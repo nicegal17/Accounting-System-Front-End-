@@ -2,7 +2,7 @@
 
 angular
     .module('accounting', ['ngResource', 'ngSanitize', 'ui.router', 'ui.bootstrap', 'ngAnimate', 'toastr', 'ngDialog', 'ngTable'])
-    .constant('API_URL', 'http://localhost:8000')
+    .constant('API_URL', 'http://192.168.1.34:8000/api/v1')
     .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
         $stateProvider
         // =========== AUTHENTICATION =========== //
