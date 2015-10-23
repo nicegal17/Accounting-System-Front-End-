@@ -1,108 +1,54 @@
 'use strict';
 
 angular.module('accounting')
-    .factory('BranchFactory', function($http, $q) {
+    .factory('BranchFactory', function($http, API_URL) {
 
         return {
-            getBranches: function(callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.get('/api/v1/branches')
-                .success(function(data) {
-                    deferred.resolve(data);
-                    return cb();
-                })
-                .error(function(err) {
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
+            getBranches: function() {
+                return $http({
+                    url: API_URL + '/branches',
+                    type: 'GET',
+                }).then(function(res){
+                    return res.data;
+                });
             },
 
-            createBranch: function(data,callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.post('/api/v1/branches',data).
-                success(function(data) {
-                    deferred.resolve(data);
-                    return cb();
-                }).
-                error(function(err) {
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
+            createBranch: function(data) {
+                return $http({
+                    url: API_URL + '/branches',
+                    type: 'POST',
+                    data: data
+                }).then(function(res){
+                    return res.data;
+                });
             },
 
-            getBranchByID: function(id, callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-                $http.get('/api/v1/branches/' + id)
-                    .success(function(data) {
-                        deferred.resolve(data);
-                        return cb();
-                    })
-                    .error(function(err) {
-                        deferred.reject(err);
-                        return cb(err);
-                    }.bind(this));
-
-                return deferred.promise;
+            getBranchByID: function(id) {
+                return $http({
+                    url: API_URL + '/branches/' + id,
+                    type: 'GET',
+                }).then(function(res){
+                    return res.data;
+                });
             },
 
-            updateBranch: function(id,data,callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.put('/api/v1/branches/'+ id,data).
-                success(function(data) {
-                    deferred.resolve(data);
-                    return cb();
-                }).
-                error(function(err) {
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
+            updateBranch: function(id,data) {
+                return $http({
+                    url: API_URL + '/branches/' + id,
+                    type: 'PUT',
+                    data: data
+                }).then(function(res){
+                    return res.data;
+                });
             },
             
-            deleteBranch: function(id,callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.delete('/api/v1/branches/'+ id).
-                success(function(data) {
-                    deferred.resolve(data);
-                    return cb();
-                }).
-                error(function(err) {
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
-            },
-
-            searchBranch: function(data,callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.get('/api/v1/branches')
-                .success(function(data) {
-                    deferred.resolve(data);
-                    return cb();
-                })
-                .error(function(err) {
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
+            deleteBranch: function(id) {
+                return $http({
+                    url: API_URL + '/branches/' + id,
+                    type: 'DELETE',
+                }).then(function(res){
+                    return res.data;
+                });
             },
         };
     });

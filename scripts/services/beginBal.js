@@ -1,41 +1,26 @@
 'use strict';
 
 angular.module('accounting')
-    .factory('beginBalFactory', function($http, $q) {
+    .factory('beginBalFactory', function($http, API_URL) {
 
         return {
-            getAcctTitles: function(callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.get('/api/v1/Balance')
-                .success(function(data) {
-                    deferred.resolve(data);
-                    return cb();
-                })
-                .error(function(err) {
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
+            getAcctTitles: function() {
+                return $http({
+                    url: API_URL + '/Balance',
+                    type: 'GET',
+                }).then(function(res) {
+                    return res.data;
+                });
             },
 
-            createBeginBal: function(data, callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.post('/api/v1/Balance', data).
-                success(function(data) {
-                    deferred.resolve(data);
-                    return cb();
-                }).
-                error(function(err) {
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
+            createBeginBal: function(data) {
+                return $http({
+                    url: API_URL + '/Balance',
+                    type: 'POST',
+                    data: data
+                }).then(function(res) {
+                    return res.data;
+                });
             },
         };
     });

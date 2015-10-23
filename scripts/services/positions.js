@@ -1,73 +1,44 @@
 'use strict';
 
 angular.module('accounting')
-    .factory('PositionFactory', function($http, $q) {
+    .factory('PositionFactory', function($http, API_URL) {
         return {
-            getPositions: function(callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.get('/api/v1/position')
-                .success(function(data) {
-                    deferred.resolve(data);
-                    return cb();
-                })
-                .error(function(err) {
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
+            getPositions: function() {
+                return $http({
+                    url: API_URL + '/position',
+                    type: 'GET',
+                }).then(function(res) {
+                    return res.data;
+                });
             },
 
-            createPositions: function(data,callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.post('/api/v1/position',data).
-                success(function(data) {
-                    deferred.resolve(data);
-                    return cb();
-                }).
-                error(function(err) {
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
+            createPositions: function(data) {
+                return $http({
+                    url: API_URL + '/position',
+                    type: 'POST',
+                    data: data
+                }).then(function(res) {
+                    return res.data;
+                });
             },
 
-            getPositionsByID: function(id, callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-                $http.get('/api/v1/position/' + id)
-                    .success(function(data) {
-                        deferred.resolve(data);
-                        return cb();
-                    })
-                    .error(function(err) {
-                        deferred.reject(err);
-                        return cb(err);
-                    }.bind(this));
-
-                return deferred.promise;
+            getPositionsByID: function(id) {
+                return $http({
+                    url: API_URL + '/position/' + id,
+                    type: 'GET'
+                }).then(function(res) {
+                    return res.data;
+                });
             },
 
-            updatePositions: function(id,data,callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.put('/api/v1/position/'+ id,data).
-                success(function(data) {
-                    deferred.resolve(data);
-                    return cb();
-                }).
-                error(function(err) {
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
+            updatePositions: function(id, data) {
+                return $http({
+                    url: API_URL + '/position/' + id,
+                    type: 'PUT',
+                    data: data
+                }).then(function(res) {
+                    return res.data;
+                });
             },
         }
     });

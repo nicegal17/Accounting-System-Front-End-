@@ -1,76 +1,45 @@
 'use strict';
 
 angular.module('accounting')
-    .factory('AppCDVFactory', function($http, $q) {
+    .factory('AppCDVFactory', function($http, API_URL) {
 
         return {
-
-            getCDVNo: function(callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.get('/api/v1/AppCDV')
-                    .success(function(data) {
-                        deferred.resolve(data);
-                        return cb();
-                    })
-                    .error(function(err) {
-                        deferred.reject(err);
-                        return cb(err);
-                    }.bind(this));
-
-                return deferred.promise;
+            getCDVNo: function() {
+                return $http({
+                    url: API_URL + '/AppCDV',
+                    type: 'GET',
+                }).then(function(res) {
+                    return res.data;
+                });
             },
 
-            getAcctEntries: function(CDVNo,callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.get('/api/v1/AppCDV/getAcctEntries/' + CDVNo)
-                    .success(function(data) {
-                        deferred.resolve(data);
-                        return cb();
-                    })
-                    .error(function(err) {
-                        deferred.reject(err);
-                        return cb(err);
-                    }.bind(this));
-
-                return deferred.promise;
+            getAcctEntries: function(CDVNo) {
+                return $http({
+                    url: API_URL + '/getAcctEntries/' + CDVNo,
+                    type: 'GET',
+                }).then(function(res) {
+                    return res.data;
+                });
             },
 
-            appCDV: function(id,data,callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.put('/api/v1/AppCDV/'+ id,data).
-                success(function(data) {
-                    deferred.resolve(data);
-                    return cb();
-                }).
-                error(function(err) {
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
+            appCDV: function(id, data) {
+                return $http({
+                    url: API_URL + '/AppCDV/' + id,
+                    type: 'PUT',
+                    data: data
+                }).then(function(res) {
+                    return res.data;
+                });
             },
 
-            denyCDV: function(id,data,callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.put('/api/v1/AppCDV/denyCDV/'+ id,data).
-                success(function(data) {
-                    deferred.resolve(data);
-                    return cb();
-                }).
-                error(function(err) {
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
+            denyCDV: function(id, data) {
+                return $http({
+                    url: API_URL + '/AppCDV/denyCDV/' + id,
+                    type: 'PUT',
+                    data: data
+                }).then(function(res) {
+                    return res.data;
+                });
             },
         };
     });

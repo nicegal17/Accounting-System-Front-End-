@@ -1,161 +1,89 @@
 'use strict';
 
 angular.module('accounting')
-    .factory('POFactory', function($http, $q) {
+    .factory('POFactory', function($http, API_URL) {
 
         return {
-
-            getSupplier: function(callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.get('/api/v1/PO')
-                .success(function(data) {
-                    deferred.resolve(data);
-                    return cb();
-                })
-                .error(function(err) {
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
+            getSupplier: function() {
+                return $http({
+                    url: API_URL + '/PO',
+                    type: 'GET',
+                }).then(function(res){
+                    return res.data;
+                });
             },  
 
-            getBranch: function(callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.get('/api/v1/PO/getBranch')
-                .success(function(data) {
-                    deferred.resolve(data);
-                    return cb();
-                })
-                .error(function(err) {
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
+            getBranch: function() {
+                return $http({
+                    url: API_URL + '/PO/getBranch',
+                    type: 'GET',
+                }).then(function(res){
+                    return res.data;
+                });
             }, 
 
-            getBank: function(callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.get('/api/v1/PO/getBank')
-                .success(function(data) {
-                    deferred.resolve(data);
-                    return cb();
-                })
-                .error(function(err) {
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
+            getBank: function() {
+                return $http({
+                    url: API_URL + '/PO/getBank',
+                    type: 'GET',
+                }).then(function(res){
+                    return res.data;
+                });
             },  
 
-            getBranchNames: function(callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.get('/api/v1/PO/getBranchNames')
-                .success(function(data) {
-                    deferred.resolve(data);
-                    return cb();
-                })
-                .error(function(err) {
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
+            getBranchNames: function() {
+                return $http({
+                    url: API_URL + '/PO/getBranchNames',
+                    type: 'GET',
+                }).then(function(res){
+                    return res.data;
+                });
             },  
 
-            getUnit: function(callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.get('/api/v1/PO/getUnit')
-                .success(function(data) {
-                    deferred.resolve(data);
-                    return cb();
-                })
-                .error(function(err) {
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
+            getUnit: function() {
+                return $http({
+                    url: API_URL + '/PO/getUnit',
+                    type: 'GET',
+                }).then(function(res){
+                    return res.data;
+                });
             },  
 
-            getSupplier2: function(callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.get('/api/v1/PO/getSupplier2')
-                .success(function(data) {
-                    deferred.resolve(data);
-                    return cb();
-                })
-                .error(function(err) {
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
+            getSupplier2: function() {
+                return $http({
+                    url: API_URL + '/PO/getSupplier2',
+                    type: 'GET',
+                }).then(function(res){
+                    return res.data;
+                });
             },
 
-            getMOP: function(callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.get('/api/v1/PO/getMOP')
-                .success(function(data) {
-                    deferred.resolve(data);
-                    return cb();
-                })
-                .error(function(err) {
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
+            getMOP: function() {
+                return $http({
+                    url: API_URL + '/PO/getMOP',
+                    type: 'GET',
+                }).then(function(res){
+                    return res.data;
+                });
             },
 
-            createPO: function(data, callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-                $http.post('/api/v1/PO', data)
-                    .success(function(data) {
-                        console.log('data: ', data);
-                        deferred.resolve(data);
-                        return cb();
-                    })
-                    .error(function(err) {
-                        deferred.reject(err);
-                        return cb(err);
-                    }.bind(this));
-
-                return deferred.promise;
+            createPO: function(data) {
+                return $http({
+                    url: API_URL + '/PO',
+                    type: 'POST',
+                    data: data
+                }).then(function(res){
+                    return res.data;
+                });
             }, 
 
-            getPOLists: function(callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.get('/api/v1/PO/getPOLists')
-                .success(function(data) {
-                    deferred.resolve(data);
-                    return cb();
-                })
-                .error(function(err) {
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
+            getPOLists: function() {
+                return $http({
+                    url: API_URL + '/PO/getPOLists',
+                    type: 'GET',
+                }).then(function(res){
+                    return res.data;
+                });
             },
         };
     });

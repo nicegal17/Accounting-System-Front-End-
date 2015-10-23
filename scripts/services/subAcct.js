@@ -1,109 +1,62 @@
 'use strict';
 
 angular.module('accounting')
-    .factory('SubAcctFactory', function($http, $q) {
+    .factory('SubAcctFactory', function($http, API_URL) {
 
         return {
-            getAccountTitles: function(callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.get('/api/v1/SubAccount')
-                    .success(function(data) {
-                        deferred.resolve(data);
-                        return cb();
-                    })
-                    .error(function(err) {
-                        deferred.reject(err);
-                        return cb(err);
-                    }.bind(this));
-
-                return deferred.promise;
+            getAccountTitles: function() {
+                return $http({
+                    url: API_URL + '/SubAccount',
+                    type: 'GET',
+                }).then(function(res){
+                    return res.data;
+                });
             },
 
-            getNorms: function(callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.get('/api/v1/SubAccount/getNorms')
-                    .success(function(data) {
-                        deferred.resolve(data);
-                        return cb();
-                    })
-                    .error(function(err) {
-                        deferred.reject(err);
-                        return cb(err);
-                    }.bind(this));
-
-                return deferred.promise;
+            getNorms: function() {
+                return $http({
+                    url: API_URL + '/SubAccount/getNorms',
+                    type: 'GET',
+                }).then(function(res){
+                    return res.data;
+                });
             },
 
-            getAcctTypes: function(callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.get('/api/v1/SubAccount/getAcctTypes')
-                    .success(function(data) {
-                        deferred.resolve(data);
-                        return cb();
-                    })
-                    .error(function(err) {
-                        deferred.reject(err);
-                        return cb(err);
-                    }.bind(this));
-
-                return deferred.promise;
+            getAcctTypes: function() {
+                return $http({
+                    url: API_URL + '/SubAccount/getAcctTypes',
+                    type: 'GET',
+                }).then(function(res){
+                    return res.data;
+                });
             },
 
-            getFunds: function(callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.get('/api/v1/SubAccount/getFunds')
-                    .success(function(data) {
-                        deferred.resolve(data);
-                        return cb();
-                    })
-                    .error(function(err) {
-                        deferred.reject(err);
-                        return cb(err);
-                    }.bind(this));
-
-                return deferred.promise;
+            getFunds: function() {
+                return $http({
+                    url: API_URL + '/SubAccount/getFunds',
+                    type: 'GET',
+                }).then(function(res){
+                    return res.data;
+                });
             },
 
-            getFinStatements: function(callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.get('/api/v1/SubAccount/getFinStatements')
-                    .success(function(data) {
-                        deferred.resolve(data);
-                        return cb();
-                    })
-                    .error(function(err) {
-                        deferred.reject(err);
-                        return cb(err);
-                    }.bind(this));
-
-                return deferred.promise;
+            getFinStatements: function() {
+                return $http({
+                    url: API_URL + '/SubAccount/getFinStatements',
+                    type: 'GET',
+                }).then(function(res){
+                    return res.data;
+                });
             },
 
-            createSubAccts: function(data,callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.post('/api/v1/SubAccount',data).
-                success(function(data) {
-                    deferred.resolve(data);
-                    return cb();
-                }).
-                error(function(err) {
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
+            createSubAccts: function(data) {
+                return $http({
+                    url: API_URL + '/SubAccount',
+                    type: 'POST',
+                    data: data
+                }).then(function(res){
+                    return res.data;
+                });
             },
         }
     });

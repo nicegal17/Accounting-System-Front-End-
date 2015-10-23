@@ -1,7 +1,7 @@
  'use strict';
 
  angular.module('accounting')
-     .controller('employeectrl', function($scope, $filter, EmployeeFactory, toastr, ngDialog, ngTableParams) {
+     .controller('employeectrl', function($scope, $filter, EmployeeFactory,PositionFactory, toastr, ngDialog, ngTableParams) {
 
          $scope.saveEmployee = function() {
              console.log('employee: ', $scope.employee);
@@ -97,7 +97,7 @@
                  }
              });
 
-             EmployeeFactory.getUsersPositions().then(function(data) {
+             PositionFactory.getPositions().then(function(data) {
                  console.log('positions: ', data);
                  $scope.positions = data;
              });

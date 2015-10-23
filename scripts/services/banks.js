@@ -1,109 +1,54 @@
 'use strict';
 
 angular.module('accounting')
-    .factory('BankFactory', function($http, $q) {
+    .factory('BankFactory', function($http, API_URL) {
 
         return {
-
-            createBanks: function(data, callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.post('/api/v1/bank', data).
-                success(function(data) {
-                    deferred.resolve(data);
-                    return cb();
-                }).
-                error(function(err) {
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
+            createBanks: function(data) {
+                return $http({
+                    url: API_URL + '/bank',
+                    type: 'POST',
+                    data: data
+                }).then(function(res){
+                    return res.data;
+                });
             },
 
-            getBanks: function(callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.get('/api/v1/bank')
-                .success(function(data) {
-                    deferred.resolve(data);
-                    return cb();
-                })
-                .error(function(err) {
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
+            getBanks: function() {
+                return $http({
+                    url: API_URL + '/bank',
+                    type: 'GET'
+                }).then(function(res){
+                    return res.data;
+                });
             },
 
-            searchBank: function(data,callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.get('/api/v1/bank')
-                .success(function(data) {
-                    deferred.resolve(data);
-                    return cb();
-                })
-                .error(function(err) {
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
+            getBankByID: function(id) {
+                return $http({
+                    url: API_URL + '/bank/' + id,
+                    type: 'GET'
+                }).then(function(res){
+                    return res.data;
+                });
             },
 
-            getBankByID: function(id, callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-                $http.get('/api/v1/bank/' + id)
-                    .success(function(data) {
-                        deferred.resolve(data);
-                        return cb();
-                    })
-                    .error(function(err) {
-                        deferred.reject(err);
-                        return cb(err);
-                    }.bind(this));
-
-                return deferred.promise;
+            updateBank: function(id, data) {
+                return $http({
+                    url: API_URL + '/bank/' + id,
+                    type: 'PUT',
+                    data: data
+                }).then(function(res){
+                    return res.data;
+                });
             },
 
-            updateBank: function(id,data,callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.put('/api/v1/bank/'+ id,data).
-                success(function(data) {
-                    deferred.resolve(data);
-                    return cb();
-                }).
-                error(function(err) {
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
-            },
-
-            deleteBank: function(id,callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.delete('/api/v1/bank/'+ id).
-                success(function(data) {
-                    deferred.resolve(data);
-                    return cb();
-                }).
-                error(function(err) {
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
+            deleteBank: function(id) {
+                return $http({
+                    url: API_URL + '/bank/' + id,
+                    type: 'DELETE'
+                }).then(function(res){
+                    return res.data;
+                });
             },
         };
     });

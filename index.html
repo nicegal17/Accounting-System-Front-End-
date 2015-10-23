@@ -25,20 +25,13 @@
     <!-- Custom styles for this template -->
     <link href="styles/style.css" rel="stylesheet">
     <link href="styles/main.css" rel="stylesheet">
+    <link href="styles/login.css" rel="stylesheet">
    
   </head>
 
   <body ng-app="accounting">
 
-    <!-- mao ning  nav bar sa bootstrap nga g.himong directive nako pra pwede ma reuse sa ubang page -->
-    <nav-bar ng-controller="headerCtrl"></nav-bar>
-
-    <!-- Dri e render sa angular ang mga views nga naa sa templates -->
-    <div id="wrapper">
-      <div id="page-wrapper">
-        <div data-ui-view></div>
-      </div>
-    </div>
+    <div data-ui-view></div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -118,5 +111,6 @@
     <script src ="scripts/services/po.js"></script>
     <script src ="scripts/services/podetails.js"></script>
     <script src ="scripts/services/series.js"></script>
+    <script src ="scripts/services/authentication.js"></script>
   </body>
 </html>

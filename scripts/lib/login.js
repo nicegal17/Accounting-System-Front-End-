@@ -11,25 +11,5 @@ $("#form-signin").submit(function(event) {
         return;
     }
 
-    $.ajax({
-        url: '/auth/login',
-        type: 'POST',
-        dataType: 'json',
-        data: {
-            username: $('#inputEmail').val(),
-            password: $('#inputPassword').val()
-        },
-        success: function(data, textStatus, xhr) {
-            console.log('data: ',data);
-            if(data.success == false){
-            	$.notify(data.msg, "error");
-            	return;
-            }
-            window.location.href= data.url;
-        },
-        error: function(xhr, textStatus, errorThrown) {
-            console.log('textStatus: ',textStatus);
-        }
-    });
-    event.preventDefault();
+
 });

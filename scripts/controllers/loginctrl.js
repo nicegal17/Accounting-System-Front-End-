@@ -1,27 +1,32 @@
 'use strict';
 
 angular.module('accounting')
-  .controller('loginctrl', function($scope, $location) {
+    .controller('loginctrl', function($scope, $state, toastr, AuthenticationFactory) {
 
-    // $scope.submit = function() {
+        $scope.login = function() {
+            console.log('username: ' + $scope.username);
+            console.log('password: ' + $scope.password);
+            
+            if ($scope.username == '' || _.isEmpty($scope.username)) {
+                toastr.error("Please enter username");
+                return;
+            }
 
-    //  // $location.path('/dashboard');
+            if ($scope.password == '' || _.isEmpty($scope.password)) {
+                toastr.error("Please enter password");
+                return;
+            }
 
-    //   return false;
-    // }
+            /*AuthenticationFactory.Login($scope.username, $scope.password, function(response) {
+                if (response.success) {
+                    AuthenticationService.SetCredentials($scope.username, $scope.password);
+                    $state.go('login');
+                } else {
+                    $scope.error = response.message;
+                    $.notify($scope.error, "error");
+                }
+            });*/
+            $state.go('main.dashboard');
+        };
 
-
-    $scope.login = function() {
-    	$scope.dataLoading = true;
-    	AuthenticationService.Login($scope.username, $scope.password, function(response) {
-    		if (response.success) {
-    			AuthenticationService.SetCredentials($scope.username, $scope.password);
-    			$location.path('/');
-    		} else {
-    			$scope.error = response.message;
-    			$scope.dataLoading = false;
-    		}
-    	});
-    };
-
-  });
+    });

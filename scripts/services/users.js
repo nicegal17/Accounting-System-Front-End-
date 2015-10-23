@@ -1,123 +1,62 @@
 'use strict';
 
 angular.module('accounting')
-    .factory('UsersFactory', function($http, $q) {
-        var abouts = {};
+    .factory('UsersFactory', function($http, API_URL) {
         return {
-            logoutUser: function(callback){
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.get('/auth/logout').
-                success(function(data) {
-                    deferred.resolve(data);
-                    return cb();
-                }).
-                error(function(err) {
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
+            createUser: function(data) {
+                return $http({
+                    url: API_URL + '/users',
+                    type: 'POST',
+                    data: data
+                }).then(function(res){
+                    return res.data;
+                });
             },
 
-            createUser: function(data,callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.post('/api/v1/users',data).
-                success(function(data) {
-                    deferred.resolve(data);
-                    return cb();
-                }).
-                error(function(err) {
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
-            },
-            
-            getEmployee: function(callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-                $http.get('/api/v1/users')
-                    .success(function(data) {
-                        deferred.resolve(data);
-                        return cb();
-                    })
-                    .error(function(err) {
-                        deferred.reject(err);
-                        return cb(err);
-                    }.bind(this));
-
-                return deferred.promise;
+            getEmployee: function() {
+                return $http({
+                    url: API_URL + '/users',
+                    type: 'GET',
+                }).then(function(res){
+                    return res.data;
+                });
             },
 
-            getAllUsers: function(callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-                $http.get('/api/v1/users/getUsers')
-                    .success(function(data) {
-                        deferred.resolve(data);
-                        return cb();
-                    })
-                    .error(function(err) {
-                        deferred.reject(err);
-                        return cb(err);
-                    }.bind(this));
-
-                return deferred.promise;
+            getAllUsers: function() {
+                return $http({
+                    url: API_URL + '/users/getUsers',
+                    type: 'GET',
+                }).then(function(res) {
+                    return res.data;
+                });
             },
 
-             getUserID: function(id, callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-                $http.get('/api/v1/users/' + id)
-                    .success(function(data) {
-                        deferred.resolve(data);
-                        return cb();
-                    })
-                    .error(function(err) {
-                        deferred.reject(err);
-                        return cb(err);
-                    }.bind(this));
-
-                return deferred.promise;
+            getUserID: function(id) {
+                return $http({
+                    url: API_URL + '/users/' + id,
+                    type: 'GET',
+                }).then(function(res) {
+                    return res.data;
+                });
             },
 
-            updateUser: function(id,data,callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.put('/api/v1/users/'+ id,data).
-                success(function(data) {
-                    deferred.resolve(data);
-                    return cb();
-                }).
-                error(function(err) {
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
+            updateUser: function(id, data) {
+                return $http({
+                    url: API_URL + '/users/' + id,
+                    type: 'PUT',
+                    data: data
+                }).then(function(res) {
+                    return res.data;
+                });
             },
 
-            deleteUser: function(id,callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.delete('/api/v1/users/'+ id).
-                success(function(data) {
-                    deferred.resolve(data);
-                    return cb();
-                }).
-                error(function(err) {
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
+            deleteUser: function(id) {
+                return $http({
+                    url: API_URL + '/users/' + id,
+                    type: 'DELETE',
+                }).then(function(res) {
+                    return res.data;
+                });
             },
         };
     });

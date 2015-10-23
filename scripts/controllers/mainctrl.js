@@ -4,11 +4,6 @@ angular
     .module('accounting')
     .controller('MainCtrl', function($scope) {
 
-        function init() {
-            console.log('MainCtrl');
-        }
-
-        init();
     })
     .controller('headerCtrl', function($scope, $modal,UsersFactory) {
 

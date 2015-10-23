@@ -1,42 +1,26 @@
 'use strict';
 
 angular.module('accounting')
-    .factory('APVFactory', function($http, $q) {
+    .factory('APVFactory', function($http, API_URL) {
 
         return {
-
-             getAcctTitle: function(callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.get('/api/v1/APV')
-                .success(function(data) {
-                    deferred.resolve(data);
-                    return cb();
-                })
-                .error(function(err) {
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
+             getAcctTitle: function() {
+                return $http({
+                    url: API_URL + '/APV',
+                    type: 'GET',
+                }).then(function(res){
+                    return res.data;
+                });
             },
 
-             createAPV: function(data, callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-                $http.post('/api/v1/APV', data)
-                    .success(function(data) {
-                        console.log('data: ', data);
-                        deferred.resolve(data);
-                        return cb();
-                    })
-                    .error(function(err) {
-                        deferred.reject(err);
-                        return cb(err);
-                    }.bind(this));
-
-                return deferred.promise;
+             createAPV: function(data) {
+                return $http({
+                    url: API_URL + '/APV',
+                    type: 'POST',
+                    data: data
+                }).then(function(res){
+                    return res.data;
+                });
             }, 
         };
     });

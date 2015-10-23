@@ -1,93 +1,53 @@
 'use strict';
 
 angular.module('accounting')
-    .factory('CDVFactory', function($http, $q) {
+    .factory('CDVFactory', function($http, API_URL) {
 
         return {
-
-            getAcctNum: function(callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.get('/api/v1/CDV/accounts')
-                .success(function(data) {
-                    deferred.resolve(data);
-                    return cb();
-                })
-                .error(function(err) {
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
-            },  
-
-            getBankName: function(callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.get('/api/v1/CDV/banks')
-                .success(function(data) {
-                    deferred.resolve(data);
-                    return cb();
-                })
-                .error(function(err) {
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
-            },  
-
-            getAcctTitle: function(callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.get('/api/v1/CDV')
-                .success(function(data) {
-                    deferred.resolve(data);
-                    return cb();
-                })
-                .error(function(err) {
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
+            getAcctNum: function() {
+                return $http({
+                    url: API_URL + '/CDV/accounts',
+                    type: 'GET',
+                }).then(function(res) {
+                    return res.data;
+                });
             },
 
-            createCDV: function(data, callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-                $http.post('/api/v1/CDV', data)
-                    .success(function(data) {
-                        console.log('data: ', data);
-                        deferred.resolve(data);
-                        return cb();
-                    })
-                    .error(function(err) {
-                        deferred.reject(err);
-                        return cb(err);
-                    }.bind(this));
+            getBankName: function() {
+                return $http({
+                    url: API_URL + '/CDV/banks',
+                    type: 'GET',
+                }).then(function(res) {
+                    return res.data;
+                });
+            },
 
-                return deferred.promise;
-            }, 
+            getAcctTitle: function() {
+                return $http({
+                    url: API_URL + '/CDV',
+                    type: 'GET',
+                }).then(function(res){
+                    return res.data;
+                });
+            },
 
-            getCDVNum: function(callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
+            createCDV: function(data) {
+                return $http({
+                    url: API_URL + '/CDV',
+                    type: 'POST',
+                    data: data
+                }).then(function(res){
+                    return res.data;
+                });
+            },
 
-                $http.get('/api/v1/CDV/cdvnum')
-                .success(function(data) {
-                    deferred.resolve(data);
-                    return cb();
-                })
-                .error(function(err) {
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
-            }, 
+            getCDVNum: function() {
+                return $http({
+                    url: API_URL + '/CDV/cdvnum',
+                    type: 'GET',
+                }).then(function(res){
+                    return res.data;
+                });
+            },
         };
     });

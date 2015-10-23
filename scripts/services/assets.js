@@ -1,58 +1,35 @@
 'use strict';
 
 angular.module('accounting')
-    .factory('AssetsFactory', function($http, $q) {
+    .factory('AssetsFactory', function($http, API_URL) {
 
         return {
-            getCategories: function(callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.get('/api/v1/Assets')
-                    .success(function(data) {
-                        deferred.resolve(data);
-                        return cb();
-                    })
-                    .error(function(err) {
-                        deferred.reject(err);
-                        return cb(err);
-                    }.bind(this));
-
-                return deferred.promise;
+            getCategories: function() {
+                return $http({
+                    url: API_URL + '/Assets',
+                    type: 'GET',
+                }).then(function(res){
+                    return res.data;
+                });
             },
 
-            getPeriods: function(callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.get('/api/v1/Assets/getPeriods')
-                    .success(function(data) {
-                        deferred.resolve(data);
-                        return cb();
-                    })
-                    .error(function(err) {
-                        deferred.reject(err);
-                        return cb(err);
-                    }.bind(this));
-
-                return deferred.promise;
+            getPeriods: function() {
+                return $http({
+                    url: API_URL + '/Assets/getPeriods',
+                    type: 'GET',
+                }).then(function(res){
+                    return res.data;
+                });
             },
 
-            createAsset: function(data, callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.post('/api/v1/Assets', data).
-                success(function(data) {
-                    deferred.resolve(data);
-                    return cb();
-                }).
-                error(function(err) {
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
+            createAsset: function(data) {
+                return $http({
+                    url: API_URL + '/Assets',
+                    type: 'POST',
+                    data: data
+                }).then(function(res){
+                    return res.data;
+                });
             },
         }
     });
