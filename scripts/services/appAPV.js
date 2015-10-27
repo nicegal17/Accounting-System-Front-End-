@@ -6,7 +6,7 @@ angular.module('accounting')
             getAPVNo: function() {
                 return $http({
                     url: API_URL + '/appAPV',
-                    type: 'GET',
+                    method: 'GET',
                 }).then(function(res){
                     return res.data;
                 });
@@ -15,7 +15,7 @@ angular.module('accounting')
             getAcctEntries: function(apvID) {
                 return $http({
                     url: API_URL + '/getAcctEntries/' + apvID,
-                    type: 'GET',
+                    method: 'GET',
                 }).then(function(res){
                     return res.data;
                 });

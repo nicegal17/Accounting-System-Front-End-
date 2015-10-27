@@ -6,7 +6,7 @@ angular.module('accounting')
             getPositions: function() {
                 return $http({
                     url: API_URL + '/position',
-                    type: 'GET',
+                    method: 'GET',
                 }).then(function(res) {
                     return res.data;
                 });
@@ -15,7 +15,7 @@ angular.module('accounting')
             createPositions: function(data) {
                 return $http({
                     url: API_URL + '/position',
-                    type: 'POST',
+                    method: 'POST',
                     data: data
                 }).then(function(res) {
                     return res.data;
@@ -25,7 +25,7 @@ angular.module('accounting')
             getPositionsByID: function(id) {
                 return $http({
                     url: API_URL + '/position/' + id,
-                    type: 'GET'
+                    method: 'GET'
                 }).then(function(res) {
                     return res.data;
                 });
@@ -34,7 +34,7 @@ angular.module('accounting')
             updatePositions: function(id, data) {
                 return $http({
                     url: API_URL + '/position/' + id,
-                    type: 'PUT',
+                    method: 'PUT',
                     data: data
                 }).then(function(res) {
                     return res.data;

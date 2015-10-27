@@ -7,7 +7,7 @@ angular.module('accounting')
             getAcctNum: function() {
                 return $http({
                     url: API_URL + '/CDV/accounts',
-                    type: 'GET',
+                    method: 'GET',
                 }).then(function(res) {
                     return res.data;
                 });
@@ -16,7 +16,7 @@ angular.module('accounting')
             getBankName: function() {
                 return $http({
                     url: API_URL + '/CDV/banks',
-                    type: 'GET',
+                    method: 'GET',
                 }).then(function(res) {
                     return res.data;
                 });
@@ -25,7 +25,7 @@ angular.module('accounting')
             getAcctTitle: function() {
                 return $http({
                     url: API_URL + '/CDV',
-                    type: 'GET',
+                    method: 'GET',
                 }).then(function(res){
                     return res.data;
                 });
@@ -34,7 +34,7 @@ angular.module('accounting')
             createCDV: function(data) {
                 return $http({
                     url: API_URL + '/CDV',
-                    type: 'POST',
+                    method: 'POST',
                     data: data
                 }).then(function(res){
                     return res.data;
@@ -44,7 +44,7 @@ angular.module('accounting')
             getCDVNum: function() {
                 return $http({
                     url: API_URL + '/CDV/cdvnum',
-                    type: 'GET',
+                    method: 'GET',
                 }).then(function(res){
                     return res.data;
                 });

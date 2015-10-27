@@ -6,7 +6,7 @@ angular.module('accounting')
             createUser: function(data) {
                 return $http({
                     url: API_URL + '/users',
-                    type: 'POST',
+                    method: 'POST',
                     data: data
                 }).then(function(res){
                     return res.data;
@@ -16,7 +16,7 @@ angular.module('accounting')
             getEmployee: function() {
                 return $http({
                     url: API_URL + '/users',
-                    type: 'GET',
+                    method: 'GET',
                 }).then(function(res){
                     return res.data;
                 });
@@ -25,7 +25,7 @@ angular.module('accounting')
             getAllUsers: function() {
                 return $http({
                     url: API_URL + '/users/getUsers',
-                    type: 'GET',
+                    method: 'GET',
                 }).then(function(res) {
                     return res.data;
                 });
@@ -34,7 +34,7 @@ angular.module('accounting')
             getUserID: function(id) {
                 return $http({
                     url: API_URL + '/users/' + id,
-                    type: 'GET',
+                    method: 'GET',
                 }).then(function(res) {
                     return res.data;
                 });
@@ -43,7 +43,7 @@ angular.module('accounting')
             updateUser: function(id, data) {
                 return $http({
                     url: API_URL + '/users/' + id,
-                    type: 'PUT',
+                    method: 'PUT',
                     data: data
                 }).then(function(res) {
                     return res.data;
@@ -53,7 +53,7 @@ angular.module('accounting')
             deleteUser: function(id) {
                 return $http({
                     url: API_URL + '/users/' + id,
-                    type: 'DELETE',
+                    method: 'DELETE',
                 }).then(function(res) {
                     return res.data;
                 });

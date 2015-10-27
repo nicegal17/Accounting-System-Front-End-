@@ -7,7 +7,7 @@ angular.module('accounting')
             createBanks: function(data) {
                 return $http({
                     url: API_URL + '/bank',
-                    type: 'POST',
+                    method: 'POST',
                     data: data
                 }).then(function(res){
                     return res.data;
@@ -17,7 +17,7 @@ angular.module('accounting')
             getBanks: function() {
                 return $http({
                     url: API_URL + '/bank',
-                    type: 'GET'
+                    method: 'GET'
                 }).then(function(res){
                     return res.data;
                 });
@@ -26,7 +26,7 @@ angular.module('accounting')
             getBankByID: function(id) {
                 return $http({
                     url: API_URL + '/bank/' + id,
-                    type: 'GET'
+                    method: 'GET'
                 }).then(function(res){
                     return res.data;
                 });
@@ -35,7 +35,7 @@ angular.module('accounting')
             updateBank: function(id, data) {
                 return $http({
                     url: API_URL + '/bank/' + id,
-                    type: 'PUT',
+                    method: 'PUT',
                     data: data
                 }).then(function(res){
                     return res.data;
@@ -45,7 +45,7 @@ angular.module('accounting')
             deleteBank: function(id) {
                 return $http({
                     url: API_URL + '/bank/' + id,
-                    type: 'DELETE'
+                    method: 'DELETE'
                 }).then(function(res){
                     return res.data;
                 });

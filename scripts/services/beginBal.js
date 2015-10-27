@@ -7,7 +7,7 @@ angular.module('accounting')
             getAcctTitles: function() {
                 return $http({
                     url: API_URL + '/Balance',
-                    type: 'GET',
+                    method: 'GET',
                 }).then(function(res) {
                     return res.data;
                 });
@@ -16,7 +16,7 @@ angular.module('accounting')
             createBeginBal: function(data) {
                 return $http({
                     url: API_URL + '/Balance',
-                    type: 'POST',
+                    method: 'POST',
                     data: data
                 }).then(function(res) {
                     return res.data;

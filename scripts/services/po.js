@@ -7,7 +7,7 @@ angular.module('accounting')
             getSupplier: function() {
                 return $http({
                     url: API_URL + '/PO',
-                    type: 'GET',
+                    method: 'GET',
                 }).then(function(res){
                     return res.data;
                 });
@@ -16,7 +16,7 @@ angular.module('accounting')
             getBranch: function() {
                 return $http({
                     url: API_URL + '/PO/getBranch',
-                    type: 'GET',
+                    method: 'GET',
                 }).then(function(res){
                     return res.data;
                 });
@@ -25,7 +25,7 @@ angular.module('accounting')
             getBank: function() {
                 return $http({
                     url: API_URL + '/PO/getBank',
-                    type: 'GET',
+                    method: 'GET',
                 }).then(function(res){
                     return res.data;
                 });
@@ -34,7 +34,7 @@ angular.module('accounting')
             getBranchNames: function() {
                 return $http({
                     url: API_URL + '/PO/getBranchNames',
-                    type: 'GET',
+                    method: 'GET',
                 }).then(function(res){
                     return res.data;
                 });
@@ -43,7 +43,7 @@ angular.module('accounting')
             getUnit: function() {
                 return $http({
                     url: API_URL + '/PO/getUnit',
-                    type: 'GET',
+                    method: 'GET',
                 }).then(function(res){
                     return res.data;
                 });
@@ -52,7 +52,7 @@ angular.module('accounting')
             getSupplier2: function() {
                 return $http({
                     url: API_URL + '/PO/getSupplier2',
-                    type: 'GET',
+                    method: 'GET',
                 }).then(function(res){
                     return res.data;
                 });
@@ -61,7 +61,7 @@ angular.module('accounting')
             getMOP: function() {
                 return $http({
                     url: API_URL + '/PO/getMOP',
-                    type: 'GET',
+                    method: 'GET',
                 }).then(function(res){
                     return res.data;
                 });
@@ -70,7 +70,7 @@ angular.module('accounting')
             createPO: function(data) {
                 return $http({
                     url: API_URL + '/PO',
-                    type: 'POST',
+                    method: 'POST',
                     data: data
                 }).then(function(res){
                     return res.data;
@@ -80,7 +80,7 @@ angular.module('accounting')
             getPOLists: function() {
                 return $http({
                     url: API_URL + '/PO/getPOLists',
-                    type: 'GET',
+                    method: 'GET',
                 }).then(function(res){
                     return res.data;
                 });

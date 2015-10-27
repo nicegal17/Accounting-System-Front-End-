@@ -7,7 +7,7 @@ angular.module('accounting')
             getSeriesNum: function() {
                 return $http({
                     url: API_URL + '/series',
-                    type: 'GET',
+                    method: 'GET',
                 }).then(function(res){
                     return res.data;
                 });
@@ -16,7 +16,7 @@ angular.module('accounting')
              getSeriesDet: function(id) {
                 return $http({
                     url: API_URL + '/series/getSeriesDet/' + id,
-                    type: 'GET',
+                    method: 'GET',
                 }).then(function(res){
                     return res.data;
                 });
@@ -25,7 +25,7 @@ angular.module('accounting')
             updateNumSeries: function(id, data) {
                 return $http({
                     url: API_URL + '/series/' + id,
-                    type: 'PUT',
+                    method: 'PUT',
                     data: data
                 }).then(function(res){
                     return res.data;

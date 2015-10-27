@@ -7,7 +7,7 @@ angular.module('accounting')
             getPoDetails: function(id) {
                 return $http({
                     url: API_URL + '/podetails/' + id,
-                    type: 'GET',
+                    method: 'GET',
                 }).then(function(res){
                     return res.data;
                 });
@@ -16,7 +16,7 @@ angular.module('accounting')
             getPOItems: function(id) {
                 return $http({
                     url: API_URL + '/podetails/getPOItems/' + id,
-                    type: 'GET',
+                    method: 'GET',
                 }).then(function(res){
                     return res.data;
                 });
@@ -25,7 +25,7 @@ angular.module('accounting')
             selectSUM: function(id) {
                 return $http({
                     url: API_URL + '/podetails/selectSUM/' + id,
-                    type: 'GET',
+                    method: 'GET',
                 }).then(function(res){
                     return res.data;
                 });

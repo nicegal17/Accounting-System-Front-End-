@@ -8,25 +8,26 @@ angular.module('accounting')
             console.log('password: ' + $scope.password);
             
             if ($scope.username == '' || _.isEmpty($scope.username)) {
-                toastr.error("Please enter username");
+                toastr.warning("Please enter username");
                 return;
             }
 
             if ($scope.password == '' || _.isEmpty($scope.password)) {
-                toastr.error("Please enter password");
+                toastr.warning("Please enter password");
                 return;
             }
 
-            /*AuthenticationFactory.Login($scope.username, $scope.password, function(response) {
+            AuthenticationFactory.Login($scope.username, $scope.password).then(function(response) {
+                console.log('response: ',response);
                 if (response.success) {
-                    AuthenticationService.SetCredentials($scope.username, $scope.password);
-                    $state.go('login');
+                    AuthenticationFactory.storeUser(JSON.stringify(response.user),response.token);
+                    $state.go('main.dashboard');
                 } else {
-                    $scope.error = response.message;
-                    $.notify($scope.error, "error");
+                    $scope.error = response.msg;
+                    toastr.error($scope.error);
                 }
-            });*/
-            $state.go('main.dashboard');
+            });
+            
         };
 
     });

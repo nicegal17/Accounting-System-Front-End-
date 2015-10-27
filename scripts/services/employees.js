@@ -7,7 +7,7 @@ angular.module('accounting')
             createEmployee: function(data) {
                 return $http({
                     url: API_URL + '/employees',
-                    type: 'POST',
+                    method: 'POST',
                     data: data
                 }).then(function(res){
                     return res.data;
@@ -17,7 +17,7 @@ angular.module('accounting')
             getEmployees: function() {
                 return $http({
                     url: API_URL + '/employees',
-                    type: 'GET',
+                    method: 'GET',
                 }).then(function(res){
                     return res.data;
                 });
@@ -26,7 +26,7 @@ angular.module('accounting')
             getEID: function(id) {
                 return $http({
                     url: API_URL + '/employees/' + id,
-                    type: 'GET',
+                    method: 'GET',
                 }).then(function(res){
                     return res.data;
                 });
@@ -35,7 +35,7 @@ angular.module('accounting')
             updateEmployee: function(id, data) {
                 return $http({
                     url: API_URL + '/employees/' + id,
-                    type: 'PUT',
+                    method: 'PUT',
                     data: data
                 }).then(function(res){
                     return res.data;
@@ -44,7 +44,7 @@ angular.module('accounting')
             deleteUsers: function(id) {
                 return $http({
                     url: API_URL + '/employees/' + id,
-                    type: 'DELETE',
+                    method: 'DELETE',
                 }).then(function(res){
                     return res.data;
                 });

@@ -7,7 +7,7 @@ angular.module('accounting')
             getCDVNo: function() {
                 return $http({
                     url: API_URL + '/AppCDV',
-                    type: 'GET',
+                    method: 'GET',
                 }).then(function(res) {
                     return res.data;
                 });
@@ -16,7 +16,7 @@ angular.module('accounting')
             getAcctEntries: function(CDVNo) {
                 return $http({
                     url: API_URL + '/getAcctEntries/' + CDVNo,
-                    type: 'GET',
+                    method: 'GET',
                 }).then(function(res) {
                     return res.data;
                 });
@@ -25,7 +25,7 @@ angular.module('accounting')
             appCDV: function(id, data) {
                 return $http({
                     url: API_URL + '/AppCDV/' + id,
-                    type: 'PUT',
+                    method: 'PUT',
                     data: data
                 }).then(function(res) {
                     return res.data;
@@ -35,7 +35,7 @@ angular.module('accounting')
             denyCDV: function(id, data) {
                 return $http({
                     url: API_URL + '/AppCDV/denyCDV/' + id,
-                    type: 'PUT',
+                    method: 'PUT',
                     data: data
                 }).then(function(res) {
                     return res.data;

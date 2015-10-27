@@ -7,7 +7,7 @@ angular.module('accounting')
             getAccountTitles: function() {
                 return $http({
                     url: API_URL + '/SubAccount',
-                    type: 'GET',
+                    method: 'GET',
                 }).then(function(res){
                     return res.data;
                 });
@@ -16,7 +16,7 @@ angular.module('accounting')
             getNorms: function() {
                 return $http({
                     url: API_URL + '/SubAccount/getNorms',
-                    type: 'GET',
+                    method: 'GET',
                 }).then(function(res){
                     return res.data;
                 });
@@ -25,7 +25,7 @@ angular.module('accounting')
             getAcctTypes: function() {
                 return $http({
                     url: API_URL + '/SubAccount/getAcctTypes',
-                    type: 'GET',
+                    method: 'GET',
                 }).then(function(res){
                     return res.data;
                 });
@@ -34,7 +34,7 @@ angular.module('accounting')
             getFunds: function() {
                 return $http({
                     url: API_URL + '/SubAccount/getFunds',
-                    type: 'GET',
+                    method: 'GET',
                 }).then(function(res){
                     return res.data;
                 });
@@ -43,7 +43,7 @@ angular.module('accounting')
             getFinStatements: function() {
                 return $http({
                     url: API_URL + '/SubAccount/getFinStatements',
-                    type: 'GET',
+                    method: 'GET',
                 }).then(function(res){
                     return res.data;
                 });
@@ -52,7 +52,7 @@ angular.module('accounting')
             createSubAccts: function(data) {
                 return $http({
                     url: API_URL + '/SubAccount',
-                    type: 'POST',
+                    method: 'POST',
                     data: data
                 }).then(function(res){
                     return res.data;

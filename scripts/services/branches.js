@@ -7,7 +7,7 @@ angular.module('accounting')
             getBranches: function() {
                 return $http({
                     url: API_URL + '/branches',
-                    type: 'GET',
+                    method: 'GET',
                 }).then(function(res){
                     return res.data;
                 });
@@ -16,7 +16,7 @@ angular.module('accounting')
             createBranch: function(data) {
                 return $http({
                     url: API_URL + '/branches',
-                    type: 'POST',
+                    method: 'POST',
                     data: data
                 }).then(function(res){
                     return res.data;
@@ -26,7 +26,7 @@ angular.module('accounting')
             getBranchByID: function(id) {
                 return $http({
                     url: API_URL + '/branches/' + id,
-                    type: 'GET',
+                    method: 'GET',
                 }).then(function(res){
                     return res.data;
                 });
@@ -35,7 +35,7 @@ angular.module('accounting')
             updateBranch: function(id,data) {
                 return $http({
                     url: API_URL + '/branches/' + id,
-                    type: 'PUT',
+                    method: 'PUT',
                     data: data
                 }).then(function(res){
                     return res.data;
@@ -45,7 +45,7 @@ angular.module('accounting')
             deleteBranch: function(id) {
                 return $http({
                     url: API_URL + '/branches/' + id,
-                    type: 'DELETE',
+                    method: 'DELETE',
                 }).then(function(res){
                     return res.data;
                 });
