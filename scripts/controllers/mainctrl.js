@@ -5,16 +5,37 @@ angular
     .controller('MainCtrl', function($scope) {
 
     })
-    .controller('headerCtrl', function($scope, $modal,UsersFactory) {
+    .controller('headerCtrl', function($scope, AuthenticationFactory) {
+        $scope.logout = function() {
+            console.log('logout');
+            AuthenticationFactory.Logout();
+        };
+    })
+    .controller('sideBarCtrl', function($scope, $modal) {
+        $scope.selectedMenu = 'dashboard';
+        $scope.collapseVar = 0;
+        $scope.multiCollapseVar = 0;
 
-        function init() {
-            console.log('headerCtrl');
-        }
+        $scope.check = function(x) {
+
+            if (x == $scope.collapseVar)
+                $scope.collapseVar = 0;
+            else
+                $scope.collapseVar = x;
+        };
+
+        $scope.multiCheck = function(y) {
+            if (y == $scope.multiCollapseVar)
+                $scope.multiCollapseVar = 0;
+            else
+                $scope.multiCollapseVar = y;
+        };
 
         $scope.openPosition = function() {
             console.log('asdasda');
             var modalInstance = $modal.open({
                 animation: true,
+                backdrop: 'static',
                 templateUrl: '/templates/modals/position.html',
                 controller: 'positionctrl',
                 size: 'md'
@@ -104,8 +125,10 @@ angular
         };
 
         $scope.openUser = function() {
+            console.log('sadasdasd');
             var modalInstance = $modal.open({
                 animation: true,
+                backdrop: 'static',
                 templateUrl: '/templates/modals/user.html',
                 controller: 'userctrl',
                 size: 'md'
@@ -167,23 +190,12 @@ angular
             });
         };
 
-        $scope.logout = function(){
-            console.log('logout');
-            UsersFactory.logoutUser().then(function(data){
-                if(data.success == true){
-                    window.location.href=data.url;
-                }
-            });
-        };
-
-        $scope.seriesNumbers = function(){
-           var modalInstance = $modal.open({
+        $scope.seriesNumbers = function() {
+            var modalInstance = $modal.open({
                 animation: true,
                 templateUrl: '/templates/modals/seriesNo.html',
                 controller: 'seriesnumctrl',
                 size: 'md'
             });
         };
-
-        init();
     });

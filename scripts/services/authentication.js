@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('accounting')
-    .factory('AuthenticationFactory', function($http, $window, API_URL) {
+    .factory('AuthenticationFactory', function($http, $state, $window, API_URL) {
         return {
             Login: function(username, password) {
                 console.log('username: ' + username + ' password: ' + password);

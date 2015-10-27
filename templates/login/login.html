@@ -1,10 +1,24 @@
 <div class="container">
-    <form class="form-signin" id="form-signin">
-        <label for="inputEmail" class="sr-only">Username</label>
-        <input type="text" id="inputEmail" ng-model="username" class="form-control" placeholder="Username" autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" ng-model="password" class="form-control" placeholder="Password">
-        <button class="btn btn-lg btn-primary btn-block" ng-click="login()">Sign in</button>
-    </form>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="login-panel panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Please Sign In</h3>
+                </div>
+                <div class="panel-body">
+                    <form role="form" id="form-signin">
+                        <fieldset>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="E-mail" name="email" type="text" ng-model="username"  autofocus>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Password" name="password" type="password" ng-model="password">
+                            </div>
+                            <a class="btn btn-lg btn-success btn-block" ng-click="login()">Login</a>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<!-- /container -->

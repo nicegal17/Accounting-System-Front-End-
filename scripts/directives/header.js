@@ -1,8 +1,11 @@
 'use strict';
 angular.module('accounting')
-    .directive('navBar', function() {
+    .directive('header', function() {
         return {
             restrict: 'AE',
-            templateUrl: 'templates/directives/header.html'
+            templateUrl: 'templates/directives/header.html',
+            restrict: 'E',
+            replace: true,
+            controller: 'headerCtrl'
         };
     });
