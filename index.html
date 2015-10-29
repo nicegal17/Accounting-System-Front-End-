@@ -1,49 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <base href="/">
-
     <title>Accounting System</title>
-
     <!-- Bootstrap core CSS -->
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Angular Toastr -->
-    <link href="bower_components/angular-toastr/dist/angular-toastr.css" rel="stylesheet"/>
+    <link href="bower_components/angular-toastr/dist/angular-toastr.css" rel="stylesheet" />
     <!-- Angular NgDialog -->
-    <link href="bower_components/ngDialog/css/ngDialog.css" rel="stylesheet"/>
-    <link href="bower_components/ngDialog/css/ngDialog-theme-default.css" rel="stylesheet"/>
+    <link href="bower_components/ngDialog/css/ngDialog.css" rel="stylesheet" />
+    <link href="bower_components/ngDialog/css/ngDialog-theme-default.css" rel="stylesheet" />
     <!-- Angular ngTable -->
-    <link href="bower_components/ng-table/dist/ng-table.css" rel="stylesheet"/>
+    <link href="bower_components/ng-table/dist/ng-table.css" rel="stylesheet" />
     <!-- font awesome icons -->
     <link href="bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- Angular Metimenu -->
     <link rel="stylesheet" href="bower_components/metisMenu/dist/metisMenu.min.css">
     <!-- Angular Loading Bar -->
     <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.min.css">
-
     <!-- Custom styles for this template -->
     <link href="styles/style.css" rel="stylesheet">
     <link href="styles/main.css" rel="stylesheet">
     <link href="styles/paper-bootstrap.min.css" rel="stylesheet">
-   
-  </head>
+</head>
 
-  <body ng-app="accounting">
-
+<body ng-app="accounting">
     <div data-ui-view></div>
-
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="bower_components/lodash/lodash.min.js"></script>
+    <script>
+    if (typeof module === "object" && typeof module.exports === "object") {
+        window.$ = window.jQuery = require('jquery');
+        window.angular = require('angular');
+    }
+    </script>
+    <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="bower_components/lodash/lodash.min.js"></script>
     <!-- Angular JS -->
     <script type="text/javascript" src="bower_components/angular/angular.js"></script>
     <!-- Angular Resource -->
@@ -56,7 +56,7 @@
     <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
     <!-- Angular Animate -->
     <script type="text/javascript" src="bower_components/angular-animate/angular-animate.js"></script>
-     <!-- Angular Toastr -->
+    <!-- Angular Toastr -->
     <script type="text/javascript" src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
     <!-- Angular ngDialog  -->
     <script type="text/javascript" src="bower_components/ngDialog/js/ngDialog.js"></script>
@@ -65,68 +65,67 @@
     <!-- Angular Cookies -->
     <script type="text/javascript" src="bower_components/angular-cookies/angular-cookies.min.js"></script>
     <!-- OcLazyLoad -->
-    <script src="bower_components/oclazyload/dist/ocLazyLoad.min.js"></script>
+    <script type="text/javascript" src="bower_components/oclazyload/dist/ocLazyLoad.min.js"></script>
     <!-- Angular Loading Bar -->
-    <script src="bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
+    <script type="text/javascript" src="bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
     <!-- Metis Menu -->
-    <script src="bower_components/metisMenu/dist/metisMenu.min.js"></script>
+    <script type="text/javascript" src="bower_components/metisMenu/dist/metisMenu.min.js"></script>
     <!-- Angular Charts -->
-    <script src="bower_components/Chart.js/Chart.min.js"></script>
-    
-
-    <script src="scripts/lib/dashboard.js"></script>
+    <script type="text/javascript" src="bower_components/Chart.js/Chart.min.js"></script>
+    <script type="text/javascript" src="scripts/lib/dashboard.js"></script>
     <!-- Angular Libraries -->
-    <script src ="scripts/app.js"></script>
-    <script src ="scripts/config.js"></script>
+    <script type="text/javascript" src="scripts/app.js"></script>
+    <script type="text/javascript" src="scripts/config.js"></script>
     <!-- Angular Controllers -->
-    <script src ="scripts/controllers/loginctrl.js"></script>
-    <script src ="scripts/controllers/mainctrl.js"></script>
-    <script src ="scripts/controllers/employeectrl.js"></script>
-    <script src ="scripts/controllers/branchctrl.js"></script>
-    <script src ="scripts/controllers/cdvctrl.js"></script>
-    <script src ="scripts/controllers/positionctrl.js"></script>
-    <script src ="scripts/controllers/appCDVctrl.js"></script>
-    <script src ="scripts/controllers/appJVctrl.js"></script>
-    <script src ="scripts/controllers/searchCDVctrl.js"></script>
-    <script src ="scripts/controllers/JVctrl.js"></script>
-    <script src ="scripts/controllers/checkctrl.js"></script>
-    <script src ="scripts/controllers/userctrl.js"></script>
-    <script src ="scripts/controllers/bankctrl.js"></script>
-    <script src ="scripts/controllers/accountctrl.js"></script>
-    <script src ="scripts/controllers/subAcctctrl.js"></script>
-    <script src ="scripts/controllers/assetctrl.js"></script>
-    <script src ="scripts/controllers/beginBalctrl.js"></script>
-    <script src ="scripts/controllers/searchJVctrl.js"></script>
-    <script src ="scripts/controllers/apvctrl.js"></script>
-    <script src ="scripts/controllers/appAPVctrl.js"></script>
-    <script src ="scripts/controllers/searchAPVctrl.js"></script>
-    <script src ="scripts/controllers/poctrl.js"></script>
-    <script src ="scripts/controllers/podetailsctrl.js"></script>
-    <script src ="scripts/controllers/seriesnumctrl.js"></script>
+    <script src="scripts/controllers/loginctrl.js"></script>
+    <script src="scripts/controllers/mainctrl.js"></script>
+    <script src="scripts/controllers/employeectrl.js"></script>
+    <script src="scripts/controllers/branchctrl.js"></script>
+    <script src="scripts/controllers/cdvctrl.js"></script>
+    <script src="scripts/controllers/positionctrl.js"></script>
+    <script src="scripts/controllers/appCDVctrl.js"></script>
+    <script src="scripts/controllers/appJVctrl.js"></script>
+    <script src="scripts/controllers/searchCDVctrl.js"></script>
+    <script src="scripts/controllers/JVctrl.js"></script>
+    <script src="scripts/controllers/checkctrl.js"></script>
+    <script src="scripts/controllers/userctrl.js"></script>
+    <script src="scripts/controllers/bankctrl.js"></script>
+    <script src="scripts/controllers/accountctrl.js"></script>
+    <script src="scripts/controllers/subAcctctrl.js"></script>
+    <script src="scripts/controllers/assetctrl.js"></script>
+    <script src="scripts/controllers/beginBalctrl.js"></script>
+    <script src="scripts/controllers/searchJVctrl.js"></script>
+    <script src="scripts/controllers/apvctrl.js"></script>
+    <script src="scripts/controllers/appAPVctrl.js"></script>
+    <script src="scripts/controllers/searchAPVctrl.js"></script>
+    <script src="scripts/controllers/poctrl.js"></script>
+    <script src="scripts/controllers/podetailsctrl.js"></script>
+    <script src="scripts/controllers/seriesnumctrl.js"></script>
     <!-- Angular Directives -->
-    <script src ="scripts/directives/header.js"></script>
+    <script src="scripts/directives/header.js"></script>
     <!-- Angular Services -->
-    <script src ="scripts/services/employees.js"></script>
-    <script src ="scripts/services/branches.js"></script>
-    <script src ="scripts/services/cdv.js"></script>
-    <script src ="scripts/services/positions.js"></script>
-    <script src ="scripts/services/jv.js"></script>
-    <script src ="scripts/services/appCDV.js"></script>
-    <script src ="scripts/services/appJV.js"></script>
-    <script src ="scripts/services/searchCDV.js"></script>
-    <script src ="scripts/services/users.js"></script>
-    <script src ="scripts/services/banks.js"></script>
-    <script src ="scripts/services/account.js"></script>
-    <script src ="scripts/services/subAcct.js"></script>
-    <script src ="scripts/services/assets.js"></script>
-    <script src ="scripts/services/beginBal.js"></script>
-    <script src ="scripts/services/searchJV.js"></script>
-    <script src ="scripts/services/apv.js"></script>
-    <script src ="scripts/services/appAPV.js"></script>
-    <script src ="scripts/services/searchAPV.js"></script>
-    <script src ="scripts/services/po.js"></script>
-    <script src ="scripts/services/podetails.js"></script>
-    <script src ="scripts/services/series.js"></script>
-    <script src ="scripts/services/authentication.js"></script>
-  </body>
+    <script src="scripts/services/employees.js"></script>
+    <script src="scripts/services/branches.js"></script>
+    <script src="scripts/services/cdv.js"></script>
+    <script src="scripts/services/positions.js"></script>
+    <script src="scripts/services/jv.js"></script>
+    <script src="scripts/services/appCDV.js"></script>
+    <script src="scripts/services/appJV.js"></script>
+    <script src="scripts/services/searchCDV.js"></script>
+    <script src="scripts/services/users.js"></script>
+    <script src="scripts/services/banks.js"></script>
+    <script src="scripts/services/account.js"></script>
+    <script src="scripts/services/subAcct.js"></script>
+    <script src="scripts/services/assets.js"></script>
+    <script src="scripts/services/beginBal.js"></script>
+    <script src="scripts/services/searchJV.js"></script>
+    <script src="scripts/services/apv.js"></script>
+    <script src="scripts/services/appAPV.js"></script>
+    <script src="scripts/services/searchAPV.js"></script>
+    <script src="scripts/services/po.js"></script>
+    <script src="scripts/services/podetails.js"></script>
+    <script src="scripts/services/series.js"></script>
+    <script src="scripts/services/authentication.js"></script>
+</body>
+
 </html>
