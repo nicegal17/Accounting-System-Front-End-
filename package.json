@@ -1,6 +1,7 @@
 {
   "name": "accounting-system",
   "version": "0.0.1",
+  "main": "main.js",
   "development": {
     "apiEndPoint": "http://localhost:8000"
   },
@@ -10,7 +11,14 @@
   "production": {
     "apiEndPoint": "http://localhost:8000"
   },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "./node_modules/.bin/electron ."
+  },
   "devDependencies": {
+    "asar": "^0.8.2",
+    "electron-prebuilt": "^0.34.1",
+    "fs-jetpack": "^0.7.0",
     "grunt": "~0.4",
     "grunt-angular-templates": "~0.5",
     "grunt-browser-output": "0.1.0",
@@ -33,6 +41,12 @@
     "karma-jasmine": "~0.1.5",
     "karma-mocha-reporter": "~0.2.5",
     "karma-phantomjs-launcher": "~0.1.4",
-    "load-grunt-tasks": "~0.2"
+    "load-grunt-tasks": "~0.2",
+    "q": "^1.4.1",
+    "rcedit": "^0.3.0"
+  },
+  "dependencies": {
+    "angular": "^1.4.7",
+    "jquery": "^2.1.4"
   }
 }
