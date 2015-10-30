@@ -4,15 +4,6 @@ angular.module('accounting')
     .factory('CDVFactory', function($http, API_URL) {
 
         return {
-            getAcctNum: function() {
-                return $http({
-                    url: API_URL + '/CDV/accounts',
-                    method: 'GET',
-                }).then(function(res) {
-                    return res.data;
-                });
-            },
-
             getBankName: function() {
                 return $http({
                     url: API_URL + '/CDV/banks',

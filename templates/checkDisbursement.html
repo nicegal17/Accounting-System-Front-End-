@@ -18,30 +18,28 @@
                         <input type="text" class="form-control" id="inputName" ng-model="CDV.address" placeholder="Payee Address">
                     </div>
                     <div class="form-group">
-                        <div ng-controller="cdvctrl">
-                            <label for="inputName">Check Date</label>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <p class="input-group">
-                                        <input type="date" class="form-control" datepicker-popup ng-model="CDV.dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
-                                        <span class="input-group-btn">
+                        <label for="inputName">Check Date</label>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p class="input-group">
+                                    <input type="date" class="form-control" datepicker-popup ng-model="CDV.dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                                    <span class="input-group-btn">
                                                 <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                                             </span>
-                                    </p>
-                                </div>
+                                </p>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Bank</label>
-                            <select ng-model="CDV.bank" class="form-control">
-                                <option ng-repeat="bank in banks" value="{{bank.bankID}}">{{bank.bankName}}</option>
+                            <label>Bank Name: </label>
+                            <select ng-model="CDV.bank" class="form-control input-sm" ng-change="cboBank(CDV.bank)">
+                                <option ng-repeat="bank in banks" value="{{bank.bankID}}--{{bank.acctNum}}">{{bank.bankName}}</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Account No.</label>
-                            <select ng-model="CDV.account" class="form-control">
-                                <option ng-repeat="account in accounts" value="{{account.acctID}}">{{account.acctNo}}</option>
-                            </select>
+                            <label>Account Number: </label>
+                            <div class="form-group">
+                                <input type="text" class="form-control input-sm" value="{{CDV.acctNum}}" placeholder="ACCOUNT NUMBER" ng-disabled="isDisable">
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="inputName">Amount</label>
@@ -118,4 +116,3 @@
             </div>
         </div>
     </div>
-</div>

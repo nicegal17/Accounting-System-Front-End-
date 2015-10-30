@@ -25,20 +25,6 @@
              });
          }
 
-         // $scope.approveJV = function() {
-         //         AppJVFactory.approveJV($scope.appjv.JID, $scope.appjv).then(function(data) {
-         //             console.log('data: ', data);
-         //             toastr.success('Journal Voucher has been approved', 'Approve JV');
-         //         });
-         // };
-
-         // $scope.denyJV = function() {
-         //         AppJVFactory.denyJV($scope.appjv.JID, $scope.appjv).then(function(data) {
-         //             console.log('data: ', data);
-         //             toastr.success('Journal Voucher has been denied', 'Denied JV');
-         //         });
-         // };
-
          function init() {
              $scope.appApv = {};
              $scope.appApv.apvID = null;

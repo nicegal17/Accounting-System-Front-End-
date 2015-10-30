@@ -3,6 +3,12 @@
  angular.module('accounting')
      .controller('cdvctrl', function($scope, $filter, CDVFactory, toastr) {
 
+        $scope.cboBank = function(bank) {
+             var str = bank.split('--');
+             $scope.CDV.bankID = str[0];
+             $scope.CDV.acctNum = str[1];
+         };
+
          $scope.today = function() {
              $scope.dt = new Date();
          }
@@ -46,9 +52,9 @@
          $scope.addRow = function(row) {
              var DB, CR;
 
-                 var title = _.find($scope.acctTitles, {
-                     'idAcctTitle': parseInt(row.acctTitle)
-                 });
+             var title = _.find($scope.acctTitles, {
+                 'idAcctTitle': parseInt(row.acctTitle)
+             });
 
              if (row.DB === undefined || row.DB === null) {
                  DB = 0;
@@ -57,7 +63,7 @@
              }
 
              if (row.CR === undefined || row.CR === null) {
-                 CR = 0;    
+                 CR = 0;
              } else {
                  CR = row.CR;
              }
@@ -101,9 +107,10 @@
                  $scope.totalDB = "";
                  $scope.totalCR = "";
              });
-         }; 
+         };
 
          function init() {
+             $scope.CDV = {};
              $scope.banks = {};
              $scope.accounts = {};
              $scope.acctTitles = {};
@@ -111,12 +118,11 @@
              $scope.entry = {};
              $scope.cdvnums = {};
 
+             $scope.CDV.bankID = null;
+             $scope.CDV.bankName = "";
+
              CDVFactory.getBankName().then(function(data) {
                  $scope.banks = data;
-             });
-
-             CDVFactory.getAcctNum().then(function(data) {
-                 $scope.accounts = data;
              });
 
              CDVFactory.getAcctTitle().then(function(data) {
@@ -148,7 +154,7 @@
              }];
          }
 
-         $scope.today();
+          $scope.today();   
 
          init();
      });

@@ -3,10 +3,13 @@
 angular.module('accounting')
     .controller('loginctrl', function($scope, $state, toastr, AuthenticationFactory) {
 
+        // $scope.userID = {};
+
         $scope.login = function() {
             console.log('username: ' + $scope.username);
             console.log('password: ' + $scope.password);
-            
+            console.log('userid' +  $scope.userID);
+
             if ($scope.username == '' || _.isEmpty($scope.username)) {
                 toastr.warning("Please enter username");
                 return;
@@ -18,16 +21,26 @@ angular.module('accounting')
             }
 
             AuthenticationFactory.Login($scope.username, $scope.password).then(function(response) {
-                console.log('response: ',response);
+                console.log('response: ', response);
+    
                 if (response.success) {
-                    AuthenticationFactory.storeUser(JSON.stringify(response.user),response.token);
+                    AuthenticationFactory.storeUser(JSON.stringify(response.user), response.token);
+                    AuthenticationFactory.getUser(JSON.stringify(response.user), response.token);
+
+                    $scope.userID = response.user;
+                    console.log('userID', userID);
+                   
+
                     $state.go('main.dashboard');
                 } else {
                     $scope.error = response.msg;
                     toastr.error($scope.error);
                 }
             });
-            
-        };
 
+            
+                    
+               
+           
+        }
     });

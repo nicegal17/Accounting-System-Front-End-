@@ -94,9 +94,5 @@ angular
                 templateUrl: 'templates/PO_prev.html',
                 controller: 'podetailsctrl'
             });
-
-
-
         $urlRouterProvider.otherwise('/login');
-        // $locationProvider.html5Mode(true);
     });

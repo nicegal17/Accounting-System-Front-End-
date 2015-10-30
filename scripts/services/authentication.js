@@ -2,6 +2,8 @@
 
 angular.module('accounting')
     .factory('AuthenticationFactory', function($http, $state, $window, API_URL) {
+       
+
         return {
             Login: function(username, password) {
                 console.log('username: ' + username + ' password: ' + password);
@@ -21,8 +23,11 @@ angular.module('accounting')
                 $window.localStorage['userToken'] = token;
             },
             getUser: function() {
-                return $window.localStorage['user'];
-            },
+                // return $window.localStorage['user'];
+
+                   var currentUser = JSON.stringify($window.localStorage['user']);
+                    // console.log('curUser: ', currentUser);
+            },    
             getToken: function() {
                 return $window.localStorage['userToken'];
             },
