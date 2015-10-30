@@ -6,6 +6,7 @@
 
 body {
     background-color: #f8f8f8;
+    padding-bottom: 20px;
 }
 
 #wrapper {
@@ -134,7 +135,6 @@ body {
         width: 250px;
         margin-top: 64px;
     }
-
     .navbar-nav .dropdown-messages,
     .navbar-nav .dropdown-tasks,
     .navbar-nav .dropdown-alerts {
@@ -253,7 +253,7 @@ table.dataTable thead .sorting:after {
     content: "\f0dc";
     float: right;
     font-family: fontawesome;
-    color: rgba(50,50,50,.5);
+    color: rgba(50, 50, 50, .5);
 }
 
 .btn-circle {

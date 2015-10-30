@@ -27,15 +27,16 @@ app.on('ready', function() {
 
     // Create the browser window.
     mainWindow = new BrowserWindow({
-        width: 800,
-        height: 600
+        width: 1366,
+        height: 768,
+        resizable: true
     });
 
     // and load the index.html of the app.
     mainWindow.loadUrl( INDEX );
 
     // Open the DevTools.
-    // mainWindow.openDevTools();
+    //mainWindow.openDevTools();
 
     mainWindow.webContents.on( 'did-finish-load', function () {
         mainWindow.show();
