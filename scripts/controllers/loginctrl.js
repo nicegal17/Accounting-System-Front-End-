@@ -1,14 +1,13 @@
 'use strict';
 
 angular.module('accounting')
-    .controller('loginctrl', function($scope, $state, toastr, AuthenticationFactory) {
+    .controller('loginctrl', function($scope, $state, toastr, $window, AuthenticationFactory) {
 
-        // $scope.userID = {};
+        var currentUser = AuthenticationFactory.getUser();
 
         $scope.login = function() {
             console.log('username: ' + $scope.username);
             console.log('password: ' + $scope.password);
-            console.log('userid' +  $scope.userID);
 
             if ($scope.username == '' || _.isEmpty($scope.username)) {
                 toastr.warning("Please enter username");
@@ -22,14 +21,12 @@ angular.module('accounting')
 
             AuthenticationFactory.Login($scope.username, $scope.password).then(function(response) {
                 console.log('response: ', response);
-    
+
                 if (response.success) {
                     AuthenticationFactory.storeUser(JSON.stringify(response.user), response.token);
-                    AuthenticationFactory.getUser(JSON.stringify(response.user), response.token);
 
-                    $scope.userID = response.user;
-                    console.log('userID', userID);
-                   
+                    currentUser = JSON.parse($window.localStorage['user']);
+                    console.log('currentUser: ', currentUser);
 
                     $state.go('main.dashboard');
                 } else {
@@ -37,10 +34,5 @@ angular.module('accounting')
                     toastr.error($scope.error);
                 }
             });
-
-            
-                    
-               
-           
         }
     });

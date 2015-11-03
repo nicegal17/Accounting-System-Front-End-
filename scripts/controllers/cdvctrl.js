@@ -1,9 +1,13 @@
  'use strict';
 
  angular.module('accounting')
-     .controller('cdvctrl', function($scope, $filter, CDVFactory, toastr) {
+     .controller('cdvctrl', function($scope, $filter, $window, CDVFactory, toastr) {
 
-        $scope.cboBank = function(bank) {
+         $scope.currentUser = JSON.parse($window.localStorage['user']);
+         console.log('user: ', $scope.currentUser);
+
+
+         $scope.cboBank = function(bank) {
              var str = bank.split('--');
              $scope.CDV.bankID = str[0];
              $scope.CDV.acctNum = str[1];
@@ -117,6 +121,7 @@
              $scope.entries = [];
              $scope.entry = {};
              $scope.cdvnums = {};
+             $scope.currentUser = {};
 
              $scope.CDV.bankID = null;
              $scope.CDV.bankName = "";
@@ -154,7 +159,7 @@
              }];
          }
 
-          $scope.today();   
+         $scope.today();
 
          init();
      });
