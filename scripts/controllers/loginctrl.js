@@ -28,7 +28,7 @@ angular.module('accounting')
                     AuthenticationFactory.getUser(JSON.stringify(response.user), response.token);
 
                     $scope.userID = response.user;
-                    console.log('userID', userID);
+                    console.log('userID', $scope.userID);
                    
 
                     $state.go('main.dashboard');

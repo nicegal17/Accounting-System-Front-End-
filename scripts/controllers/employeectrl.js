@@ -1,7 +1,7 @@
  'use strict';
 
  angular.module('accounting')
-     .controller('employeectrl', function($scope, $filter, EmployeeFactory,PositionFactory, toastr, ngDialog, ngTableParams) {
+     .controller('employeectrl', function($scope, $filter, EmployeeFactory, PositionFactory, toastr, ngDialog, ngTableParams) {
 
          $scope.saveEmployee = function() {
              console.log('employee: ', $scope.employee);
@@ -55,8 +55,10 @@
              $scope.isDisable = false;
              EmployeeFactory.getEID(id).then(function(data) {
                  if (data.length > 0) {
-                     $scope.employee = data[0];
-                     $scope.isUpdate = true;
+                    $scope.employee = data[0];
+                    $scope.employee.position = data[0].idPosition;
+                    console.log('employee: ', $scope.employee);
+                    $scope.isUpdate = true;
                  }
              });
          };
@@ -81,7 +83,6 @@
              }, {
                  getData: function($defer, params) {
                      EmployeeFactory.getEmployees().then(function(data) {
-                         console.log('data: ', data);
                          var orderedData = {};
 
                          if ($scope.searchEmployee) {
@@ -98,8 +99,8 @@
              });
 
              PositionFactory.getPositions().then(function(data) {
-                 console.log('positions: ', data);
                  $scope.positions = data;
+                 $scope.employee.position = data[0].idPosition;
              });
          }
 

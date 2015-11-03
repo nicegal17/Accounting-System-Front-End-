@@ -24,7 +24,7 @@
                     <div class="form-group">
                         <label>Position</label>
                         <select ng-model="employee.position" class="form-control">
-                            <option ng-repeat="position in positions" value="{{position.idPosition}}">{{position.posName}}</option>
+                            <option ng-repeat="position in positions track by position.idPosition" ng-value="position.idPosition" ng-selected="employee.position == position.idPosition">{{position.posName}}</option>
                         </select>
                     </div>
                     <button class="btn btn-sm btn-primary" ng-click="saveEmployee()"><span class="glyphicon glyphicon-saved"></span> Save</button>

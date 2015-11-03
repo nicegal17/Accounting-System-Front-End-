@@ -53,6 +53,7 @@
              UsersFactory.getUserID(id).then(function(data) {
                  if (data.length > 0) {
                      $scope.user = data[0];
+                     console.log('$scope.user: ', $scope.user);
                      $scope.isUpdate = true;
                  }
              });
@@ -79,7 +80,6 @@
              $scope.isDisable = true;
 
              UsersFactory.getEmployee().then(function(data) {
-                 console.log('empNames: ', data);
                  $scope.empNames = data;
 
                  // $scope.user.empName = 3;
