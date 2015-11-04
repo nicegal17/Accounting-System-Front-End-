@@ -3,10 +3,6 @@
  angular.module('accounting')
      .controller('cdvctrl', function($scope, $filter, $window, CDVFactory, toastr) {
 
-         $scope.currentUser = JSON.parse($window.localStorage['user']);
-         console.log('user: ', $scope.currentUser);
-
-
          $scope.cboBank = function(bank) {
              var str = bank.split('--');
              $scope.CDV.bankID = str[0];
@@ -85,6 +81,7 @@
          $scope.removeRow = function(index) {
              $scope.entries.splice(index, 1);
          };
+
          $scope.total = function() {
              $scope.totalDB = 0;
              $scope.totalCR = 0;
@@ -97,19 +94,23 @@
          };
 
          $scope.saveCDVEntries = function() {
+             $scope.currentUser = JSON.parse($window.localStorage['user']);
+             console.log('user: ', $scope.currentUser.userID);
              console.log('cdv: ', $scope.CDV);
              console.log('cdv: ', JSON.stringify($scope.entries));
              var data = {
                  CDV: $scope.CDV,
-                 entries: JSON.stringify($scope.entries)
-             }
+                 entries: JSON.stringify($scope.entries),
+                 userID: $scope.currentUser.userID
+             };
+             console.log('data: ', data);
              CDVFactory.createCDV(data).then(function(res) {
-                 console.log('data: ', res);
+                 console.log('res: ', res);
                  toastr.success('Check Disbursement Voucher has been Created', 'CDV Created');
-                 $scope.entries = "";
+                 /*$scope.entries = "";
                  $scope.CDV = "";
                  $scope.totalDB = "";
-                 $scope.totalCR = "";
+                 $scope.totalCR = "";*/
              });
          };
 
@@ -122,6 +123,7 @@
              $scope.entry = {};
              $scope.cdvnums = {};
              $scope.currentUser = {};
+             $scope.userID = {};
 
              $scope.CDV.bankID = null;
              $scope.CDV.bankName = "";
