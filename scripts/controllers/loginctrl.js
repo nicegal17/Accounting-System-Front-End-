@@ -3,7 +3,7 @@
 angular.module('accounting')
     .controller('loginctrl', function($scope, $state, toastr, $window, AuthenticationFactory) {
 
-        var currentUser = AuthenticationFactory.getUser();
+        
 
         $scope.login = function() {
             console.log('username: ' + $scope.username);
@@ -25,9 +25,9 @@ angular.module('accounting')
                 if (response.success) {
                     AuthenticationFactory.storeUser(JSON.stringify(response.user), response.token);
 
-                    currentUser = JSON.parse($window.localStorage['user']);
+                    var currentUser = AuthenticationFactory.getUser();
+                    currentUser = JSON.parse(currentUser);
                     console.log('currentUser: ', currentUser);
-
                     $state.go('main.dashboard');
                 } else {
                     $scope.error = response.msg;
