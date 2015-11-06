@@ -1,7 +1,7 @@
  'use strict';
 
  angular.module('accounting')
-     .controller('JVctrl', function($scope, $filter, JVFactory, toastr, ngDialog, $modalInstance) {
+     .controller('JVctrl', function($scope, $filter, $modalInstance, $window, JVFactory, toastr) {
 
          $scope.addRow = function(row) {
              var DB, CR;
@@ -52,13 +52,15 @@
              $modalInstance.close();
          };
 
-          $scope.saveJVEntries = function() {
-             console.log('jv: ', $scope.JV);
-             console.log('jv: ', JSON.stringify($scope.entries));
-             
+         $scope.saveJVEntries = function() {
+             $scope.currentUser = JSON.parse($window.localStorage['user']);
+             // console.log('jv: ', $scope.JV);
+             // console.log('jv: ', JSON.stringify($scope.entries));
+
              var data = {
                  JV: $scope.JV,
-                 entries: JSON.stringify($scope.entries)
+                 entries: JSON.stringify($scope.entries),
+                 userID: $scope.currentUser.userID
              };
 
              JVFactory.createJV(data).then(function(res) {
@@ -77,7 +79,8 @@
              $scope.acctTitles = {};
              $scope.entries = [];
              $scope.entry = {};
-             
+             $scope.userID = {};
+
              JVFactory.getAcctTitle().then(function(data) {
                  $scope.acctTitles = data;
              });

@@ -15,7 +15,7 @@ angular.module('accounting')
 
             getAcctEntries: function(JID) {
                 return $http({
-                    url: API_URL + '/getAcctEntries/' + JID,
+                    url: API_URL + '/appJV/getAcctEntries/' + JID,
                     type: 'GET',
                 }).then(function(res) {
                     return res.data;

@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('accounting')
-    .factory('AppCDVFactory', function($http, API_URL) {
+    .factory('AuditCDVFactory', function($http, API_URL) {
 
         return {
             getCDVNo: function() {
                 return $http({
-                    url: API_URL + '/AppCDV',
+                    url: API_URL + '/Audit',
                     method: 'GET',
                 }).then(function(res) {
                     return res.data;
@@ -15,26 +15,16 @@ angular.module('accounting')
 
             getAcctEntries: function(CDVNo) {
                 return $http({
-                    url: API_URL + '/AppCDV/getAcctEntries/' + CDVNo,
+                    url: API_URL + '/Audit/getAcctEntries/' + CDVNo,
                     method: 'GET',
                 }).then(function(res) {
                     return res.data;
                 });
             },
 
-            appCDV: function(id, data) {
+            auditCDV: function(id, data) {
                 return $http({
-                    url: API_URL + '/AppCDV/' + id,
-                    method: 'PUT',
-                    data: data
-                }).then(function(res) {
-                    return res.data;
-                });
-            },
-
-            denyCDV: function(id, data) {
-                return $http({
-                    url: API_URL + '/AppCDV/denyCDV/' + id,
+                    url: API_URL + '/Audit/' + id,
                     method: 'PUT',
                     data: data
                 }).then(function(res) {

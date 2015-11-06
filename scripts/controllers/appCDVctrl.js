@@ -1,7 +1,7 @@
  'use strict';
 
  angular.module('accounting')
-     .controller('appCDVctrl', function($scope, $filter, AppCDVFactory, toastr, ngDialog, ngTableParams, $modalInstance) {
+     .controller('appCDVctrl', function($scope, $filter, $modalInstance, AppCDVFactory, toastr, ngDialog, ngTableParams) {
 
          $scope.appCDV = function() {
              $scope.appcdv = {};
@@ -19,10 +19,11 @@
              $scope.appcdv.sDate = str[1];
              $scope.appcdv.Particular = str[2];
              $scope.appcdv.CDVNum = str[3];
+             $scope.appcdv.userName = str[4];
 
              AppCDVFactory.getAcctEntries($scope.appcdv.CDVNo).then(function(data) {
                  $scope.accnts = data;
-                 console.log(data);
+                 console.log('entries: ', data);
 
              });
          }
@@ -43,12 +44,14 @@
 
          function init() {
              $scope.appcdv = {};
+             $scope.entries = [];
+             $scope.acctTitles = {};
+
              $scope.appcdv.CDVNo = null;
              $scope.appcdv.sDate = "";
              $scope.appcdv.Particular = "";
              $scope.appcdv.CDVNum = "";
-             $scope.entries = [];
-             $scope.acctTitles = {};
+             $scope.appcdv.userName = "";
 
              AppCDVFactory.getCDVNo().then(function(data) {
                  $scope.IDs = data;

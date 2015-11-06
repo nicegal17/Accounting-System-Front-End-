@@ -1,13 +1,13 @@
  'use strict';
 
  angular.module('accounting')
-     .controller('appJVctrl', function($scope, $filter, AppJVFactory, toastr, ngDialog, ngTableParams, $modalInstance) {
+     .controller('appJVctrl', function($scope, $filter, $modalInstance, $window, AppJVFactory, toastr) {
 
          $scope.appJV = function() {
              $scope.appjv = {};
          };
 
-        $scope.closeModal = function() {
+         $scope.closeModal = function() {
              console.log('cancel');
              $modalInstance.close();
          }
@@ -18,35 +18,34 @@
              $scope.appjv.sDate = str[1];
              $scope.appjv.Particular = str[2];
              $scope.appjv.JVNum = str[3];
+             $scope.appjv.userName = str[4];
 
              AppJVFactory.getAcctEntries($scope.appjv.JID).then(function(data) {
                  $scope.accnts = data;
-                 console.log(data);
-
              });
          }
 
          $scope.approveJV = function() {
-                 AppJVFactory.approveJV($scope.appjv.JID, $scope.appjv).then(function(data) {
-                     console.log('data: ', data);
-                     toastr.success('Journal Voucher has been approved', 'Approve JV');
-                 });
+            $scope.currentUser = JSON.parse($window.localStorage['user']);
+            var data = {
+                 userID: $scope.currentUser.userID
+            };
+
+             AppJVFactory.approveJV($scope.appjv.JID, $scope.appjv).then(function(data) {
+                 toastr.success('Journal Voucher has been approved', 'Approve JV');
+             });
          };
 
          $scope.denyJV = function() {
-                 AppJVFactory.denyJV($scope.appjv.JID, $scope.appjv).then(function(data) {
-                     console.log('data: ', data);
-                     toastr.success('Journal Voucher has been denied', 'Denied JV');
-                 });
+             AppJVFactory.denyJV($scope.appjv.JID, $scope.appjv).then(function(data) {
+                 console.log('data: ', data);
+                 toastr.success('Journal Voucher has been denied', 'Denied JV');
+             });
          };
 
          function init() {
              $scope.appjv = {};
-             $scope.appjv.JID = null;
-             $scope.appjv.sDate = "";
-             $scope.appjv.Particular = "";
-             $scope.appjv.JVNum = "";
-        
+
              AppJVFactory.getJVNo().then(function(data) {
                  $scope.jvnums = data;
              });

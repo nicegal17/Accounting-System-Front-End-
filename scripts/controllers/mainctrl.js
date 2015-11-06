@@ -43,11 +43,19 @@ angular
         };
 
         $scope.openAppCDV = function() {
-            console.log('asdasda');
             var modalInstance = $modal.open({
                 animation: true,
                 templateUrl: '/templates/modals/appCDV.html',
                 controller: 'appCDVctrl',
+                size: 'lg'
+            });
+        };
+
+        $scope.openAuditCDV = function() {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: '/templates/modals/auditCDV.html',
+                controller: 'auditCDVctrl',
                 size: 'lg'
             });
         };

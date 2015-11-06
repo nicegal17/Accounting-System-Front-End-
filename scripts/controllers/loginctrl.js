@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('accounting')
-    .controller('loginctrl', function($scope, $state, toastr, $window, $rootScope, AuthenticationFactory) {
+    .controller('loginctrl', function($scope, $state, $window, toastr, AuthenticationFactory) {
         
         $scope.login = function() {
             console.log('username: ' + $scope.username);
@@ -25,7 +25,7 @@ angular.module('accounting')
 
                     var currentUser = AuthenticationFactory.getUser();
                     currentUser = JSON.parse(currentUser);
-                    console.log('currentUser: ', $rootScope.currentUser);
+                    console.log('currentUser: ', currentUser);
 
                     $state.go('main.dashboard');
                 } else {

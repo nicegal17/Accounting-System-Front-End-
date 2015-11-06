@@ -1,6 +1,6 @@
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="closeModal()"><span aria-hidden="true">&times;</span></button>
-    <h5 class="modal-title">Approve Check Disbursement Voucher</h5>
+    <h5 class="modal-title">Audit Check Disbursement Voucher</h5>
 </div>
 <div class="modal-body">
     <div class="panel panel-primary">
@@ -8,21 +8,21 @@
             <form>
                 <div class="form-group">
                     <label for="inputName">CDV #</label>
-                    <select ng-model="appcdv.ID" class="form-control" ng-change="changeMeChange(appcdv.ID)">
-                        <option ng-repeat="ID in IDs" value="{{ID.cdvID}}--{{ID.transDate}}--{{ID.particular}}--{{ID.CDVNo}}--{{ID.empName}}">{{ID.CDVNo}}</option>
+                    <select ng-model="audit.cdv" class="form-control" ng-change="cboCDV(audit.cdv)">
+                        <option ng-repeat="cdv in cdvs" value="{{cdv.cdvID}}--{{cdv.transDate}}--{{cdv.particular}}--{{cdv.CDVNo}}--{{cdv.empName}}">{{cdv.CDVNo}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="inputSlug">Date:</label>
-                    <label for="inputSlug">{{appcdv.sDate}}</label>
+                    <label for="inputSlug">{{audit.sDate}}</label>
                 </div>
                 <div class="form-group">
                     <label for="inputSlug">CDV No.:</label>
-                    <label for="inputSlug">{{appcdv.CDVNum}}</label>
+                    <label for="inputSlug">{{audit.CDVNum}}</label>
                 </div>
                 <div class="form-group">
                     <label for="inputSlug">Particular:</label>
-                    <label for="inputSlug">{{appcdv.Particular}}</label>
+                    <label for="inputSlug">{{audit.Particular}}</label>
                 </div>
             </form>
         </div>
@@ -63,12 +63,11 @@
         <div class="col-lg-6 col-md-6">
             <div class="form-group">
                 <label for="inputSlug">Prepared By:</label>
-                <label for="inputSlug">{{appcdv.userName}}</label>
+                <label for="inputSlug">{{audit.userName}}</label>
             </div>
         </div>
     </div>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-sm btn-primary" ng-click="appCDV()"><span class="glyphicon glyphicon-ok"></span> Approve</button>
-    <button class="btn btn-sm btn-warning" ng-click="denyCDV()"><span class="glyphicon glyphicon-remove"></span> Deny</button>
+    <button class="btn btn-sm btn-primary" ng-click="auditCDV()"><span class="glyphicon glyphicon-ok"></span> Audit</button>
 </div>
