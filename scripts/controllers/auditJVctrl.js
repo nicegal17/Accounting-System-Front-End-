@@ -1,9 +1,9 @@
  'use strict';
 
  angular.module('accounting')
-     .controller('auditCDVctrl', function($scope, $filter, $modalInstance, $window, AuditCDVFactory, toastr, ngDialog) {
+     .controller('auditJVctrl', function($scope, $filter, $modalInstance, $window, AuditJVFactory, toastr, ngDialog) {
 
-         $scope.auditCDV = function() {
+         $scope.auditJV = function() {
              $scope.audit = {};
          };
 
@@ -12,29 +12,29 @@
              $modalInstance.close();
          }
 
-         $scope.cboCDV = function(cdv) {
-             var str = cdv.split('--');
-             $scope.audit.CDVNo = str[0];
+         $scope.cboJV = function(jv) {
+             var str = jv.split('--');
+             $scope.audit.JVNo = str[0];
              $scope.audit.sDate = str[1];
              $scope.audit.Particular = str[2];
-             $scope.audit.CDVNum = str[3];
+             $scope.audit.JVNum = str[3];
              $scope.audit.userName = str[4];
 
-             AuditCDVFactory.getAcctEntries($scope.audit.CDVNo).then(function(data) {
+             AuditJVFactory.getAcctEntries($scope.audit.JVNo).then(function(data) {
                  $scope.accnts = data;
                  console.log('entries: ', data);
 
              });
-         }
+         };
 
-         $scope.auditCDV = function() {
+         $scope.auditJV = function() {
              $scope.currentUser = JSON.parse($window.localStorage['user']);
              var data = {
                  userID: $scope.currentUser.userID
              };
-             AuditCDVFactory.auditCDV($scope.audit.CDVNo, data).then(function(data) {
+             AuditJVFactory.auditJV($scope.audit.JVNo, data).then(function(data) {
                  console.log('data: ', data);
-                 toastr.success('Check Disbursement Voucher has been audited', 'Audit CDV');
+                 toastr.success('Journal Voucher has been audited', 'Audit JV');
              });
 
          };
@@ -44,8 +44,8 @@
              $scope.entries = [];
              $scope.acctTitles = {};
 
-             AuditCDVFactory.getCDVNo().then(function(data) {
-                 $scope.cdvs = data;
+             AuditJVFactory.getJVNo().then(function(data) {
+                 $scope.jvs = data;
              });
          }
 

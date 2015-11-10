@@ -87,6 +87,15 @@ angular
             });
         };
 
+        $scope.openAuditJV = function() {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: '/templates/modals/auditJV.html',
+                controller: 'auditJVctrl',
+                size: 'lg'
+            });
+        };
+
         $scope.openSearchJV = function() {
             var modalInstance = $modal.open({
                 animation: true,

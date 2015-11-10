@@ -1,28 +1,28 @@
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="closeModal()"><span aria-hidden="true">&times;</span></button>
-    <h5 class="modal-title">Search Journal Voucher</h5>
+    <h5 class="modal-title">Audit Journal Voucher</h5>
 </div>
 <div class="modal-body">
     <div class="panel panel-primary">
         <div class="panel-body">
             <form>
                 <div class="form-group">
-                    <label for="inputName">Journal Voucher #</label>
-                    <select ng-model="search.jv" class="form-control" ng-change="changeMeChange(search.jv)">
-                        <option ng-repeat="jv in jvs" value="{{jv.JID}}--{{jv.transDate}}--{{jv.particulars}}--{{jv.JVNum}}">{{jv.JVNum}}</option>
+                    <label for="inputName">JV #</label>
+                    <select ng-model="audit.jv" class="form-control" ng-change="cboJV(audit.jv)">
+                        <option ng-repeat="jv in jvs" value="{{jv.JID}}--{{jv.transDate}}--{{jv.particulars}}--{{jv.JVNum}}--{{jv.empName}}">{{jv.JVNum}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="inputSlug">Date:</label>
-                    <label for="inputSlug">{{search.sDate}}</label>
+                    <label for="inputSlug">{{audit.sDate}}</label>
                 </div>
                 <div class="form-group">
-                    <label for="inputSlug">Journal Voucher No.:</label>
-                    <label for="inputSlug">{{search.JVNum}}</label>
+                    <label for="inputSlug">CDV No.:</label>
+                    <label for="inputSlug">{{audit.JVNum}}</label>
                 </div>
                 <div class="form-group">
                     <label for="inputSlug">Particular:</label>
-                    <label for="inputSlug">{{search.Particular}}</label>
+                    <label for="inputSlug">{{audit.Particular}}</label>
                 </div>
             </form>
         </div>
@@ -36,6 +36,7 @@
                         <th class="text-center">Account Title</th>
                         <th class="text-center">Debit</th>
                         <th class="text-center">Credit</th>
+                        <th width="5%"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,15 +59,15 @@
         </div>
     </div>
     <hr>
-    <div class="form-group">
-        <label for="inputSlug">Prepared By:</label>
-        <label for="inputSlug">Prepared By</label>
-    </div>
-    <div class="form-group">
-        <label for="inputSlug">Approved By:</label>
-        <label for="inputSlug">Approved By</label>
+    <div class="row">
+        <div class="col-lg-6 col-md-6">
+            <div class="form-group">
+                <label for="inputSlug">Prepared By:</label>
+                <label for="inputSlug">{{audit.userName}}</label>
+            </div>
+        </div>
     </div>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-sm btn-primary" ng-click="denyJV()"><span class="glyphicon glyphicon-print"></span> Print</button>
+    <button class="btn btn-sm btn-primary" ng-click="auditJV()"><span class="glyphicon glyphicon-ok"></span> Audit</button>
 </div>

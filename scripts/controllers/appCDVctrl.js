@@ -1,7 +1,7 @@
  'use strict';
 
  angular.module('accounting')
-     .controller('appCDVctrl', function($scope, $filter, $modalInstance, AppCDVFactory, toastr, ngDialog, ngTableParams) {
+     .controller('appCDVctrl', function($scope, $filter, $modalInstance, $window, AppCDVFactory, toastr, ngDialog, ngTableParams) {
 
          $scope.appCDV = function() {
              $scope.appcdv = {};
@@ -26,20 +26,25 @@
                  console.log('entries: ', data);
 
              });
-         }
+         };
 
          $scope.appCDV = function() {
-                 AppCDVFactory.appCDV($scope.appcdv.CDVNo, $scope.appcdv).then(function(data) {
-                     console.log('data: ', data);
-                     toastr.success('Check Disbursement Voucher has been approved', 'Approve CDV');
-                 });
+             $scope.currentUser = JSON.parse($window.localStorage['user']);
+             var data = {
+                 userID: $scope.currentUser.userID
+             };
+             console.log('data: ', data);
+             AppCDVFactory.appCDV($scope.appcdv.CDVNo, data).then(function(data) {
+                 console.log('data: ', data);
+                 toastr.success('Check Disbursement Voucher has been approved', 'Approve CDV');
+             });
          };
 
          $scope.denyCDV = function() {
-                 AppCDVFactory.denyCDV($scope.appcdv.CDVNo, $scope.appcdv).then(function(data) {
-                     console.log('data: ', data);
-                     toastr.success('Check Disbursement Voucher has been denied', 'Denied CDV');
-                 });
+             AppCDVFactory.denyCDV($scope.appcdv.CDVNo, $scope.appcdv).then(function(data) {
+                 console.log('data: ', data);
+                 toastr.success('Check Disbursement Voucher has been denied', 'Denied CDV');
+             });
          };
 
          function init() {

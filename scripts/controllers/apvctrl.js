@@ -1,9 +1,9 @@
  'use strict';
 
  angular.module('accounting')
-     .controller('apvctrl', function($scope, $filter, APVFactory, $modalInstance, ngDialog, toastr) {
+     .controller('apvctrl', function($scope, $filter, $modalInstance, $window, APVFactory, ngDialog, toastr) {
 
-        $scope.closeModal = function() {
+         $scope.closeModal = function() {
              console.log('cancel');
              $modalInstance.close();
          }
@@ -53,12 +53,15 @@
          };
 
          $scope.saveAPVEntries = function() {
+             $scope.currentUser = JSON.parse($window.localStorage['user']);
              console.log('apv: ', $scope.APVoucher);
              console.log('apv: ', JSON.stringify($scope.entries));
              var data = {
                  APVoucher: $scope.APVoucher,
-                 entries: JSON.stringify($scope.entries)
-             }
+                 entries: JSON.stringify($scope.entries),
+                 userID: $scope.currentUser.userID
+             };
+             
              APVFactory.createAPV(data).then(function(res) {
                  console.log('data: ', res);
                  toastr.success('Account Payable Voucher has been Created', 'APV Created');

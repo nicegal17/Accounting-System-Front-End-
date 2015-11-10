@@ -105,12 +105,12 @@
              };
              console.log('data: ', data);
              CDVFactory.createCDV(data).then(function(res) {
-                 console.log('res: ', res);
-                 toastr.success('Check Disbursement Voucher has been Created', 'CDV Created');
-                 /*$scope.entries = "";
+             //     console.log('res: ', res);
+                  toastr.success('Check Disbursement Voucher has been Created', 'CDV Created');
+                 $scope.entries = "";
                  $scope.CDV = "";
                  $scope.totalDB = "";
-                 $scope.totalCR = "";*/
+                 $scope.totalCR = "";
              });
          };
 

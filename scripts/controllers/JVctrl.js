@@ -52,6 +52,10 @@
              $modalInstance.close();
          };
 
+         $scope.cancel = function() {
+             $scope.entry = {};
+         };
+
          $scope.saveJVEntries = function() {
              $scope.currentUser = JSON.parse($window.localStorage['user']);
              // console.log('jv: ', $scope.JV);
