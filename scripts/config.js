@@ -93,6 +93,11 @@ angular
                 url: '/purchaseOrder/:id',
                 templateUrl: 'templates/PO_prev.html',
                 controller: 'podetailsctrl'
+            })
+             .state('main.manageUser', {
+                url: '/manageUser',
+                templateUrl: 'templates/user.html',
+                controller: 'userctrl'
             });
         $urlRouterProvider.otherwise('/login');
     });

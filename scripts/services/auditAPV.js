@@ -1,30 +1,30 @@
 'use strict';
 
 angular.module('accounting')
-    .factory('AppJVFactory', function($http, API_URL) {
+    .factory('AuditAPVFactory', function($http, API_URL) {
 
         return {
-            getJVNo: function() {
+            getAPV: function() {
                 return $http({
-                    url: API_URL + '/approveJV',
-                    type: 'GET',
+                    url: API_URL + '/AuditAPV',
+                    method: 'GET',
                 }).then(function(res) {
                     return res.data;
                 });
             },
 
-            getAcctEntries: function(JID) {
+            getAcctEntries: function(apvID) {
                 return $http({
-                    url: API_URL + '/approveJV/getAcctEntries/' + JID,
-                    type: 'GET',
+                    url: API_URL + '/AuditAPV/getAcctEntries/' + apvID,
+                    method: 'GET',
                 }).then(function(res) {
                     return res.data;
                 });
             },
 
-            approveJV: function(id, data) {
+            auditAPV: function(id, data) {
                 return $http({
-                    url: API_URL + '/approveJV/' + id,
+                    url: API_URL + '/AuditAPV/' + id,
                     method: 'PUT',
                     data: data
                 }).then(function(res) {

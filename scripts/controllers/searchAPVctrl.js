@@ -8,12 +8,13 @@
              $modalInstance.close();
          }
 
-        $scope.changeMeChange = function(det) {
-             var str = det.split('--');
+        $scope.cboAPV = function(apv) {
+             var str = apv.split('--');
              $scope.search.apvID = str[0];
              $scope.search.sDate = str[1];
              $scope.search.Particular = str[2];
              $scope.search.apvNum = str[3];
+             $scope.search.empName = str[4];
 
              searchAPVFactory.getAcctEntries($scope.search.apvID).then(function(data) {
                  $scope.accnts = data;

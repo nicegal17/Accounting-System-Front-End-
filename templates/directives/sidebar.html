@@ -5,7 +5,7 @@
                 <a ui-sref="main.dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
             </li>
             <li ui-sref-active="active">
-                <a ng-click="openUser()" href=""><i class="fa fa-user fa-fw"></i> Manage Users<span></span></a>
+                <a ui-sref="main.manageUser">Manage Users</a>
             </li>
             <li ng-class="{active: collapseVar==1}">
                 <a href="" ng-click="check(1)"><i class="fa fa-wrench fa-fw"></i> Settings<span
@@ -86,9 +86,9 @@
                         <a href="" ng-click="multiCheck(7)">Accounts Payable Voucher <span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level" collapse="multiCollapseVar!=7">
                             <li><a ng-click="openAPVoucher()" href="">Prepare</a></li>
-                            <li><a ng-click="openAppJV()" href="">Approve</a></li>
-                            <li><a ng-click="openAppJV()" href="">Audit</a></li>
-                            <li><a ng-click="openSearchJV()" href="">Search</a></li>
+                            <li><a ng-click="openAppAPV()" href="">Approve</a></li>
+                            <li><a ng-click="openAuditAPV()" href="">Audit</a></li>
+                            <li><a ng-click="openSearchAPV()" href="">Search</a></li>
                         </ul>
                     </li>
                 </ul>

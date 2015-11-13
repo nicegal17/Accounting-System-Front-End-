@@ -132,23 +132,21 @@ angular
             });
         };
 
+        $scope.openAuditAPV = function() {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: '/templates/modals/auditAPV.html',
+                controller: 'auditAPVctrl',
+                size: 'lg'
+            });
+        };
+
         $scope.openSearchAPV = function() {
             var modalInstance = $modal.open({
                 animation: true,
                 templateUrl: '/templates/modals/searchAPV.html',
                 controller: 'searchAPVctrl',
                 size: 'lg'
-            });
-        };
-
-        $scope.openUser = function() {
-            console.log('sadasdasd');
-            var modalInstance = $modal.open({
-                animation: true,
-                backdrop: 'static',
-                templateUrl: '/templates/modals/user.html',
-                controller: 'userctrl',
-                size: 'md'
             });
         };
 

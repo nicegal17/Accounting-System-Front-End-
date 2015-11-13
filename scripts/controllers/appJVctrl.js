@@ -30,18 +30,17 @@
              var data = {
                  userID: $scope.currentUser.userID
              };
-             console.log('data: ', data);
+
              AppJVFactory.approveJV($scope.appjv.JID, data).then(function(data) {
-                 toastr.success('Journal Voucher has been approved', 'Approve JV');
+                 if (!_.isEmpty(data)) {
+                     if (data.success == 'true') {
+                         toastr.success(data.msg, 'Approve JV');
+                     } else {
+                         toastr.error(data.msg, 'Error');
+                     }
+                 }
              });
          };
-
-         // $scope.denyJV = function() {
-         //     AppJVFactory.denyJV($scope.appjv.JID, $scope.appjv).then(function(data) {
-         //         console.log('data: ', data);
-         //         toastr.success('Journal Voucher has been denied', 'Denied JV');
-         //     });
-         // };
 
          function init() {
              $scope.appjv = {};

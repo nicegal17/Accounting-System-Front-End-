@@ -1,34 +1,34 @@
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="closeModal()"><span aria-hidden="true">&times;</span></button>
-    <h5 class="modal-title">Approve Accounts Payable Voucher</h5>
+    <h5 class="modal-title">Audit Account Payable Voucher</h5>
 </div>
 <div class="modal-body">
     <div class="panel panel-primary">
         <div class="panel-body">
             <form>
                 <div class="form-group">
-                    <label for="inputName">APV #</label>
-                    <select ng-model="appApv.apv" class="form-control" id="textBoxes" ng-change="cboAPV(appApv.apv)">
+                    <label for="inputName">Account Payable Voucher #</label>
+                    <select ng-model="audit.apv" class="form-control" ng-change="cboAPV(audit.apv)">
                         <option ng-repeat="apv in apvs" value="{{apv.apvID}}--{{apv.transDate}}--{{apv.particulars}}--{{apv.APVNum}}--{{apv.empName}}">{{apv.APVNum}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="inputSlug">Date:</label>
-                    <label for="inputSlug">{{appApv.sDate}}</label>
+                    <label for="inputSlug">{{audit.sDate}}</label>
                 </div>
                 <div class="form-group">
                     <label for="inputSlug">Account Payable Voucher No.:</label>
-                    <label for="inputSlug">{{appApv.APVNum}}</label>
+                    <label for="inputSlug">{{audit.APVNum}}</label>
                 </div>
                 <div class="form-group">
                     <label for="inputSlug">Particular:</label>
-                    <label for="inputSlug">{{appApv.Particular}}</label>
+                    <label for="inputSlug">{{audit.Particular}}</label>
                 </div>
             </form>
         </div>
     </div>
     <div class="panel panel-primary">
-        <div class="panel-heading">Account Entry</div>
+        <div class="panel-heading">Account Payable Voucher Entry</div>
         <div class="scrollable-area">
             <table class="table table-bordered table-hover" id="tab_logic">
                 <thead>
@@ -36,6 +36,7 @@
                         <th class="text-center">Account Title</th>
                         <th class="text-center">Debit</th>
                         <th class="text-center">Credit</th>
+                        <th width="5%"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,12 +59,15 @@
         </div>
     </div>
     <hr>
-    <div class="form-group">
-        <label for="inputSlug">Prepared By:</label>
-        <label for="inputSlug">{{appApv.userName}}</label>
+    <div class="row">
+        <div class="col-lg-6 col-md-6">
+            <div class="form-group">
+                <label for="inputSlug">Prepared By:</label>
+                <label for="inputSlug">{{audit.userName}}</label>
+            </div>
+        </div>
     </div>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-sm btn-primary" ng-click="approveAPV()"><span class="glyphicon glyphicon-ok"></span> Approve</button>
-    <button class="btn btn-sm btn-warning" ng-click="denyJV()"><span class="glyphicon glyphicon-remove"></span> Deny</button>
+    <button class="btn btn-sm btn-primary" ng-click="auditAPV()"><span class="glyphicon glyphicon-ok"></span> Audit</button>
 </div>

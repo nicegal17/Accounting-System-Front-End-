@@ -13,18 +13,9 @@ angular.module('accounting')
                 });
             },
 
-            getEmployee: function() {
-                return $http({
-                    url: API_URL + '/users',
-                    method: 'GET',
-                }).then(function(res){
-                    return res.data;
-                });
-            },
-
             getAllUsers: function() {
                 return $http({
-                    url: API_URL + '/users/getUsers',
+                    url: API_URL + '/users',
                     method: 'GET',
                 }).then(function(res) {
                     return res.data;
@@ -45,15 +36,6 @@ angular.module('accounting')
                     url: API_URL + '/users/' + id,
                     method: 'PUT',
                     data: data
-                }).then(function(res) {
-                    return res.data;
-                });
-            },
-
-            deleteUser: function(id) {
-                return $http({
-                    url: API_URL + '/users/' + id,
-                    method: 'DELETE',
                 }).then(function(res) {
                     return res.data;
                 });

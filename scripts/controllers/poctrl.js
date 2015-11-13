@@ -1,7 +1,7 @@
  'use strict';
 
  angular.module('accounting')
-     .controller('poctrl', function($scope, $filter, POFactory, toastr, ngTableParams) {
+     .controller('poctrl', function($scope, $filter, $window, POFactory, toastr, ngTableParams) {
 
          $scope.cboBank = function(bank) {
              var str = bank.split('--');
@@ -9,13 +9,13 @@
              $scope.PO.acctNum = str[1];
          };
 
-          $scope.refresh = function() {
+         $scope.refresh = function() {
              $scope.tableParams.reload();
              $scope.POSearch = "";
          };
 
          $scope.addRow = function(row) {
-            var qty, Items, unitPrice, total;
+             var qty, Items, unitPrice, total;
 
              var unitType = _.find($scope.units, {
                  'unitID': parseInt(row.unit)
@@ -33,13 +33,13 @@
                  qty: qty,
                  unitPrice: unitPrice,
                  total: total
-                 
+
              });
 
              $scope.entry = {};
              $scope.total();
          };
-          
+
          $scope.removeRow = function(index) {
              $scope.entries.splice(index, 1);
          };
@@ -52,26 +52,35 @@
              });
          };
 
+         $scope.$watch("POSearch", function() {
+             $scope.tableParams.reload();
+         });
+
          $scope.savePOEntries = function() {
-             console.log('po: ', $scope.PO);
-             console.log('po: ', JSON.stringify($scope.entries));
+             $scope.currentUser = JSON.parse($window.localStorage['user']);
+             // console.log('po: ', $scope.PO);
+             // console.log('po: ', JSON.stringify($scope.entries));
              var data = {
                  PO: $scope.PO,
-                 entries: JSON.stringify($scope.entries)
-             }
+                 entries: JSON.stringify($scope.entries),
+                 userID: $scope.currentUser.userID
+             }; 
+             
              POFactory.createPO(data).then(function(res) {
-                 console.log('data: ', res);
-                 toastr.success('Purchase Order has been Created', 'PO Created');
+                 if (!_.isEmpty(data)) {
+                     if (data.success == 'true') {
+                         toastr.success(data.msg, 'PO Created');
+                     } else {
+                         toastr.error(data.msg, 'Error');
+                     }
+                 }
+
                  $scope.entries = "";
                  $scope.PO = "";
                  $scope.total = "";
                  $scope.refresh();
              });
-         }; 
-
-         $scope.$watch("POSearch", function() {
-             $scope.tableParams.reload();
-         });
+         };
 
          function init() {
              $scope.PO = {};

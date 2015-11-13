@@ -1,17 +1,28 @@
  'use strict';
 
  angular.module('accounting')
-     .controller('userctrl', function($scope, $filter, UsersFactory, toastr, ngDialog, ngTableParams, $modalInstance) {
+     .controller('userctrl', function($scope, $filter, UsersFactory, toastr, ngDialog, ngTableParams) {
 
          $scope.saveUser = function() {
              if ($scope.isUpdate === true) {
                  UsersFactory.updateUser($scope.user.userID, $scope.user).then(function(data) {
-                    console.log('data: ', data);
-                     toastr.success('User Account has been updated', 'Record Updated');
+                     if (!_.isEmpty(data)) {
+                         if (data.success == 'true') {
+                             toastr.success(data.msg, 'Record Updated');
+                         } else {
+                             toastr.error(data.msg, 'Error');
+                         }
+                     }
                  });
              } else {
                  UsersFactory.createUser($scope.user).then(function(data) {
-                     toastr.success('New user has been successfully created', 'New User Account');
+                     if (!_.isEmpty(data)) {
+                         if (data.success == 'true') {
+                             toastr.success(data.msg, 'New User Account');
+                         } else {
+                             toastr.error(data.msg, 'Error');
+                         }
+                     }
                  });
              }
 
@@ -59,33 +70,11 @@
              });
          };
 
-         $scope.delUser = function(id) {
-             ngDialog.openConfirm({
-                 templateUrl: 'templates/directives/delModal.html',
-                 className: 'ngdialog-theme-default',
-                 scope: $scope
-             }).then(function() {
-                 UsersFactory.deleteUser(id).then(function(data) {
-                     $scope.refresh();
-                 });
-                 console.log(id);
-             });
-
-         };
-
          function init() {
              $scope.users = {};
              $scope.user = {};
              $scope.empNames = {};
              $scope.isDisable = true;
-
-             UsersFactory.getEmployee().then(function(data) {
-                 $scope.empNames = data;
-
-                 // $scope.user.empName = 3;
-                 //  console.log($scope.user.empName);
-
-             });
 
              $scope.tableParams = new ngTableParams({
                  page: 1,

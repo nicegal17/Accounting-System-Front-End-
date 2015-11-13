@@ -1,7 +1,7 @@
  'use strict';
 
  angular.module('accounting')
-     .controller('checkctrl', function($scope, $filter, $modalInstance, toastr) {
+     .controller('checkctrl', function($scope, $filter, $modalInstance, $window, CheckFactory, toastr) {
 
          $scope.closeModal = function() {
              console.log('cancel');
@@ -50,8 +50,19 @@
          };
 
          $scope.saveCheck = function() {
+             $scope.currentUser = JSON.parse($window.localStorage['user']);
+             var data = {
+                 userID: $scope.currentUser.userID
+             };
+
              CheckFactory.createCheck($scope.check).then(function(data) {
-                 toastr.success('Record Successfully Created', 'Record Saved');
+                 if (!_.isEmpty(data)) {
+                     if (data.success == 'true') {
+                         toastr.success(data.msg, 'Record Saved');
+                     } else {
+                         toastr.error(data.msg, 'Error');
+                     }
+                 }
                  $scope.check = {};
              });
          };

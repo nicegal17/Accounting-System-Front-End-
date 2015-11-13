@@ -14,39 +14,21 @@ angular.module('accounting')
 
             getAcctEntries: function(apvID) {
                 return $http({
-                    url: API_URL + '/getAcctEntries/' + apvID,
+                    url: API_URL + '/appAPV/getAcctEntries/' + apvID,
                     method: 'GET',
                 }).then(function(res){
                     return res.data;
                 });
             },
 
-            // approveJV: function(id,data) {
-            //     $http.put('/api/v1/appJV/'+ id,data).
-            //     success(function(data) {
-            //         deferred.resolve(data);
-            //         return cb();
-            //     }).
-            //     error(function(err) {
-            //         deferred.reject(err);
-            //         return cb(err);
-            //     }.bind(this));
-
-            //     return deferred.promise;
-            // },
-
-            // denyJV: function(id,data) {
-            //     $http.put('/api/v1/appJV/denyJV/'+ id,data).
-            //     success(function(data) {
-            //         deferred.resolve(data);
-            //         return cb();
-            //     }).
-            //     error(function(err) {
-            //         deferred.reject(err);
-            //         return cb(err);
-            //     }.bind(this));
-
-            //     return deferred.promise;
-            // },
+            approveAPV: function(id, data) {
+                return $http({
+                    url: API_URL + '/appAPV/' + id,
+                    method: 'PUT',
+                    data: data
+                }).then(function(res) {
+                    return res.data;
+                });
+            },
         };
     });
