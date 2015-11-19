@@ -15,7 +15,7 @@ angular.module('accounting')
 
             getAcctTypes: function() {
                 return $http({
-                    url: API_URL + '/getAcctTypes',
+                    url: API_URL + '/account/getAcctTypes',
                     method: 'GET',
                 }).then(function(res){
                     return res.data;
@@ -24,7 +24,7 @@ angular.module('accounting')
 
             getNorms: function() {
                 return $http({
-                    url: API_URL + '/getNorms',
+                    url: API_URL + '/account/getNorms',
                     method: 'GET',
                 }).then(function(res){
                     return res.data;
@@ -33,16 +33,16 @@ angular.module('accounting')
 
             getFS: function() {
                 return $http({
-                    url: API_URL + '/getFS',
+                    url: API_URL + '/account/getFS',
                     method: 'GET',
                 }).then(function(res){
                     return res.data;
                 });
             },
 
-            getAccountTitles: function() {
+            getAccountChart: function() {
                 return $http({
-                    url: API_URL + '/getAccountTitles',
+                    url: API_URL + '/account/getAccountChart',
                     method: 'GET',
                 }).then(function(res){
                     return res.data;

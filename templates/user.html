@@ -13,10 +13,6 @@
                         <h4><label for="inputName">{{user.empName}}</label></h4>
                     </div>
                     <div class="form-group">
-                        <label for="inputName">Employee</label>
-                        <input type="text" class="form-control" ng-disabled="isDisable" ng-model="user.empName" placeholder="Username">
-                    </div>
-                    <div class="form-group">
                         <label for="inputName">Username</label>
                         <input type="text" class="form-control" ng-disabled="isDisable" ng-model="user.username" placeholder="Username">
                     </div>
@@ -35,7 +31,7 @@
             <div class="panel-heading">Manage Users</div>
             <div class="panel-body">
                 <div class="form-inline pull-left" role="form">
-                    <a class="btn btn-warning" ng-show="isDisable" ng-click="addNew()"><i class="fa fa-plus"></i> Add New User</a>
+                    <a class="btn btn-warning" ng-show="isDisable" ng-click="addNew()"><i class="fa fa-plus"></i> </a>
                 </div>
                 <div class="form-inline pull-right" role="form">
                     <div class="form-group">

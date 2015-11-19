@@ -1,21 +1,7 @@
  'use strict';
 
  angular.module('accounting')
-     .controller('assetctrl', function($scope, $filter, AssetsFactory, toastr, ngDialog, $modalInstance) {
-
-        $scope.saveAssetItem = function() {
-
-             AssetsFactory.createAsset($scope.asset).then(function(data) {
-                 toastr.success('Record Successfully Created', 'Record Created');
-                 $scope.asset = {};
-             });
-
-         };
-
-         $scope.closeModal = function() {
-             console.log('cancel');
-             $modalInstance.close();
-         }
+     .controller('assetctrl', function($scope, $filter, $window, AssetsFactory, toastr, ngDialog, ngTableParams) {
 
          $scope.today = function() {
              $scope.dt = new Date();
@@ -79,21 +65,101 @@
              return '';
          };
 
+         $scope.addNew = function() {
+             $scope.asset = {};
+             $scope.isUpdate = false;
+             $scope.isDisable = false;
+         };
+
          $scope.cancel = function() {
              $scope.asset = {};
+             $scope.isUpdate = false;
+             $scope.isDisable = true;
          };
+
+         $scope.$watch("searchAsset", function() {
+             $scope.tableParams.reload();
+         });
+
+         $scope.refresh = function() {
+             $scope.tableParams.reload();
+             $scope.searchAsset = "";
+         };
+
+         $scope.getAssetItem = function(id) {
+             $scope.asset = {};
+             $scope.isDisable = false;
+             AssetsFactory.getAssetID(id).then(function(data) {
+                 if (data.length > 0) {
+                     $scope.asset = data[0];
+                     $scope.asset.category = data[0].categoryID;
+                     $scope.isUpdate = true;
+                 }
+             });
+         };
+
+         $scope.saveAssetItem = function() {
+             $scope.currentUser = JSON.parse($window.localStorage['user']);
+             var data = {
+                 asset: $scope.asset,
+                 userID: $scope.currentUser.userID
+             };
+
+             AssetsFactory.createAsset(data).then(function(data) {
+                 console.log('data: ', data);
+                 if (!_.isEmpty(data)) {
+                     if (data.success == 'true') {
+                         toastr.success(data.msg, 'Create New Asset');
+                     } else {
+                         toastr.error(data.msg, 'Error');
+                     }
+                 }
+             });
+
+             $scope.asset = {};
+             $scope.refresh();
+             $scope.isDisable = true;
+         };
+
 
          function init() {
              $scope.asset = {};
-             $scope.assets = {};
+             $scope.isUpdate = false;
+             $scope.isDisable = true;
+
+             $scope.tableParams = new ngTableParams({
+                 page: 1, // show first page
+                 count: 10, // count per page
+                 sorting: {
+                     name: 'asc' // initial sorting
+                 }
+             }, {
+                 getData: function($defer, params) {
+                     AssetsFactory.getAssets().then(function(data) {
+                         var orderedData = {};
+
+                         if ($scope.searchAsset) {
+                             orderedData = $filter('filter')(data, $scope.searchAsset);
+                             orderedData = params.sorting() ? $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
+                         } else {
+                             orderedData = params.sorting() ? $filter('orderBy')(data, params.orderBy()) : data;
+                         }
+
+                         params.total(data.length);
+                         $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+                     });
+                 }
+             });
 
              AssetsFactory.getCategories().then(function(data) {
                  $scope.categories = data;
+                 $scope.asset.category = data[0].categoryID;
              });
 
              AssetsFactory.getPeriods().then(function(data) {
                  $scope.periods = data;
              });
+
          }
 
          init();

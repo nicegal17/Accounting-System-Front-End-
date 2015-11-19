@@ -1,55 +1,28 @@
  'use strict';
 
  angular.module('accounting')
-     .controller('branchctrl', function($scope, $filter, BranchFactory, toastr, ngDialog, ngTableParams) {
+     .controller('branchctrl', function($scope, $filter, $modal, BranchFactory, toastr, ngDialog, ngTableParams) {
 
-         $scope.saveBranch = function() {
-             console.log('branch: ', $scope.branch);
+         $scope.createNewBranch = function(id) {
+             var modalInstance = $modal.open({
+                 animation: true,
+                 templateUrl: '/templates/modals/newBranch.html',
+                 controller: 'createNewctrl',
+                 size: 'md'
+             });
 
-             if ($scope.isUpdate === true) {
-                 BranchFactory.updateBranch($scope.branch.brID, $scope.branch).then(function(data) {
-                     console.log('data: ', data);
-                     toastr.success('Branch Details has been updated', 'Update Branch Details');
-                 });
-             } else {
-                 BranchFactory.createBranch($scope.branch).then(function(data) {
-                     console.log('data: ', data);
-                     toastr.success('New Branch has been added', 'New Branch');
-                 });
-             }
-
-              $scope.branch = {};
-              $scope.refresh();
-
-              $scope.isDisable = true;
-         };
-
-         $scope.addNew = function() {
-             $scope.isUpdate = false;
-             $scope.branch = {};
-             $scope.isDisable = false;
-         };
- 
-         $scope.cancel = function() {
-             $scope.branch = {};
-             $scope.isUpdate = false;
-             $scope.isDisable = true;
-         };
-
-         $scope.refresh = function() {
-             $scope.tableParams.reload();
-             $scope.searchUser = "";
-         };
-
-         $scope.getBRID = function(id) {
-             $scope.branch = {};
-             $scope.isDisable = false;
              BranchFactory.getBranchByID(id).then(function(data) {
                  if (data.length > 0) {
                      $scope.branch = data[0];
                      $scope.isUpdate = true;
                  }
              });
+         };
+
+         $scope.getBRID = function(id) {
+             $scope.branch = {};
+             $scope.isDisable = false;
+             
          };
 
          $scope.delBranch = function(id) {
@@ -70,10 +43,7 @@
          });
 
          function init() {
-             $scope.branches = {};
              $scope.branch = {};
-             $scope.isUpdate = false;
-             $scope.isDisable = true;
 
              $scope.tableParams = new ngTableParams({
                  page: 1, // show first page

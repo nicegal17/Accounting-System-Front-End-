@@ -21,7 +21,7 @@
                         <a ui-sref="main.branch">Branch</a>
                     </li>
                     <li ui-sref-active="active">
-                        <a ng-click="openBank()" href="">Bank</a>
+                        <a ui-sref="main.bank">Bank</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->
@@ -40,7 +40,7 @@
                         <a href="" ng-click="multiCheck(3)">Accounts <span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level" collapse="multiCollapseVar!=3">
                             <li>
-                                <a ng-click="openGenAcct()" href="">General Account</a>
+                                <a ui-sref="main.Account">General Account</a>
                             </li>
                             <li>
                                 <a ng-click="openSubAcct()" href="">Sub Account</a>
@@ -48,7 +48,10 @@
                         </ul>
                     </li>
                     <li ng-init="third=!third" ng-class="{active: multiCollapseVar==4}">
-                        <a href="" ng-click="multiCheck(4)">Fixed Assets <span class="fa arrow"></span></a>
+                        <li ui-sref-active="active">
+                            <a ui-sref="main.FA">Fixed Assets</a>
+                        </li>
+                       <!--  <a href="" ng-click="multiCheck(4)">Fixed Assets <span class="fa arrow"></span></a> -->
                         <ul class="nav nav-third-level" collapse="multiCollapseVar!=4">
                             <li>
                                 <a ng-click="openFixedAsset()" href="">Items</a>
@@ -63,6 +66,7 @@
                 <ul class="nav nav-second-level" collapse="collapseVar!=3">
                     <li><a ng-click="openCheck()" href="">Write Check</a></li>
                     <li><a ui-sref="main.purchaseOrder">Purchase Order</a></li>
+                    <li><a ng-click="issueOR()" href="">Issue O.R</a></li>
                     <li><a href="">Update Accounting</a></li>
                     <li ng-init="third=!third" ng-class="{active: multiCollapseVar==5}">
                         <a href="" ng-click="multiCheck(5)">Check Disbursement Voucher <span class="fa arrow"></span></a>

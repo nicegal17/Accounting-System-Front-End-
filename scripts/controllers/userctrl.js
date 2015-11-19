@@ -71,7 +71,6 @@
          };
 
          function init() {
-             $scope.users = {};
              $scope.user = {};
              $scope.empNames = {};
              $scope.isDisable = true;

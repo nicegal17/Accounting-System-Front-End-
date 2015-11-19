@@ -5,7 +5,7 @@ angular
     .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
         $stateProvider
         // =========== AUTHENTICATION =========== //
-        .state('login', {
+            .state('login', {
             url: '/login',
             templateUrl: 'templates/login/login.html',
             controller: 'loginctrl'
@@ -94,10 +94,25 @@ angular
                 templateUrl: 'templates/PO_prev.html',
                 controller: 'podetailsctrl'
             })
-             .state('main.manageUser', {
+            .state('main.manageUser', {
                 url: '/manageUser',
                 templateUrl: 'templates/user.html',
                 controller: 'userctrl'
+            })
+            .state('main.FA', {
+                url: '/FA',
+                templateUrl: 'templates/FA.html',
+                controller: 'assetctrl'
+            })
+            .state('main.bank', {
+                url: '/bank',
+                templateUrl: 'templates/bank.html',
+                controller: 'bankctrl'
+            })
+            .state('main.Account', {
+                url: '/Account',
+                templateUrl: 'templates/Account.html',
+                controller: 'accountctrl'
             });
         $urlRouterProvider.otherwise('/login');
     });

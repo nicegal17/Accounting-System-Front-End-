@@ -150,25 +150,6 @@ angular
             });
         };
 
-        $scope.openBank = function() {
-            console.log('bank');
-            var modalInstance = $modal.open({
-                animation: true,
-                templateUrl: '/templates/modals/bank.html',
-                controller: 'bankctrl',
-                size: 'md'
-            });
-        };
-
-        $scope.openGenAcct = function() {
-            var modalInstance = $modal.open({
-                animation: true,
-                templateUrl: '/templates/modals/genAcct.html',
-                controller: 'accountctrl',
-                size: 'md'
-            });
-        };
-
         $scope.openSubAcct = function() {
             var modalInstance = $modal.open({
                 animation: true,
@@ -210,6 +191,15 @@ angular
                 animation: true,
                 templateUrl: '/templates/modals/seriesNo.html',
                 controller: 'seriesnumctrl',
+                size: 'md'
+            });
+        };
+
+        $scope.issueOR = function() {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: '/templates/modals/OR.html',
+                controller: 'ORctrl',
                 size: 'md'
             });
         };

@@ -1,0 +1,37 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="closeModal()"><span aria-hidden="true">&times;</span></button>
+    <h5 class="modal-title">Prepare: Issue Official Reciept</h5>
+</div>
+<div class="modal-body">
+    <div class="panel panel-primary">
+        <div class="panel-heading">Official Receipt Details</div>
+        <div class="panel-body">
+            <form>
+                <div class="form-group">
+                    <label for="inputName">O.R NO.: </label>
+                    <input type="text" class="form-control" ng-model="OR.ORNum" placeholder="Input OR No." ng-disabled="isDisable">
+                </div>
+                <div class="form-group">
+                    <label for="inputSlug">Payer: </label>
+                    <select ng-model="OR.payer" class="form-control input-sm" ng-change="cboPayer(OR.payer)">
+                        <option ng-repeat="payer in payers" value="{{payer.brID}}--{{payer.brAddress}}">{{payer.brName}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="inputSlug">Address: </label>
+                    <input type="text" class="form-control" ng-model="OR.Address" value="{{payer.Address}}" placeholder="Branch Address" ng-disabled="isDisable">
+                </div>
+                <div class="form-group">
+                    <label for="inputSlug">Amount Paid: </label>
+                    <input type="number" class="form-control" ng-model="OR.amount" placeholder="0.00" ng-disabled="isDisable">
+                </div>
+                <div class="form-group">
+                    <label for="inputSlug">Particulars: </label>
+                    <input type="text" class="form-control" ng-model="OR.particulars" placeholder="Particulars" ng-disabled="isDisable">
+                </div>
+                <button class="btn btn-sm btn-primary" ng-click="saveOR()"><span class="glyphicon glyphicon-saved"></span> Save</button>
+                <button ng-click="cancel()" class="btn btn-sm btn-danger" ng-hide="isDisable"> Cancel</button>
+            </form>
+        </div>
+    </div>
+</div>

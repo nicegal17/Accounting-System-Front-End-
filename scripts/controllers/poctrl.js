@@ -66,7 +66,7 @@
                  userID: $scope.currentUser.userID
              }; 
              
-             POFactory.createPO(data).then(function(res) {
+             POFactory.createPO(data).then(function(data) {
                  if (!_.isEmpty(data)) {
                      if (data.success == 'true') {
                          toastr.success(data.msg, 'PO Created');

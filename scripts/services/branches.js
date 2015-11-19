@@ -25,7 +25,7 @@ angular.module('accounting')
 
             getBranchByID: function(id) {
                 return $http({
-                    url: API_URL + '/branches/' + id,
+                    url: API_URL + '/branches/getBranchByID/' + id,
                     method: 'GET',
                 }).then(function(res){
                     return res.data;

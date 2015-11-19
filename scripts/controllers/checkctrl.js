@@ -52,10 +52,11 @@
          $scope.saveCheck = function() {
              $scope.currentUser = JSON.parse($window.localStorage['user']);
              var data = {
+                 check: $scope.check,
                  userID: $scope.currentUser.userID
              };
 
-             CheckFactory.createCheck($scope.check).then(function(data) {
+             CheckFactory.createCheck(data).then(function(data) {
                  if (!_.isEmpty(data)) {
                      if (data.success == 'true') {
                          toastr.success(data.msg, 'Record Saved');
