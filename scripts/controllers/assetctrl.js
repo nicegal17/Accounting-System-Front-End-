@@ -105,16 +105,28 @@
                  userID: $scope.currentUser.userID
              };
 
-             AssetsFactory.createAsset(data).then(function(data) {
-                 console.log('data: ', data);
-                 if (!_.isEmpty(data)) {
-                     if (data.success == 'true') {
-                         toastr.success(data.msg, 'Create New Asset');
-                     } else {
-                         toastr.error(data.msg, 'Error');
+             if ($scope.isUpdate === true) {
+                 AssetsFactory.updateFA($scope.asset.itemID, data).then(function(data) {
+                     if (!_.isEmpty(data)) {
+                         if (data.success == 'true') {
+                             toastr.success(data.msg, 'Update Fixed Asset Item');
+                         } else {
+                             toastr.error(data.msg, 'Error');
+                         }
                      }
-                 }
-             });
+                 });
+             } else {
+                 AssetsFactory.createAsset(data).then(function(data) {
+                     console.log('data: ', data);
+                     if (!_.isEmpty(data)) {
+                         if (data.success == 'true') {
+                             toastr.success(data.msg, 'Create New Asset');
+                         } else {
+                             toastr.error(data.msg, 'Error');
+                         }
+                     }
+                 });
+             }
 
              $scope.asset = {};
              $scope.refresh();

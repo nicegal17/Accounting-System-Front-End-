@@ -11,42 +11,41 @@
                 <form>
                     <div class="form-group">
                         <label for="inputName">Account Code</label>
-                        <input type="text" class="form-control" id="inputName" ng-model="Account.acctCode" placeholder="Bank Name" ng-disabled="isDisable">
-                        <div class="radio"><tt>Acount = {{Account.name | json}}</tt><br/>
-                            <label>
-                                <input type="radio" name="optradio" ng-model="Account.name" value="With Sub Account" ng-change="withSubAcct">With Sub Account</label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="optradio" ng-model="Account.name" value="AccountVal" ng-ngchange="noSubAcct">Without Sub Account</label>
-                        </div>
+                        <input type="text" class="form-control" id="inputName" ng-model="account.acctCode" placeholder="Bank Name" ng-disabled="isDisable">
+                       <!--  <div ng-controller="accountctrl">
+                            <form name="taskForm">
+                                <div ng-repeat="type in types">
+                                    <input type="radio" name="typeGroup" ng-model="$parent.accountType" value="{{type.id}}">{{type.name}}
+                                </div>
+                            </form>
+                        </div> -->
                     </div>
                     <div class="form-group">
                         <label for="inputName">Account Title</label>
-                        <input type="text" class="form-control" id="inputName" ng-model="Account.acctTitle" placeholder="Accounting Title" ng-disabled="isDisable">
+                        <input type="text" class="form-control" id="inputName" ng-model="account.acctTitle" placeholder="Accounting Title" ng-disabled="isDisable">
                     </div>
                     <div class="form-group">
                         <label for="inputName">Fund</label>
-                        <select ng-model="fund.fundDesc" class="form-control">
-                            <option ng-repeat="fund in funds" value="{{fund.fundID}}">{{fund.fundDesc}}</option>
+                        <select ng-model="account.fundDesc" class="form-control">
+                            <option ng-repeat="fund in funds track by fund.fundID" ng-value="fund.fundID" ng-selected="account.fund == fund.fundID">{{fund.fundDesc}}</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="inputName">Account Type</label>
-                        <select ng-model="acctType.acctType" class="form-control">
-                            <option ng-repeat="acctType in acctTypes" value="{{acctType.acctTypeID}}">{{acctType.acctType}}</option>
+                        <select ng-model="account.acctType" class="form-control">
+                            <option ng-repeat="acctType in acctTypes track by acctType.acctTypeID" ng-value="acctType.acctTypeID" ng-selected="account.acctType == acctType.acctTypeID">{{acctType.acctType}}</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="inputName">Normal Balance</label>
-                        <select ng-model="norm.normDesc" class="form-control">
-                            <option ng-repeat="norm in norms" value="{{norm.normsID}}">{{norm.normDesc}}</option>
+                        <select ng-model="account.normDesc" class="form-control">
+                            <option ng-repeat="norm in norms track by norm.normsID" ng-value="norm.normsID" ng-selected="account.norm == norm.normsID">{{norm.normDesc}}</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="inputName">Financial Statement</label>
-                        <select ng-model="finStatement.FSDesc" class="form-control">
-                            <option ng-repeat="finStatement in finStatements" value="{{finStatement.FSID}}">{{finStatement.FSDesc}}</option>
+                        <select ng-model="account.FSDesc" class="form-control">
+                            <option ng-repeat="finStatement in finStatements track by finStatement.FSID" ng-value="finStatement.FSID" ng-selected="account.finStatement == finStatement.FSID">{{finStatement.FSDesc}}</option>
                         </select>
                     </div>
                     <a class="btn btn-sm btn-success" ng-show="!isDisable" ng-click="saveAccount()"><span class="glyphicon glyphicon-saved"></span> Save</a>
@@ -71,22 +70,22 @@
             </div>
             <div class="scrollable-area">
                 <table id="tbl_subject" class="table table-hover table-responsive" ng-table="tableParams">
-                    <tr ng-repeat="Account in $data">
+                    <tr ng-repeat="account in $data">
                         <td data-title="'Account CODE'" sortable="'title'">
-                            {{Account.acctCode}}
+                            {{account.acctCode}}
                         </td>
                         <td data-title="'Account Title'">
-                            {{Account.acctTitle}}
+                            {{account.acctTitle}}
                         </td>
                         <td data-title="'Normal Balance'">
-                            {{Account.normDesc}}
+                            {{account.normDesc}}
                         </td>
                         <td data-title="'Account Type'">
-                            {{Account.acctType}}
+                            {{account.acctType}}
                         </td>
                         <td data-title="'Action'">
                             <div class="text-right">
-                                <a class="btn btn-primary btn-xs" ng-click="getEmployeeID(employee.empID)">
+                                <a class="btn btn-primary btn-xs" ng-click="getAcctChartByID(account.idAcctTitle)">
                                     <i class="fa fa-pencil"></i>
                                 </a>
                                 <a class="btn btn-danger btn-xs" ng-click="delBranch(branch.brID)">

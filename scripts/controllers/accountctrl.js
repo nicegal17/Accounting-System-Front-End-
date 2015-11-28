@@ -1,38 +1,63 @@
  'use strict';
 
  angular.module('accounting')
-     .controller('accountctrl', function($scope, $filter, AccountFactory, toastr, ngDialog, ngTableParams) {
+     .controller('accountctrl', function($scope, $filter, $window, AccountFactory, toastr, ngDialog, ngTableParams) {
 
          $scope.saveAccount = function() {
+             $scope.currentUser = JSON.parse($window.localStorage['user']);
+             var data = {
+                 account: $scope.account,
+                 userID: $scope.currentUser.userID
+             };
+
              if ($scope.isUpdate === true) {
-                 AccountFactory.updateAccount($scope.account.acctTypeID, $scope.account).then(function(data) {
+                 AccountFactory.updateAccount($scope.account.idAcctTitle, data).then(function(data) {
                      console.log('data: ', data);
-                     toastr.success('Record Successfully Updated', 'Update Record');
-                     $scope.refresh();
+                     if (!_.isEmpty(data)) {
+                        if (data.success == 'true') {
+                            toastr.success(data.msg, 'Updating Data');
+                        } else {
+                            toastr.error(data.msg, 'Error');
+                        }
+                     }
                  });
              } else {
-                 AccountFactory.createAccount($scope.account).then(function(data) {
+                 AccountFactory.createAccount(data).then(function(data) {
                      console.log('data: ', data);
-                     toastr.success('Record Successfully Created', 'Record Created');
-                     $scope.refresh();
+                     if (!_.isEmpty(data)) {
+                         if (data.success == 'true') {
+                             toastr.success(data.msg, 'Create New Account Title');
+                         } else {
+                             toastr.error(data.msg, 'Error');
+                         }
+                     }
                  });
              }
+
+             $scope.refresh();
          };
 
-         $scope.Account = {
-             name: 'Account'
+           $scope.refresh = function() {
+             $scope.tableParams.reload();
+             $scope.searchAcctChart = "";
          };
 
-         $scope.AccountVal = {
-             "valID": "1",
-             "value": "With Sub Account"
-         };
+         // $scope.accountType;
+         // $scope.types = [{
+         //    id: 1,
+         //    name: 'With Sub Account'
+         // }, {
+         //    id: 0,
+         //    name: 'Without Sub Account'
+         // }];
+
+         // console.log('value', $scope.Account);
 
          $scope.$watch("searchAcctChart", function() {
              $scope.tableParams.reload();
          });
 
-          $scope.addNew = function() {
+         $scope.addNew = function() {
              $scope.isUpdate = false;
              $scope.account = {};
              $scope.isDisable = false;
@@ -44,14 +69,25 @@
              $scope.isDisable = true;
          };
 
+          $scope.getAcctChartByID = function(id) {
+             $scope.account = {};
+             $scope.isDisable = false;
+             AccountFactory.getAcctChartByID(id).then(function(data) {
+                 if (data.length > 0) {
+                    $scope.account = data[0];
+                    $scope.account.fund = data[0].fundID;
+                    $scope.account.acctType = data[0].acctTypeID;
+                    $scope.account.norm = data[0].normsID;
+                    $scope.account.finStatement = data[0].FSID;
+                    console.log('account: ', $scope.account);
+                    $scope.isUpdate = true;
+                 }
+             });
+         };
+
+
          function init() {
-             $scope.Account = {};
-             $scope.funds = {};
-             $scope.acctTypes = {};
-             $scope.norms = {};
-             $scope.finStatements = {};
-             $scope.withSubAcct = false;
-             $scope.noSubAcct = false;
+             $scope.account = {};
              $scope.isUpdate = false;
              $scope.isDisable = true;
 

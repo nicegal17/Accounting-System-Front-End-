@@ -155,7 +155,7 @@ angular
                 animation: true,
                 templateUrl: '/templates/modals/subAcct.html',
                 controller: 'subAcctctrl',
-                size: 'md'
+                size: 'lg'
             });
         };
 

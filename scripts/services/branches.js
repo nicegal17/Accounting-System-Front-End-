@@ -8,7 +8,7 @@ angular.module('accounting')
                 return $http({
                     url: API_URL + '/branches',
                     method: 'GET',
-                }).then(function(res){
+                }).then(function(res) {
                     return res.data;
                 });
             },
@@ -18,35 +18,44 @@ angular.module('accounting')
                     url: API_URL + '/branches',
                     method: 'POST',
                     data: data
-                }).then(function(res){
+                }).then(function(res) {
                     return res.data;
                 });
             },
 
             getBranchByID: function(id) {
                 return $http({
-                    url: API_URL + '/branches/getBranchByID/' + id,
+                    url: API_URL + '/branches/' + id,
                     method: 'GET',
-                }).then(function(res){
+                }).then(function(res) {
                     return res.data;
                 });
             },
 
-            updateBranch: function(id,data) {
+            getBranchDet: function(id) {
+                return $http({
+                    url: API_URL + '/branches/' + id,
+                    method: 'GET',
+                }).then(function(res) {
+                    return res.data;
+                });
+            },
+
+            updateBranch: function(id, data) {
                 return $http({
                     url: API_URL + '/branches/' + id,
                     method: 'PUT',
                     data: data
-                }).then(function(res){
+                }).then(function(res) {
                     return res.data;
                 });
             },
-            
+
             deleteBranch: function(id) {
                 return $http({
                     url: API_URL + '/branches/' + id,
                     method: 'DELETE',
-                }).then(function(res){
+                }).then(function(res) {
                     return res.data;
                 });
             },

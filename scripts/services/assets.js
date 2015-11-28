@@ -4,9 +4,18 @@ angular.module('accounting')
     .factory('AssetsFactory', function($http, API_URL) {
 
         return {
+              getAssets: function() {
+                return $http({
+                    url: API_URL + '/Assets/', 
+                    type: 'GET',
+                }).then(function(res){
+                    return res.data;
+                });
+            },
+
             getCategories: function() {
                 return $http({
-                    url: API_URL + '/Assets',
+                    url: API_URL + '/Assets/getCategories',
                     type: 'GET',
                 }).then(function(res){
                     return res.data;
@@ -32,19 +41,20 @@ angular.module('accounting')
                 });
             },
 
-            getAssets: function() {
+            getAssetID: function(id) {
                 return $http({
-                    url: API_URL + '/Assets/', 
-                    type: 'GET',
+                    url: API_URL + '/Assets/' + id,
+                    method: 'GET',
                 }).then(function(res){
                     return res.data;
                 });
             },
 
-            getAssetID: function(id) {
+             updateFA: function(id, data) {
                 return $http({
                     url: API_URL + '/Assets/' + id,
-                    method: 'GET',
+                    method: 'PUT',
+                    data: data
                 }).then(function(res){
                     return res.data;
                 });

@@ -22,10 +22,10 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <p class="input-group">
-                                    <input type="date" class="form-control" datepicker-popup ng-model="asset.dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                                    <input type="date" class="form-control" datepicker-popup ng-model="asset.datePurchased" is-open="opened" min-date="{{minDate | date:'yyyy-MM-dd'}}" max-date="{{maxDate | date:'yyyy-MM-dd'}}" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
                                     <span class="input-group-btn">
                                                 <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                                            </span>
+                                            </span> <input type="text" class="form-control" ng-model="asset.datePurchased" placeholder="Item Name" ng-disabled="isDisable">
                                 </p>
                             </div>
                         </div>
@@ -40,13 +40,9 @@
                     </div>
                     <div class="form-group">
                         <label for="inputName">Account Category</label>
-                        <!-- <select ng-model="asset.category" class="form-control">
+                        <select ng-model="asset.category" class="form-control">
                             <option ng-repeat="category in categories track by category.categoryID" ng-value="category.categoryID" ng-selected="asset.category == category.categoryID">{{category.desc}}</option>
-                        </select> -->
-
-                       <!--  <select ng-model="asset.category" class="form-control">
-                            <option ng-repeat="category in categories track by category.categoryID" ng-value="category.categoryID" ng-selected="asset.category == category.categoryID">{{category.desc}}</option>
-                        </select> -->
+                        </select>
                     </div>
                     <a class="btn btn-sm btn-success" ng-show="!isDisable" ng-click="saveAssetItem()"><span class="glyphicon glyphicon-saved"></span> Save</a>
                     <button ng-click="cancel()" class="btn btn-sm btn-danger" ng-hide="isDisable">Cancel</button>
