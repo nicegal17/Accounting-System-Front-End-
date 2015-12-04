@@ -1,9 +1,10 @@
 <div class="modal-header">
-    <h3 class="modal-title">Prepare: Accounts Payable Voucher</h3>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="closeModal()"><span aria-hidden="true">&times;</span></button>
+    <h5 class="modal-title">Prepare: Account Payable Voucher</h5>
 </div>
 <div class="modal-body">
     <div class="panel panel-primary">
-        <div class="panel-heading">Accounts Payable Voucher Entry</div>
+        <div class="panel-heading">Account Payable Voucher Entry</div>
         <div class="panel-body">
             <div class="scrollable-area">
                 <div class="form-inline form-group">
@@ -20,7 +21,7 @@
                             <input type="number" class="form-control" ng-model="entry.CR" placeholder="Credit (0.00)" style="width:150px;">
                         </div>
                         <div class="form-group">
-                            <a id="add_row" class="btn btn-primary pull-left" ng-click="addRow(entry)"><span class="glyphicon glyphicon-plus"></span> Add Row</a>
+                            <a id="add_row" class="btn btn-primary pull-left" ng-click="addRow(entry)"><span class="glyphicon glyphicon-plus"></span> </a>
                         </div>
                     </form>
                 </div>
@@ -54,7 +55,7 @@
                     </table>
                     <div class="form-group">
                         <label for="inputName">Particular</label>
-                        <input type="text" class="form-control" id="inputName" ng-model="APVoucher.particular" placeholder="Particular">
+                        <input type="text" class="form-control" id="inputName" ng-model="APV.particulars" placeholder="Particular">
                     </div>
                 </div>
             </div>
@@ -63,5 +64,5 @@
 </div>
 <div class="modal-footer">
     <button class="btn btn-sm btn-primary" ng-click="saveAPVEntries()"><span class="glyphicon glyphicon-saved"></span> Save</button>
-    <a class="btn btn-sm btn-danger" ng-click="closeModal()"><span class="glyphicon glyphicon-remove-circle"></span> Close</a>
+    <button ng-click="cancel()" class="btn btn-sm btn-danger" ng-hide="isDisable">Cancel</button>
 </div>

@@ -8,12 +8,23 @@
 
              if ($scope.isUpdate === true) {
                  EmployeeFactory.updateEmployee($scope.employee.empID, $scope.employee).then(function(data) {
-                     toastr.success('Employee Details has been updated', 'Update Employee Details');
+                    if (!_.isEmpty(data)) {
+                        if (data.success == 'true') {
+                            toastr.success(data.msg, 'Update Employee Details');
+                        }else {
+                            toastr.error(data.msg, 'Error');
+                        }
+                    }     
                  });
              } else {
                  EmployeeFactory.createEmployee($scope.employee).then(function(data) {
                      console.log('data: ', data);
-                     toastr.success('New Employee has been added to the system.', 'Add New Employee');
+                     if (!_.isEmpty(data)) {
+                        if (data.success == 'true') {
+                            toastr.success(data.msg, 'Add New Employee');
+                        }else
+                            toastr.error(data.msg, 'Error');
+                     }    
                  });
              }
 
@@ -40,15 +51,15 @@
              $scope.searchEmployee = "";
          };
 
-         $scope.getIDPos = function(id) {
-             $scope.employee = {};
-             EmployeeFactory.getPosID(id).then(function(data) {
-                 if (data.length > 0) {
-                     $scope.employee = data[0];
-                     $scope.employee.position = data[0].idPosition;
-                 }
-             });
-         };
+         // $scope.getIDPos = function(id) {
+         //     $scope.employee = {};
+         //     EmployeeFactory.getPosID(id).then(function(data) {
+         //         if (data.length > 0) {
+         //             $scope.employee = data[0];
+         //             $scope.employee.position = data[0].idPosition;
+         //         }
+         //     });
+         // };
 
          $scope.getEmployeeID = function(id) {
              $scope.employee = {};

@@ -1,7 +1,7 @@
  'use strict';
 
  angular.module('accounting')
-     .controller('searchCDVctrl', function($scope, $filter, SearchCDVFactory, ngDialog,$modalInstance) {
+     .controller('searchCDVctrl', function($scope, $filter, $modalInstance, SearchCDVFactory, ngDialog) {
 
         $scope.closeModal = function() {
              console.log('cancel');
@@ -15,11 +15,11 @@
              $scope.search.sDate = str[1];
              $scope.search.Particular = str[2];
              $scope.search.CDVNum = str[3];
+             $scope.search.userName = str[4];
+             // $scope.search.appBy = str[5];
 
              SearchCDVFactory.getAcctEntries($scope.search.CDVNo).then(function(data) {
                  $scope.accnts = data;
-                 console.log(data);
-
              });
          }
 

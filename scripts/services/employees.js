@@ -41,6 +41,7 @@ angular.module('accounting')
                     return res.data;
                 });
             },
+            
             deleteUsers: function(id) {
                 return $http({
                     url: API_URL + '/employees/' + id,

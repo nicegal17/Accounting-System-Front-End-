@@ -1,35 +1,14 @@
  'use strict';
 
  angular.module('accounting')
-     .controller('branchctrl', function($scope, $filter, BranchFactory, toastr, ngDialog, ngTableParams) {
+     .controller('branchctrl', function($scope, $filter, $window, BranchFactory, toastr, ngDialog, ngTableParams) {
 
-         $scope.saveBranch = function() {
-             console.log('branch: ', $scope.branch);
-
-             if ($scope.isUpdate === true) {
-                 BranchFactory.updateBranch($scope.branch.brID, $scope.branch).then(function(data) {
-                     console.log('data: ', data);
-                     toastr.success('Branch Details has been updated', 'Update Branch Details');
-                 });
-             } else {
-                 BranchFactory.createBranch($scope.branch).then(function(data) {
-                     console.log('data: ', data);
-                     toastr.success('New Branch has been added', 'New Branch');
-                 });
-             }
-
-              $scope.branch = {};
-              $scope.refresh();
-
-              $scope.isDisable = true;
-         };
-
-         $scope.addNew = function() {
+          $scope.addNew = function() {
              $scope.isUpdate = false;
              $scope.branch = {};
              $scope.isDisable = false;
          };
- 
+
          $scope.cancel = function() {
              $scope.branch = {};
              $scope.isUpdate = false;
@@ -38,16 +17,54 @@
 
          $scope.refresh = function() {
              $scope.tableParams.reload();
-             $scope.searchUser = "";
+             $scope.searchBranch = "";
          };
 
-         $scope.getBRID = function(id) {
+          $scope.saveBranch = function() {
+             console.log('branch: ', $scope.branch);
+             $scope.currentUser = JSON.parse($window.localStorage['user']);
+             var data = {
+                 branch: $scope.branch,
+                 userID: $scope.currentUser.userID
+             };
+
+             if ($scope.isUpdate === true) {
+                 BranchFactory.updateBranch($scope.branch.brID, data).then(function(data) {
+                     console.log('data: ', data);
+                     if (!_.isEmpty(data)) {
+                         if (data.success == 'true') {
+                             toastr.success(data.msg, 'Update Branch Details');
+                         } else {
+                             toastr.error(data.msg, 'Error');
+                         }
+                     }
+                 });
+             } else {
+                 BranchFactory.createBranch(data).then(function(data) {
+                     console.log('data: ', data);
+                     if (!_.isEmpty(data)) {
+                         if (data.success == 'true') {
+                             toastr.success(data.msg, 'New Branch');
+                         } else {
+                             toastr.success(data.msg, 'Error');
+                         }
+                     }
+                 });
+             }
+
+             $scope.refresh();
+             $scope.branch = {};
+            
+         };
+
+         $scope.getBranchByID = function(id) {
              $scope.branch = {};
              $scope.isDisable = false;
              BranchFactory.getBranchByID(id).then(function(data) {
                  if (data.length > 0) {
-                     $scope.branch = data[0];
-                     $scope.isUpdate = true;
+                    $scope.branch = data[0];
+                    console.log('branch: ', $scope.branch);
+                    $scope.isUpdate = true;
                  }
              });
          };
@@ -65,14 +82,12 @@
              });
          };
 
-         $scope.$watch("searchUser", function() {
+         $scope.$watch("searchBranch", function() {
              $scope.tableParams.reload();
          });
 
          function init() {
-             $scope.branches = {};
              $scope.branch = {};
-             $scope.isUpdate = false;
              $scope.isDisable = true;
 
              $scope.tableParams = new ngTableParams({
@@ -87,8 +102,8 @@
                          console.log('data: ', data);
                          var orderedData = {};
 
-                         if ($scope.searchUser) {
-                             orderedData = $filter('filter')(data, $scope.searchUser);
+                         if ($scope.searchBranch) {
+                             orderedData = $filter('filter')(data, $scope.searchBranch);
                              orderedData = params.sorting() ? $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
                          } else {
                              orderedData = params.sorting() ? $filter('orderBy')(data, params.orderBy()) : data;

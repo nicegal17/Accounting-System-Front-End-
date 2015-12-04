@@ -7,11 +7,23 @@
              console.log('position`: ', $scope.position);
              if ($scope.isUpdate === true) {
                  PositionFactory.updatePositions($scope.position.idPosition,$scope.position).then(function(data) {
-                     toastr.success('Record Successfully Updated', 'Record Updated');
+                    if (!_.isEmpty(data)) {
+                        if (data.success == 'true') {
+                            toastr.success(data.msg, 'Record Updated');
+                        }else {
+                            toastr.success(data.msg, 'Error');
+                        }
+                    }
                  });
              } else {
                  PositionFactory.createPositions($scope.position).then(function(data) {
-                     toastr.success('Record Successfully Created', 'Record Saved');
+                    if (!_.isEmpty(data)) {
+                        if (data.success == 'true') {
+                             toastr.success(data.msg, 'Record Saved');
+                        }else {
+                            toastr.success(data.msg, 'Error');
+                        }
+                    } 
                  });
              }
              $scope.position = {};

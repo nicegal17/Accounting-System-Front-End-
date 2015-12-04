@@ -7,7 +7,14 @@
              console.log('beginBal: ', $scope.beginBal);
               beginBalFactory.createBeginBal($scope.beginBal).then(function(data) {
                   console.log('data: ', data);
-                  toastr.success('Record Successfully Saved');
+                  if (!_.isEmpty(data)) {
+                    if (data.success == 'true') {
+                        toastr.success(data.msg, 'Add New Beginning Balance');
+                    }else {
+                        toastr.success(data.msg, 'Error');
+                    }
+                  }
+                  
                   $scope.beginBal = {};
               });
          };

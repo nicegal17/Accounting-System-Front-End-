@@ -6,7 +6,7 @@ angular.module('accounting')
         return {
             getJVNo: function() {
                 return $http({
-                    url: API_URL + '/appJV',
+                    url: API_URL + '/approveJV',
                     type: 'GET',
                 }).then(function(res) {
                     return res.data;
@@ -15,7 +15,7 @@ angular.module('accounting')
 
             getAcctEntries: function(JID) {
                 return $http({
-                    url: API_URL + '/getAcctEntries/' + JID,
+                    url: API_URL + '/approveJV/getAcctEntries/' + JID,
                     type: 'GET',
                 }).then(function(res) {
                     return res.data;
@@ -24,18 +24,8 @@ angular.module('accounting')
 
             approveJV: function(id, data) {
                 return $http({
-                    url: API_URL + '/appJV/' + id,
-                    type: 'PUT',
-                    data: data
-                }).then(function(res) {
-                    return res.data;
-                });
-            },
-
-            denyJV: function(id, data) {
-                return $http({
-                    url: API_URL + '/appJV/denyJV/' + id,
-                    type: 'PUT',
+                    url: API_URL + '/approveJV/' + id,
+                    method: 'PUT',
                     data: data
                 }).then(function(res) {
                     return res.data;

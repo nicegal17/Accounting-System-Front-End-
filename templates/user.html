@@ -1,0 +1,67 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h2 class="page-header">Manage User</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-4 col-md-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Add New User</div>
+            <div class="panel-body">
+                <form>
+                    <div class="form-group">
+                        <h4><label for="inputName">{{user.empName}}</label></h4>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputName">Username</label>
+                        <input type="text" class="form-control" ng-disabled="isDisable" ng-model="user.username" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputName">Password</label>
+                        <input class="form-control" ng-disabled="isDisable" placeholder="Password" name="password" ng-model="user.password" type="password" id="password" value="">
+                    </div>
+                    <a class="btn btn-sm btn-primary" ng-show="!isDisable" ng-click="saveUser()"><span class="glyphicon glyphicon-saved"></span> Save</a>
+                    <button ng-click="cancel()" class="btn btn-sm btn-danger" ng-hide="isDisable"> Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-8 col-md-8">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Manage Users</div>
+            <div class="panel-body">
+                <div class="form-inline pull-left" role="form">
+                    <a class="btn btn-warning" ng-show="isDisable" ng-click="addNew()"><i class="fa fa-plus"></i> </a>
+                </div>
+                <div class="form-inline pull-right" role="form">
+                    <div class="form-group">
+                        <input id="txtvalue" type="text" ng-model="searchUser" class="form-control" placeholder="Search">
+                    </div>
+                    <button ng-click="search()" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
+                </div>
+            </div>
+            <div class="scrollable-area">
+                <table id="tbl_subject" class="table table-hover table-responsive" ng-table="tableParams">
+                    <tr ng-repeat="user in $data">
+                        <td data-title="'Employee'" sortable="'posName'">
+                            {{user.empName}}
+                        </td>
+                        <td data-title="'Username'" sortable="'posName'">
+                            {{user.username}}
+                        </td>
+                        <td data-title="'Position'" sortable="'posName'">
+                            {{user.posName}}
+                        </td>
+                        <td data-title="'Action'">
+                            <div class="text-right">
+                                <a class="btn btn-primary btn-xs" id="edit" ng-click="getIDUser(user.userID)">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -5,7 +5,7 @@ angular
     .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
         $stateProvider
         // =========== AUTHENTICATION =========== //
-        .state('login', {
+            .state('login', {
             url: '/login',
             templateUrl: 'templates/login/login.html',
             controller: 'loginctrl'
@@ -27,30 +27,30 @@ angular
                             }),
                             $ocLazyLoad.load({
                                 name: 'toggle-switch',
-                                files: ["bower_components/angular-toggle-switch/angular-toggle-switch.min.js",
-                                    "bower_components/angular-toggle-switch/angular-toggle-switch.css"
+                                files: ['bower_components/angular-toggle-switch/angular-toggle-switch.min.js',
+                                    'bower_components/angular-toggle-switch/angular-toggle-switch.css'
                                 ]
                             }),
                             $ocLazyLoad.load({
                                 name: 'ngAnimate',
                                 files: ['bower_components/angular-animate/angular-animate.js']
-                            })
+                            });
                         $ocLazyLoad.load({
                             name: 'ngCookies',
                             files: ['bower_components/angular-cookies/angular-cookies.js']
-                        })
+                        });
                         $ocLazyLoad.load({
                             name: 'ngResource',
                             files: ['bower_components/angular-resource/angular-resource.js']
-                        })
+                        });
                         $ocLazyLoad.load({
                             name: 'ngSanitize',
                             files: ['bower_components/angular-sanitize/angular-sanitize.js']
-                        })
+                        });
                         $ocLazyLoad.load({
                             name: 'ngTouch',
                             files: ['bower_components/angular-touch/angular-touch.js']
-                        })
+                        });
                     }
                 }
             })
@@ -65,7 +65,7 @@ angular
                             files: [
                                 'scripts/directives/notification.js',
                             ]
-                        })
+                        });
                     }
                 }
             })
@@ -93,6 +93,39 @@ angular
                 url: '/purchaseOrder/:id',
                 templateUrl: 'templates/PO_prev.html',
                 controller: 'podetailsctrl'
+            })
+            .state('main.manageUser', {
+                url: '/manageUser',
+                templateUrl: 'templates/user.html',
+                controller: 'userctrl'
+            })
+            .state('main.FA', {
+                url: '/FA',
+                templateUrl: 'templates/FA.html',
+                controller: 'assetctrl'
+            })
+            .state('main.bank', {
+                url: '/bank',
+                templateUrl: 'templates/bank.html',
+                controller: 'bankctrl'
+            })
+            .state('main.Account', {
+                url: '/Account',
+                templateUrl: 'templates/Account.html',
+                controller: 'accountctrl'
+            })
+
+            /* ============== REPORTS ============== */
+            .state('main.chart-of-account', {
+                url: '/chart-of-account',
+                templateUrl: 'templates/reports/chart-of-accounts.html',
+                controller: 'reportingctrl',
+                resolve: {
+                    reportParams: function(){
+                        return 'chart-of-account';
+                    }
+                }
             });
+
         $urlRouterProvider.otherwise('/login');
     });

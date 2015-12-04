@@ -1,5 +1,6 @@
 <div class="modal-header">
-    <h3 class="modal-title">Search Accounts Payable Voucher</h3>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="closeModal()"><span aria-hidden="true">&times;</span></button>
+    <h5 class="modal-title">Search Accounts Payable Voucher</h5>
 </div>
 <div class="modal-body">
     <div class="panel panel-primary">
@@ -7,8 +8,8 @@
             <form>
                 <div class="form-group">
                     <label for="inputName">APV #</label>
-                    <select ng-model="search.det" class="form-control" ng-change="changeMeChange(search.det)">
-                        <option ng-repeat="apv in apvs" value="{{apv.apvID}}--{{apv.transDate}}--{{apv.particulars}}--{{apv.APVNum}}">{{apv.APVNum}}</option>
+                    <select ng-model="search.apv" class="form-control" ng-change="cboAPV(search.apv)">
+                        <option ng-repeat="apv in apvs" value="{{apv.apvID}}--{{apv.transDate}}--{{apv.particulars}}--{{apv.APVNum}}--{{apv.empName}}">{{apv.APVNum}}</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -60,7 +61,7 @@
     <hr>
     <div class="form-group">
         <label for="inputSlug">Prepared By:</label>
-        <label for="inputSlug">Prepared By</label>
+        <label for="inputSlug">{{search.empName}}</label>
     </div>
     <div class="form-group">
         <label for="inputSlug">Approved By:</label>
@@ -69,5 +70,4 @@
 </div>
 <div class="modal-footer">
     <button class="btn btn-sm btn-primary" ng-click="appCDV()"><span class="glyphicon glyphicon-print"></span> Print</button>
-    <a class="btn btn-sm btn-danger" ng-click="closeModal()"><span class="glyphicon glyphicon-remove-circle"></span> Close</a>
 </div>

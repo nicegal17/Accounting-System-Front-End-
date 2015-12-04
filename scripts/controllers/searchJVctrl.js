@@ -3,12 +3,12 @@
  angular.module('accounting')
      .controller('searchJVctrl', function($scope, $filter, ngDialog, SearchJVFactory, $modalInstance) {
 
-        $scope.closeModal = function() {
+         $scope.closeModal = function() {
              console.log('cancel');
              $modalInstance.close();
-         }
+         };
 
-        $scope.changeMeChange = function(jv) {
+         $scope.changeMeChange = function(jv) {
              var str = jv.split('--');
              $scope.search.JID = str[0];
              $scope.search.sDate = str[1];
@@ -20,15 +20,15 @@
                  console.log(data);
 
              });
-         }
+         };
 
-        function init(){
-            $scope.search = {};
+         function init() {
+             $scope.search = {};
 
-            SearchJVFactory.getJVNo().then(function(data) {
+             SearchJVFactory.getJVNo().then(function(data) {
                  $scope.jvs = data;
              });
-        };
+         };
 
-        init();
+         init();
      });

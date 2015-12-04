@@ -6,7 +6,12 @@
          $scope.saveSeries = function() {
              SeriesFactory.updateNumSeries($scope.series.idNum, $scope.series).then(function(data) {
                  console.log('data: ', data);
-                 toastr.success('Accounting Number Seris has been Successfully Updated', 'Update Record');
+                 if (!_.isEmpty(data)) {
+                    if (data.success == 'true') {
+                        toastr.success(data.msg, 'Update Record');
+                    }
+                 }
+                 
              });
          };
 

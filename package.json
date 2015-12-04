@@ -11,6 +11,7 @@
     "apiEndPoint": "http://localhost:8000"
   },
   "devDependencies": {
+    "active-x-obfuscator": "0.0.2",
     "grunt": "~0.4",
     "grunt-angular-templates": "~0.5",
     "grunt-browser-output": "0.1.0",
@@ -33,6 +34,7 @@
     "karma-jasmine": "~0.1.5",
     "karma-mocha-reporter": "~0.2.5",
     "karma-phantomjs-launcher": "~0.1.4",
-    "load-grunt-tasks": "~0.2"
+    "load-grunt-tasks": "~0.2",
+    "uglify-js": "^2.6.1"
   }
 }

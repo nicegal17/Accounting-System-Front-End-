@@ -1,5 +1,6 @@
 <div class="modal-header">
-    <h3 class="modal-title">Approve Check Disbursement Voucher</h3>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="closeModal()"><span aria-hidden="true">&times;</span></button>
+    <h5 class="modal-title">Approve Check Disbursement Voucher</h5>
 </div>
 <div class="modal-body">
     <div class="panel panel-primary">
@@ -8,7 +9,7 @@
                 <div class="form-group">
                     <label for="inputName">CDV #</label>
                     <select ng-model="appcdv.ID" class="form-control" ng-change="changeMeChange(appcdv.ID)">
-                        <option ng-repeat="ID in IDs" value="{{ID.cdvID}}--{{ID.chkDate}}--{{ID.particular}}--{{ID.CDVNo}}">{{ID.CDVNo}}</option>
+                        <option ng-repeat="ID in IDs" value="{{ID.cdvID}}--{{ID.transDate}}--{{ID.particular}}--{{ID.CDVNo}}--{{ID.empName}}">{{ID.CDVNo}}</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -58,17 +59,16 @@
         </div>
     </div>
     <hr>
-    <div class="form-group">
-        <label for="inputSlug">Prepared By:</label>
-        <label for="inputSlug">Prepared By</label>
-    </div>
-    <div class="form-group">
-        <label for="inputSlug">Approved By:</label>
-        <label for="inputSlug">Approved By</label>
+    <div class="row">
+        <div class="col-lg-6 col-md-6">
+            <div class="form-group">
+                <label for="inputSlug">Prepared By:</label>
+                <label for="inputSlug">{{appcdv.userName}}</label>
+            </div>
+        </div>
     </div>
 </div>
 <div class="modal-footer">
     <button class="btn btn-sm btn-primary" ng-click="appCDV()"><span class="glyphicon glyphicon-ok"></span> Approve</button>
     <button class="btn btn-sm btn-warning" ng-click="denyCDV()"><span class="glyphicon glyphicon-remove"></span> Deny</button>
-    <a class="btn btn-sm btn-danger" ng-click="closeModal()"><span class="glyphicon glyphicon-remove-circle"></span> Close</a>
 </div>

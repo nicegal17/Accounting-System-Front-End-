@@ -1,0 +1,73 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="closeModal()"><span aria-hidden="true">&times;</span></button>
+    <h5 class="modal-title">Audit Check Disbursement Voucher</h5>
+</div>
+<div class="modal-body">
+    <div class="panel panel-primary">
+        <div class="panel-body">
+            <form>
+                <div class="form-group">
+                    <label for="inputName">CDV #</label>
+                    <select ng-model="audit.cdv" class="form-control" ng-change="cboCDV(audit.cdv)">
+                        <option ng-repeat="cdv in cdvs" value="{{cdv.cdvID}}--{{cdv.transDate}}--{{cdv.particular}}--{{cdv.CDVNo}}--{{cdv.empName}}">{{cdv.CDVNo}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="inputSlug">Date:</label>
+                    <label for="inputSlug">{{audit.sDate}}</label>
+                </div>
+                <div class="form-group">
+                    <label for="inputSlug">CDV No.:</label>
+                    <label for="inputSlug">{{audit.CDVNum}}</label>
+                </div>
+                <div class="form-group">
+                    <label for="inputSlug">Particular:</label>
+                    <label for="inputSlug">{{audit.Particular}}</label>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">Check Disbursement Voucher</div>
+        <div class="scrollable-area">
+            <table class="table table-bordered table-hover" id="tab_logic">
+                <thead>
+                    <tr>
+                        <th class="text-center">Account Title</th>
+                        <th class="text-center">Debit</th>
+                        <th class="text-center">Credit</th>
+                        <th width="5%"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="accnt in accnts">
+                        <td>
+                            <span ng-show="accnt.idAcctTitleDB != null && accnt.idAcctTitleCR == null">{{accnt.acctTitle}}</span>
+                            <span ng-show="accnt.idAcctTitleDB == null && accnt.idAcctTitleCR != null">&nbsp;&nbsp;&nbsp;&nbsp;{{accnt.acctTitle}}</span>
+                        </td>
+                        <td>
+                            <span ng-show="accnt.idAcctTitleDB != null && accnt.idAcctTitleCR == null"> {{accnt.amount}} </span>
+                            <span ng-show="accnt.idAcctTitleDB == null && accnt.idAcctTitleCR != null"></span>
+                        </td>
+                        <td>
+                            <span ng-show="accnt.idAcctTitleCR != null && accnt.idAcctTitleDB == null"> {{accnt.amount}} </span>
+                            <span ng-show="accnt.idAcctTitleCR == null && accnt.idAcctTitleDB != null"></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-lg-6 col-md-6">
+            <div class="form-group">
+                <label for="inputSlug">Prepared By:</label>
+                <label for="inputSlug">{{audit.userName}}</label>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-sm btn-primary" ng-click="auditCDV()"><span class="glyphicon glyphicon-ok"></span> Audit</button>
+</div>

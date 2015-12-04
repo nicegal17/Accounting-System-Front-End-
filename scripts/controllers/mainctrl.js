@@ -5,11 +5,15 @@ angular
     .controller('MainCtrl', function($scope) {
 
     })
-    .controller('headerCtrl', function($scope, AuthenticationFactory) {
+    .controller('headerCtrl', function($scope,$rootScope, AuthenticationFactory) {
         $scope.logout = function() {
             console.log('logout');
             AuthenticationFactory.Logout();
         };
+
+        var currentUser = AuthenticationFactory.getUser();
+        currentUser = JSON.parse(currentUser);
+        $rootScope.currentUser = currentUser;
     })
     .controller('sideBarCtrl', function($scope, $modal) {
         $scope.selectedMenu = 'dashboard';
@@ -43,11 +47,19 @@ angular
         };
 
         $scope.openAppCDV = function() {
-            console.log('asdasda');
             var modalInstance = $modal.open({
                 animation: true,
                 templateUrl: '/templates/modals/appCDV.html',
                 controller: 'appCDVctrl',
+                size: 'lg'
+            });
+        };
+
+        $scope.openAuditCDV = function() {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: '/templates/modals/auditCDV.html',
+                controller: 'auditCDVctrl',
                 size: 'lg'
             });
         };
@@ -75,6 +87,15 @@ angular
                 animation: true,
                 templateUrl: '/templates/modals/appJV.html',
                 controller: 'appJVctrl',
+                size: 'lg'
+            });
+        };
+
+        $scope.openAuditJV = function() {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: '/templates/modals/auditJV.html',
+                controller: 'auditJVctrl',
                 size: 'lg'
             });
         };
@@ -115,6 +136,15 @@ angular
             });
         };
 
+        $scope.openAuditAPV = function() {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: '/templates/modals/auditAPV.html',
+                controller: 'auditAPVctrl',
+                size: 'lg'
+            });
+        };
+
         $scope.openSearchAPV = function() {
             var modalInstance = $modal.open({
                 animation: true,
@@ -124,42 +154,12 @@ angular
             });
         };
 
-        $scope.openUser = function() {
-            console.log('sadasdasd');
-            var modalInstance = $modal.open({
-                animation: true,
-                backdrop: 'static',
-                templateUrl: '/templates/modals/user.html',
-                controller: 'userctrl',
-                size: 'md'
-            });
-        };
-
-        $scope.openBank = function() {
-            console.log('bank');
-            var modalInstance = $modal.open({
-                animation: true,
-                templateUrl: '/templates/modals/bank.html',
-                controller: 'bankctrl',
-                size: 'md'
-            });
-        };
-
-        $scope.openGenAcct = function() {
-            var modalInstance = $modal.open({
-                animation: true,
-                templateUrl: '/templates/modals/genAcct.html',
-                controller: 'accountctrl',
-                size: 'md'
-            });
-        };
-
         $scope.openSubAcct = function() {
             var modalInstance = $modal.open({
                 animation: true,
                 templateUrl: '/templates/modals/subAcct.html',
                 controller: 'subAcctctrl',
-                size: 'md'
+                size: 'lg'
             });
         };
 
@@ -195,6 +195,15 @@ angular
                 animation: true,
                 templateUrl: '/templates/modals/seriesNo.html',
                 controller: 'seriesnumctrl',
+                size: 'md'
+            });
+        };
+
+        $scope.issueOR = function() {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: '/templates/modals/OR.html',
+                controller: 'ORctrl',
                 size: 'md'
             });
         };

@@ -4,23 +4,23 @@ angular.module('accounting')
     .factory('APVFactory', function($http, API_URL) {
 
         return {
-             getAcctTitle: function() {
+            getAcctTitle: function() {
                 return $http({
                     url: API_URL + '/APV',
-                    type: 'GET',
-                }).then(function(res){
+                    method: 'GET',
+                }).then(function(res) {
                     return res.data;
                 });
             },
 
-             createAPV: function(data) {
+            createAPV: function(data) {
                 return $http({
                     url: API_URL + '/APV',
-                    type: 'POST',
+                    method: 'POST',
                     data: data
-                }).then(function(res){
+                }).then(function(res) {
                     return res.data;
                 });
-            }, 
+            },
         };
     });
