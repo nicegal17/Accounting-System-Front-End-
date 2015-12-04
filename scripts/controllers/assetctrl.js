@@ -90,8 +90,9 @@
              $scope.asset = {};
              $scope.isDisable = false;
              AssetsFactory.getAssetID(id).then(function(data) {
-                 if (data.length > 0) {
+                 if (_.isArray(data) && data.length > 0) {
                      $scope.asset = data[0];
+                     $scope.asset.datePurchased = new Date(data[0].datePurchased);
                      $scope.asset.category = data[0].categoryID;
                      $scope.isUpdate = true;
                  }

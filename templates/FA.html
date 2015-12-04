@@ -25,7 +25,8 @@
                                     <input type="date" class="form-control" datepicker-popup ng-model="asset.datePurchased" is-open="opened" min-date="{{minDate | date:'yyyy-MM-dd'}}" max-date="{{maxDate | date:'yyyy-MM-dd'}}" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
                                     <span class="input-group-btn">
                                                 <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                                            </span> <input type="text" class="form-control" ng-model="asset.datePurchased" placeholder="Item Name" ng-disabled="isDisable">
+                                            </span>
+                                    <input type="text" class="form-control" ng-model="asset.datePurchased" placeholder="Item Name" ng-disabled="isDisable">
                                 </p>
                             </div>
                         </div>
