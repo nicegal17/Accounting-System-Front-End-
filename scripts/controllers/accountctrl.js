@@ -3,7 +3,7 @@
  'use strict';
 
  angular.module('accounting')
-     .controller('accountctrl', function($scope, $filter, $window, AccountFactory, toastr, ngDialog, ngTableParams) {
+     .controller('accountctrl', function($scope, $filter, $window, AccountFactory, toastr, ngDialog, ngTableParams, ReportingService) {
 
          $scope.saveAccount = function() {
              $scope.currentUser = JSON.parse($window.localStorage['user']);
@@ -42,6 +42,11 @@
          $scope.refresh = function() {
              $scope.tableParams.reload();
              $scope.searchAcctChart = '';
+         };
+
+         $scope.printData = function() {
+             var divToPrint = document.getElementById('printTable');
+             ReportingService.printData(divToPrint);
          };
 
          // $scope.accountType;
@@ -133,7 +138,7 @@
                      });
                  }
              });
-            /* jshint ignore:end */
+             /* jshint ignore:end */
          }
 
          init();

@@ -113,6 +113,19 @@ angular
                 url: '/Account',
                 templateUrl: 'templates/Account.html',
                 controller: 'accountctrl'
+            })
+
+            /* ============== REPORTS ============== */
+            .state('main.chart-of-account', {
+                url: '/chart-of-account',
+                templateUrl: 'templates/reports/chart-of-accounts.html',
+                controller: 'reportingctrl',
+                resolve: {
+                    reportParams: function(){
+                        return 'chart-of-account';
+                    }
+                }
             });
+
         $urlRouterProvider.otherwise('/login');
     });
