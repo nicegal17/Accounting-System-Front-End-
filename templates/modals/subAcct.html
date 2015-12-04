@@ -8,8 +8,8 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">Create New Sub Accounting Title</div>
                 <div class="panel-body">
-                    <div class="form-inline pull-right" role="form">
-                        <form>
+                    <form class="form-horizontal" role="form">
+                        <div class="col-xs-6 col-md-6">
                             <div class="form-group">
                                 <label for="inputName">General Account</label>
                                 <select ng-model="subAccount.acctTitle" class="form-control">
@@ -30,6 +30,8 @@
                                 <label for="inputName">Account Title</label>
                                 <input type="text" class="form-control" id="inputSlug" ng-model="subAccount.accountTitle" placeholder="Accounting Title">
                             </div>
+                        </div>
+                        <div class="col-xs-6 col-md-6">
                             <div class="form-group">
                                 <label for="inputName">Normal Balance</label>
                                 <select ng-model="subAccount.norm" class="form-control">
@@ -48,10 +50,12 @@
                                     <option ng-repeat="statement in statements" value="{{statement.FSID}}">{{statement.FSDesc}}</option>
                                 </select>
                             </div>
-                        </form><br><br>
-                        <button class="btn btn-sm btn-success" ng-click="saveSubAccount()"><span class="glyphicon glyphicon-saved"></span> Save</button>
-                        <button ng-click="cancel()" class="btn btn-sm btn-danger" ng-hide="isDisable"> Cancel</button>
-                    </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="panel-footer">
+                    <button class="btn btn-sm btn-success" ng-click="saveSubAccount()"><span class="glyphicon glyphicon-saved"></span> Save</button>
+                    <button ng-click="cancel()" class="btn btn-sm btn-danger" ng-hide="isDisable"> Cancel</button>
                 </div>
             </div>
         </div>
