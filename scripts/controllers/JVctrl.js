@@ -70,10 +70,10 @@
              JVFactory.createJV(data).then(function(res) {
                  console.log('data: ', res);
                  toastr.success('Journal Voucher has been Created', 'JV Created');
-                 $scope.entries = "";
-                 $scope.JV = "";
-                 $scope.totalDB = "";
-                 $scope.totalCR = "";
+                 $scope.entries = '';
+                 $scope.JV = '';
+                 $scope.totalDB = '';
+                 $scope.totalCR = '';
              });
          };
 

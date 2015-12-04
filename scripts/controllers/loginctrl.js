@@ -22,11 +22,6 @@ angular.module('accounting')
 
                 if (response.success) {
                     AuthenticationFactory.storeUser(JSON.stringify(response.user), response.token);
-
-                    var currentUser = AuthenticationFactory.getUser();
-                    currentUser = JSON.parse(currentUser);
-                    console.log('currentUser: ', currentUser);
-
                     $state.go('main.dashboard');
                 } else {
                     $scope.error = response.msg;

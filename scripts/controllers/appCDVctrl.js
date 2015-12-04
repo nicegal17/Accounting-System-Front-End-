@@ -10,7 +10,7 @@
          $scope.closeModal = function() {
              console.log('cancel');
              $modalInstance.close();
-         }
+         };
 
          $scope.changeMeChange = function(cdv) {
              console.log('cdv: ', cdv);
@@ -53,10 +53,10 @@
              $scope.acctTitles = {};
 
              $scope.appcdv.CDVNo = null;
-             $scope.appcdv.sDate = "";
-             $scope.appcdv.Particular = "";
-             $scope.appcdv.CDVNum = "";
-             $scope.appcdv.userName = "";
+             $scope.appcdv.sDate = '';
+             $scope.appcdv.Particular = '';
+             $scope.appcdv.CDVNum = '';
+             $scope.appcdv.userName = '';
 
              AppCDVFactory.getCDVNo().then(function(data) {
                  $scope.IDs = data;

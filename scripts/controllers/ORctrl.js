@@ -29,13 +29,13 @@
              ORFactory.saveOR(data).then(function(data) {
                  console.log('data: ', data);
                  if (!_.isEmpty(data)) {
-                    if(data.success == 'true') {
+                    if(data.success === 'true') {
                         toastr.success(data.msg, 'OR Created');
                     } else {
                         toastr.error(data.msg, 'Error');
                     }
                  }
-                 $scope.OR = "";
+                 $scope.OR = '';
              });
          };
 

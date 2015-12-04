@@ -34,7 +34,7 @@
              appAPVFactory.approveAPV($scope.appApv.apvID, data).then(function(data) {
                  console.log('data: ', data);
                  if (!_.isEmpty(data)) {
-                     if (data.success == 'true') {
+                     if (data.success === 'true') {
                          toastr.success(data.msg, 'Approve APV');
                      } else {
                          toastr.error(data.msg, 'Error');

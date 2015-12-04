@@ -1,4 +1,5 @@
 /*jslint node: true */
+/*jslint camelcase:false*/
 'use strict';
 
 var pkg = require('./package.json');
@@ -91,6 +92,64 @@ module.exports = function (grunt) {
         dest: 'temp/templates.js'
       }
     },
+    copy: {
+      main: {
+        files: [
+          {src: ['favicon.ico'], dest: 'dist/'},
+          {src: ['img/**'], dest: 'dist/'},
+          {src: ['images/**'], dest: 'dist/'},
+          {src: ['styles/**'], dest: 'dist/'},
+          {src: ['bower_components/fontawesome/fonts/**'], dest: 'dist/',filter:'isFile',expand:true},
+          {src: ['bower_components/fontawesome/css/**'], dest: 'dist/',filter:'isFile',expand:true},
+          {src: ['bower_components/bootstrap/fonts/**'], dest: 'dist/',filter:'isFile',expand:true},
+          {src: ['bower_components/bootstrap/dist/css/**'], dest: 'dist/',filter:'isFile',expand:true},
+          {src: ['bower_components/bootstrap/dist/fonts/**'], dest: 'dist/',filter:'isFile',expand:true},
+          {src: ['bower_components/ng-table/dist/**'], dest: 'dist/',filter:'isFile',expand:true},
+          {src: ['bower_components/ngDialog/css/**'], dest: 'dist/',filter:'isFile',expand:true},
+          {src: ['bower_components/angular-toastr/dist/**'], dest: 'dist/',filter:'isFile',expand:true},
+          {src: ['bower_components/metisMenu/dist/**'], dest: 'dist/',filter:'isFile',expand:true},
+          {src: ['bower_components/angular-loading-bar/build/**'], dest: 'dist/',filter:'isFile',expand:true},
+          {src: ['bower_components/angular-toggle-switch/**'], dest: 'dist/',filter:'isFile',expand:true}
+        ]
+      }
+    },
+    dom_munger:{
+      read: {
+        options: {
+          read:[
+            {selector:'script[data-concat!="false"]',attribute:'src',writeto:'appjs'},
+            {selector:'link[rel="stylesheet"][data-concat!="false"]',attribute:'href',writeto:'appcss'}
+          ]
+        },
+        src: 'index.html'
+      },
+      update: {
+        options: {
+          remove: ['script[data-remove!="false"]','link[data-remove!="false"]'],
+          append: [
+            {selector:'body',html:'<script src="app.full.min.js"></script>'},
+            {selector:'head',html:'<link rel="stylesheet" href="app.full.min.css">'}
+          ]
+        },
+        src:'index.html',
+        dest: 'dist/index.html'
+      }
+    },
+    cssmin: {
+      main: {
+        src:['temp/app.css','<%= dom_munger.data.appcss %>'],
+        dest:'dist/app.full.min.css',
+        options: {
+          processImport: false
+        }
+      }
+    },
+    concat: {
+      main: {
+        src: ['<%= dom_munger.data.appjs %>','<%= ngtemplates.main.dest %>'],
+        dest: 'temp/app.full.js'
+      }
+    },
     ngAnnotate: {
       main: {
         src:'temp/app.full.js',
@@ -155,8 +214,8 @@ module.exports = function (grunt) {
     }
   });
 
-  // grunt.registerTask('build',['jshint','clean:before','less','dom_munger','ngtemplates','cssmin','concat','ngAnnotate','uglify','copy','htmlmin','clean:after']);
-  grunt.registerTask('build',['jshint','clean:before','less','ngtemplates','cssmin','concat','ngAnnotate','uglify','htmlmin','clean:after']);
+  grunt.registerTask('build',['jshint','clean:before','less','dom_munger','ngtemplates','cssmin','concat','ngAnnotate','uglify','copy','htmlmin','clean:after']);
+  // grunt.registerTask('build',['jshint','clean:before','less','ngtemplates','cssmin','concat','ngAnnotate','uglify','htmlmin','clean:after']);
   grunt.registerTask('check',['jshint','clean:before','less','ngtemplates','cssmin','concat','ngAnnotate','uglify','htmlmin','clean:after']);
   grunt.registerTask('serve', ['jshint','connect', 'watch']);
   grunt.registerTask('test',['karma:all_tests']);

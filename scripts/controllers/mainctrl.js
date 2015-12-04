@@ -5,11 +5,15 @@ angular
     .controller('MainCtrl', function($scope) {
 
     })
-    .controller('headerCtrl', function($scope, AuthenticationFactory) {
+    .controller('headerCtrl', function($scope,$rootScope, AuthenticationFactory) {
         $scope.logout = function() {
             console.log('logout');
             AuthenticationFactory.Logout();
         };
+
+        var currentUser = AuthenticationFactory.getUser();
+        currentUser = JSON.parse(currentUser);
+        $rootScope.currentUser = currentUser;
     })
     .controller('sideBarCtrl', function($scope, $modal) {
         $scope.selectedMenu = 'dashboard';

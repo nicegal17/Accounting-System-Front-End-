@@ -1,3 +1,5 @@
+ /*jslint camelcase:false*/
+
  'use strict';
 
  angular.module('accounting')
@@ -14,18 +16,18 @@
                  AccountFactory.updateAccount($scope.account.idAcctTitle, data).then(function(data) {
                      console.log('data: ', data);
                      if (!_.isEmpty(data)) {
-                        if (data.success == 'true') {
-                            toastr.success(data.msg, 'Updating Data');
-                        } else {
-                            toastr.error(data.msg, 'Error');
-                        }
+                         if (data.success === 'true') {
+                             toastr.success(data.msg, 'Updating Data');
+                         } else {
+                             toastr.error(data.msg, 'Error');
+                         }
                      }
                  });
              } else {
                  AccountFactory.createAccount(data).then(function(data) {
                      console.log('data: ', data);
                      if (!_.isEmpty(data)) {
-                         if (data.success == 'true') {
+                         if (data.success === 'true') {
                              toastr.success(data.msg, 'Create New Account Title');
                          } else {
                              toastr.error(data.msg, 'Error');
@@ -37,9 +39,9 @@
              $scope.refresh();
          };
 
-           $scope.refresh = function() {
+         $scope.refresh = function() {
              $scope.tableParams.reload();
-             $scope.searchAcctChart = "";
+             $scope.searchAcctChart = '';
          };
 
          // $scope.accountType;
@@ -53,7 +55,7 @@
 
          // console.log('value', $scope.Account);
 
-         $scope.$watch("searchAcctChart", function() {
+         $scope.$watch('searchAcctChart', function() {
              $scope.tableParams.reload();
          });
 
@@ -69,18 +71,18 @@
              $scope.isDisable = true;
          };
 
-          $scope.getAcctChartByID = function(id) {
+         $scope.getAcctChartByID = function(id) {
              $scope.account = {};
              $scope.isDisable = false;
              AccountFactory.getAcctChartByID(id).then(function(data) {
                  if (data.length > 0) {
-                    $scope.account = data[0];
-                    $scope.account.fund = data[0].fundID;
-                    $scope.account.acctType = data[0].acctTypeID;
-                    $scope.account.norm = data[0].normsID;
-                    $scope.account.finStatement = data[0].FSID;
-                    console.log('account: ', $scope.account);
-                    $scope.isUpdate = true;
+                     $scope.account = data[0];
+                     $scope.account.fund = data[0].fundID;
+                     $scope.account.acctType = data[0].acctTypeID;
+                     $scope.account.norm = data[0].normsID;
+                     $scope.account.finStatement = data[0].FSID;
+                     console.log('account: ', $scope.account);
+                     $scope.isUpdate = true;
                  }
              });
          };
@@ -107,6 +109,7 @@
                  $scope.finStatements = data;
              });
 
+             /* jshint ignore:start */
              $scope.tableParams = new ngTableParams({
                  page: 1, // show first page
                  count: 10, // count per page
@@ -130,6 +133,7 @@
                      });
                  }
              });
+            /* jshint ignore:end */
          }
 
          init();

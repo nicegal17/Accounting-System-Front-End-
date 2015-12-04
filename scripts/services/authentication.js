@@ -19,7 +19,7 @@ angular.module('accounting')
                 });
             },
             storeUser: function(user, token) {
-                $window.localStorage['user'] = user
+                $window.localStorage['user'] = user;
                 $window.localStorage['userToken'] = token;
             },
             getUser: function() {
