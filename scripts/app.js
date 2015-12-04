@@ -2,9 +2,9 @@
 
 angular
     .module('accounting', ['ngResource', 'ngSanitize', 'ui.router', 'ui.bootstrap', 'ngAnimate', 'toastr', 'ngDialog', 'ngTable', 'ngCookies', 'oc.lazyLoad', 'angular-loading-bar'])
-    .constant('API_URL', 'http://localhost:8000/api/v1')
+    .constant('API_URL', 'http://192.168.1.70:8000/api/v1')
     // .constant('API_URL', 'http://localhost:81/AccountingSystem/public/api/v1')
-    //.constant('API_URL', 'http://localhost/Accounting-System/public/api/v1')
+   // .constant('API_URL', 'http://localhost/Accounting-System/public/api/v1')
     .config(function($httpProvider, $ocLazyLoadProvider) {
 
         $httpProvider.interceptors.push('authInterceptor');
