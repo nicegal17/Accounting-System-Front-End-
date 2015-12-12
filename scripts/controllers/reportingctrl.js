@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('accounting')
-    .controller('reportingctrl', function($scope, toastr, ngTableParams, PositionFactory, AccountFactory, PODetFactory, AppJVFactory, SearchCDVFactory, ReportingService, CDVReportService, reportParams) {
+    .controller('reportingctrl', function($scope, toastr, ngTableParams, PositionFactory, AccountFactory, PODetFactory, AppJVFactory, SearchCDVFactory, ReportingService, reportParams) {
 
         $scope.tableParams = [];
 
