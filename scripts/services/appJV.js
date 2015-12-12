@@ -31,5 +31,14 @@ angular.module('accounting')
                     return res.data;
                 });
             },
+
+             getGJEntries: function(dateParams) {
+                return $http({
+                    url: API_URL + '/approveJV/getGJEntries/' + dateParams,
+                    method: 'POST',
+                }).then(function(res) {
+                    return res.data;
+                });
+            },
         };
     });

@@ -40,5 +40,14 @@ angular.module('accounting')
                     return res.data;
                 });
             },
+
+            getApprovingOfficer: function(id) {
+                return $http({
+                    url: API_URL + '/podetails/getApprovingOfficer/' + id,
+                    method: 'GET',
+                }).then(function(res){
+                    return res.data;
+                });
+            },
         };
     });

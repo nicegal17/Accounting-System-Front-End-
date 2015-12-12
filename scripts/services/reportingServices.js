@@ -24,38 +24,15 @@ angular.module('accounting')
                         <div class="row">\
                             <div class="col-xs-12">\
                                 <div class="text-center">\
-                                <h3>\
-                                    <img src="/img/ionic.png" alt="DS System" style="width:70px;">\
-                                    ACCOUNTING SYSTEM\
-                                    <img src="/img/avatar.jpg" alt="DS System" style="width:70px;">\
-                                </h3>\
+                                <img src="/img/smsi.png" alt="SMSi Logo" class="img-responsive" style="width:300px;height:100px;">\
                             </div>\
                             <div class="row">\
-                                <div class="col-xs-12">' + divToPrint.innerHTML + '</div>\
+                                <div class="col-xs-12"> ' + divToPrint.innerHTML + '</div>\
                             </div>\
                         </div>\
                         <div class="row">\
                             <br></br>\
                             <div class="col-xs-12 col-xs-offset-2">\
-                                <div class="col-xs-4">\
-                                    <hr>\
-                                    <center>\
-                                        <strong>Prepared by:</strong>\
-                                        <br><br>\
-                                        <b>Juan Dela Cruz</b>\
-                                        <small>Officer In-Charge</small>\
-                                    </center>\
-                                </div>\
-                                <div class="col-xs-4">\
-                                    <hr>\
-                                    <center>\
-                                        <strong>Noted By:</strong>\
-                                        <br><br>\
-                                        <b>Juanita Dela Cruz</b>\
-                                        <small>Another Officer In-Charge</small>\
-                                    </center>\
-                                    </div>\
-                                </div>\
                             </div>\
                         </div>\
                         </body>\

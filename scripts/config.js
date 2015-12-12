@@ -125,6 +125,36 @@ angular
                         return 'chart-of-account';
                     }
                 }
+            })
+            .state('main.general-journal', {
+                url: '/general-journal',
+                templateUrl: 'templates/reports/general-journal.html',
+                controller: 'reportingctrl',
+                resolve: {
+                    reportParams: function(){
+                        return 'general-journal';
+                    }
+                }
+            })
+            .state('main.PO_prev', {
+                url: '/PO_prev',
+                templateUrl: 'templates/PO_prev.html',
+                controller: 'reportingctrl',
+                resolve: {
+                    reportParams: function(){
+                        return 'PO';
+                    }
+                }
+            })
+            .state('main.by-CDVNo', {
+                url: '/by-CDVNo',
+                templateUrl: 'templates/searchCDV.html',
+                controller: 'reportingctrl',
+                resolve: {
+                    reportParams: function() {
+                        return 'by-CDVno';
+                    }
+                }
             });
 
         $urlRouterProvider.otherwise('/login');

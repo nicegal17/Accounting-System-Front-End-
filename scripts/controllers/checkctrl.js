@@ -56,7 +56,8 @@
                  userID: $scope.currentUser.userID
              };
 
-             CheckFactory.createCheck(data).then(function(data) {
+              CheckFactory.createCheck(data).then(function(data) {
+                console.log('data', data);
                  if (!_.isEmpty(data)) {
                      if (data.success == 'true') {
                          toastr.success(data.msg, 'Record Saved');

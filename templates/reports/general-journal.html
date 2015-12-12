@@ -1,0 +1,93 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h2 class="page-header">General Journal</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Journal Voucher Entries</div>
+            <div class="panel-body">
+                <div class="col-lg-3 col-md-3 col-sm-6">
+                    <div class="form-inline pull-left" role="form">
+                        <div class="form-group">
+                            <label for="inputName">Search From:</label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p class="input-group">
+                                        <input type="date" class="form-control" datepicker-popup ng-model="appjv.dtFrom" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                                        <span class="input-group-btn">
+                                                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                            </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6">
+                    <div class="form-inline pull-left" role="form">
+                        <div class="form-group">
+                            <label for="inputName">TO:</label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p class="input-group">
+                                        <input type="date" class="form-control" datepicker-popup ng-model="appjv.dtTo" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                                        <span class="input-group-btn">
+                                                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                            </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6">
+                    <div class="form-inline pull-left" role="form">
+                        <a class="btn btn-success" ng-click="getGJEntries()"><i class="fa fa-print"></i> Show</a>
+                        <a class="btn btn-success" ng-click="printData()"><i class="fa fa-print"></i> Print</a>
+                    </div>
+                </div>
+            </div>
+            <div id="printTable">
+                <table class="table table-bordered table-hover" id="tab_logic">
+                    <thead>
+                        <tr>
+                            <th class="text-center">JV Number</th>
+                            <th class="text-center">Date</th>
+                            <th class="text-center">Particulars</th>
+                            <th class="text-center">Account Title</th>
+                            <th class="text-center">Debit</th>
+                            <th class="text-center">Credit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="data in tableParams">
+                            <td>
+                                <span ng-show="data.idAcctTitleDB != null && data.idAcctTitleCR == null">{{data.JVNum}}</span>
+                            </td>
+                            <td>
+                                <span ng-show="data.idAcctTitleDB != null && data.idAcctTitleCR == null">{{data.transDate}}</span>
+                            </td>
+                            <td>
+                                <span ng-show="data.idAcctTitleDB != null && data.idAcctTitleCR == null">{{data.particulars}}</span>
+                            </td>
+                            <td>
+                                <span ng-show="data.idAcctTitleDB != null && data.idAcctTitleCR == null">{{data.acctTitle}}</span>
+                                <span ng-show="data.idAcctTitleDB == null && data.idAcctTitleCR != null">&nbsp;&nbsp;&nbsp;&nbsp;{{data.acctTitle}}</span>
+                            </td>
+                            <td>
+                                <span ng-show="data.idAcctTitleDB != null && data.idAcctTitleCR == null"> {{data.amount}} </span>
+                                <span ng-show="data.idAcctTitleDB == null && data.idAcctTitleCR != null"></span>
+                            </td>
+                            <td>
+                                <span ng-show="data.idAcctTitleCR != null && data.idAcctTitleDB == null"> {{data.amount}} </span>
+                                <span ng-show="data.idAcctTitleCR == null && data.idAcctTitleDB != null"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
