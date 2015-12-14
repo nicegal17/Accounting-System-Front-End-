@@ -12,10 +12,7 @@
              console.log('cdv: ', cdv);
              var str = cdv.split('--');
              $scope.search.CDVNo = str[0];
-             // $scope.search.sDate = str[1];
-             // $scope.search.Particular = str[2];
-             // $scope.search.CDVNum = str[3];
-             // $scope.search.userName = str[4];
+             // $scope.search.userName = str[1];
 
              SearchCDVFactory.getCDVDet($scope.search.CDVNo).then(function(data) {
                  $scope.accnts = data;
@@ -25,8 +22,12 @@
                  $scope.debits = data;
              });
 
-              SearchCDVFactory.getCREntries($scope.search.CDVNo).then(function(data) {
+             SearchCDVFactory.getCREntries($scope.search.CDVNo).then(function(data) {
                  $scope.credits = data;
+             });
+
+             SearchCDVFactory.getDBSum($scope.search.CDVNo).then(function(data) {
+                 $scope.sums = data;
              });
          }
 

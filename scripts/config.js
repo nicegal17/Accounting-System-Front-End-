@@ -146,13 +146,23 @@ angular
                     }
                 }
             })
-            .state('main.by-CDVNo', {
-                url: '/by-CDVNo',
+            .state('main.CDV', {
+                url: '/CDV',
                 templateUrl: 'templates/searchCDV.html',
                 controller: 'reportingctrl',
                 resolve: {
                     reportParams: function() {
-                        return 'by-CDVno';
+                        return 'CDV';
+                    }
+                }
+            })
+             .state('main.JV', {
+                url: '/JV',
+                templateUrl: 'templates/searchJV.html',
+                controller: 'reportingctrl',
+                resolve: {
+                    reportParams: function() {
+                        return 'JV';
                     }
                 }
             });

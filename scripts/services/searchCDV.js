@@ -39,5 +39,14 @@ angular.module('accounting')
                     return res.data;
                 });
             },
+
+             getDBSum: function(CDVNo) {
+                return $http({
+                    url: API_URL + '/Search/getDBSum/' + CDVNo,
+                    method: 'GET',
+                }).then(function(res) {
+                    return res.data;
+                });
+            },
         };
     });

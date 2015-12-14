@@ -1,6 +1,5 @@
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="closeModal()"><span aria-hidden="true">&times;</span></button>
-    <h5 class="text-center">Check Disbursement Voucher</h5>
 </div>
 <div class="modal-body">
     <div class="panel panel-primary">
@@ -20,48 +19,68 @@
         <div class="scrollable-area">
             <div id="printTable">
                 <table class="table table-hover table-responsive">
-                    <thead><br><br>
+                    <thead>
+                        <br>
+                        <br>
                         <tr>
-                            <h3 class="text-center">Check Disbursement Voucher</h3><br>
-                            <th class="text-center">CDV No</th>
-                            <th class="text-center">Date</th>
-                            <th class="text-center">Particular</th>
+                            <h4 class="text-center">Solutions Management System, Inc.</h4>
+                            <h5 class="text-center">#47 Hayes Street, Cagayan de Oro City</h5>
+                            <h3 class="text-center">CHECK DISBURSEMENT VOUCHER</h3>
+                            <br><br>
+                            <form class="form-horizontal" role="form">
+                                <div class="col-xs-6 col-md-6">
+                                    <div class="form-group" ng-repeat="accnt in accnts">
+                                        <label for="inputName">Payee: {{accnt.payee}}</label>
+                                        <br>
+                                        <label for="inputName">Address: {{accnt.address}}</label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-md-6">
+                                    <div class="form-group" ng-repeat="accnt in accnts">
+                                        <label for="inputName">Date: {{accnt.chkDate}}</label>
+                                        <br>
+                                        <label for="inputName">Bank/Check No: {{accnt.bankName}} / {{accnt.chkNO}}</label>
+                                    </div>
+                                </div>
+                            </form>
                             <th class="text-center">Account Title</th>
                             <th class="text-center">Debit</th>
                             <th class="text-center">Credit</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="accnt in accnts">
-                            <td>{{accnt.CDVNo}}</td>
-                            <td>{{accnt.chkDate}}</td>
-                            <td>{{accnt.particular}}</td>
-                        </tr>
                         <tr ng-repeat="debit in debits">
-                            <td></td><td></td><td></td>
                             <td>{{debit.acctTitle}}</td>
-                            <td>{{debit.amount}}</td>
+                            <td class="text-center">{{debit.amount}}</td>
                             <td></td>
                         </tr>
                         <tr ng-repeat="credit in credits">
-                            <td></td><td></td><td></td>
                             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{credit.acctTitle}}</td>
                             <td></td>
-                            <td>{{credit.amount}}</td>
-
+                            <td class="text-center">{{credit.amount}}</td>
+                        </tr>
+                        <tr ng-repeat="accnt in accnts">
+                            <td class="text-center">TOTAL</td>
+                            <td ng-repeat="sum in sums">{{sum.Total}}</td>
+                            <td>{{accnt.Total}}</td>
+                        </tr>
+                        <tr ng-repeat="accnt in accnts">
+                            <td>Particulars</td>
+                            <td>{{accnt.particular}}</td>
+                            <td></td>
+                        </tr>
+                        <tr ng-repeat="credit in credits">
+                            <td ng-repeat="accnt in accnts">Prepared By: {{accnt.empName}}</td>
+                            <td>Audited By: </td>
+                            <td>Approve By: {{credit.empName}}</td>
+                        </tr>
+                        <tr ng-repeat="accnt in accnts">
+                            <td></td><td></td><td>CDV no.: {{accnt.CDVNo}}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-    </div>
-    <hr>
-    <div class="form-group">
-        <label for="inputSlug">Prepared By:</label>
-        <label for="inputSlug">{{search.userName}}</label>
-    </div>
-    <div class="form-group">
-        <label for="inputSlug">Approved By:</label>
     </div>
 </div>
 <div class="modal-footer">
