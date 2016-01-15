@@ -1,11 +1,31 @@
 'use strict';
 
 angular.module('accounting')
-    .controller('reportingctrl', function($scope, toastr, ngTableParams, PositionFactory, AccountFactory, PODetFactory, AppJVFactory, SearchCDVFactory, SearchJVFactory, ReportingService, reportParams) {
+    .controller('reportingctrl', function($scope, $filter, toastr, ngTableParams, PositionFactory, AccountFactory, PODetFactory, SearchCDVFactory, SearchJVFactory, searchAPVFactory, CDVFactory, JVFactory, APVFactory, ReportingService, reportParams) {
 
         $scope.tableParams = [];
 
         console.log('reportParams: ' + reportParams);
+
+        $scope.dateParams = {
+            "paramsdate": {
+                "chkDate": new Date()
+            }
+        }
+
+        $scope.dateparamsTO = {
+            "paramsdate": {
+                "chkDate": new Date()
+            }
+        }
+
+        $scope.sDateFr = function() {
+            $scope.filterDate = $filter('date')($scope.dateParams.paramsdate.chkDate, 'yyyy-MM-dd');
+        };
+
+        $scope.sDateTO = function() {
+            $scope.filterDateTO = $filter('date')($scope.dateparamsTO.paramsdate.chkDate, 'yyyy-MM-dd');
+        };
 
         if (reportParams === 'chart-of-account') {
             if (!_.isEmpty($scope.tableParams)) {
@@ -20,10 +40,11 @@ angular.module('accounting')
             }
 
             $scope.getGJEntries = function() {
-                AppJVFactory.getGJEntries($scope.dateParams).then(function(data) {
+                JVFactory.getGJEntries($filter('date')($scope.dateParams.paramsdate.chkDate, 'yyyy-MM-dd'), $filter('date')($scope.dateparamsTO.paramsdate.chkDate, 'yyyy-MM-dd')).then(function(data) {
                     $scope.tableParams = data;
-                });
+                 });
             };
+
         } else if (reportParams === 'PO') {
             if (!_.isEmpty($scope.tableParams)) {
                 $scope.tableParams.splice(0, $scope.tableParams.length);
@@ -54,6 +75,27 @@ angular.module('accounting')
             if (!_.isEmpty($scope.tableParams)) {
                 $scope.tableParams.splice(0, $scope.tableParams.length);
             }
+        } else if (reportParams === 'APJ') {
+            if (!_.isEmpty($scope.tableParams)) {
+                $scope.tableParams.splice(0, $scope.tableParams.length);
+            }
+
+             $scope.getAPVEntries = function() {
+                APVFactory.getAPVEntries($filter('date')($scope.dateParams.paramsdate.chkDate, 'yyyy-MM-dd'), $filter('date')($scope.dateparamsTO.paramsdate.chkDate, 'yyyy-MM-dd')).then(function(data) {
+                    $scope.tableParams = data;
+                 });
+            };
+
+        } else if (reportParams === 'CDJ') {
+            if (!_.isEmpty($scope.tableParams)) {
+                $scope.tableParams.splice(0, $scope.tableParams.length);
+            }
+
+            $scope.getCDVInfo = function() {
+                CDVFactory.getCDVInfo($filter('date')($scope.dateParams.paramsdate.chkDate, 'yyyy-MM-dd'), $filter('date')($scope.dateparamsTO.paramsdate.chkDate, 'yyyy-MM-dd')).then(function(data) {
+                    $scope.tableParams = data;
+                 });
+            };
         }
 
         $scope.printData = function() {

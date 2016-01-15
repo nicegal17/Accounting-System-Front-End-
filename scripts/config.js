@@ -94,6 +94,11 @@ angular
                 templateUrl: 'templates/PO_prev.html',
                 controller: 'podetailsctrl'
             })
+            .state('main.soa', {
+                url: '/soa/:id',
+                templateUrl: 'templates/reports/soa.html',
+                controller: 'soactrl'
+            })
             .state('main.manageUser', {
                 url: '/manageUser',
                 templateUrl: 'templates/user.html',
@@ -115,13 +120,13 @@ angular
                 controller: 'accountctrl'
             })
 
-            /* ============== REPORTS ============== */
-            .state('main.chart-of-account', {
+        /* ============== REPORTS ============== */
+        .state('main.chart-of-account', {
                 url: '/chart-of-account',
                 templateUrl: 'templates/reports/chart-of-accounts.html',
                 controller: 'reportingctrl',
                 resolve: {
-                    reportParams: function(){
+                    reportParams: function() {
                         return 'chart-of-account';
                     }
                 }
@@ -131,7 +136,7 @@ angular
                 templateUrl: 'templates/reports/general-journal.html',
                 controller: 'reportingctrl',
                 resolve: {
-                    reportParams: function(){
+                    reportParams: function() {
                         return 'general-journal';
                     }
                 }
@@ -141,14 +146,14 @@ angular
                 templateUrl: 'templates/PO_prev.html',
                 controller: 'reportingctrl',
                 resolve: {
-                    reportParams: function(){
+                    reportParams: function() {
                         return 'PO';
                     }
                 }
             })
             .state('main.CDV', {
                 url: '/CDV',
-                templateUrl: 'templates/searchCDV.html',
+                templateUrl: 'templates/modals/searchCDV.html',
                 controller: 'reportingctrl',
                 resolve: {
                     reportParams: function() {
@@ -156,13 +161,43 @@ angular
                     }
                 }
             })
-             .state('main.JV', {
+            .state('main.JV', {
                 url: '/JV',
-                templateUrl: 'templates/searchJV.html',
+                templateUrl: 'templates/modals/searchJV.html',
                 controller: 'reportingctrl',
                 resolve: {
                     reportParams: function() {
                         return 'JV';
+                    }
+                }
+            })
+            .state('main.APV', {
+                url: '/APV',
+                templateUrl: 'templates/modals/searchAPV.html',
+                controller: 'reportingctrl',
+                resolve: {
+                    reportParams: function() {
+                        return 'APV';
+                    }
+                }
+            })
+            .state('main.CDJ', {
+                url: '/CDJ',
+                templateUrl: 'templates/reports/checkdisbursement-journal.html',
+                controller: 'reportingctrl',
+                resolve: {
+                    reportParams: function() {
+                        return 'CDJ';
+                    }
+                }
+            })
+            .state('main.APJ', {
+                url: '/APJ',
+                templateUrl: 'templates/reports/apv-journal.html',
+                controller: 'reportingctrl',
+                resolve: {
+                    reportParams: function() {
+                        return 'APJ';
                     }
                 }
             });

@@ -11,7 +11,6 @@
          $scope.changeMeChange = function(jv) {
              var str = jv.split('--');
              $scope.search.JID = str[0];
-             // $scope.search.userName = str[1];
 
              SearchJVFactory.getJVDet($scope.search.JID).then(function(data) {
                  $scope.accnts = data;

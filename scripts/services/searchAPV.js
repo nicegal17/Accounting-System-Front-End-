@@ -13,9 +13,27 @@ angular.module('accounting')
                 });
             },
 
-            getAcctEntries: function(apvID) {
+             getAPVDet: function(apvID) {
                 return $http({
-                    url: API_URL + '/SearchAPV/getAcctEntries/' + apvID,
+                    url: API_URL + '/SearchAPV/getAPVDet/' + apvID,
+                    method: 'GET',
+                }).then(function(res) {
+                    return res.data;
+                });
+            },
+
+             getDBEntries: function(apvID) {
+                return $http({
+                    url: API_URL + '/SearchAPV/getDBEntries/' + apvID,
+                    method: 'GET',
+                }).then(function(res) {
+                    return res.data;
+                });
+            },
+
+             getCREntries: function(apvID) {
+                return $http({
+                    url: API_URL + '/SearchAPV/getCREntries/' + apvID,
                     method: 'GET',
                 }).then(function(res) {
                     return res.data;

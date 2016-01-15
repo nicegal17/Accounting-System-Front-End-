@@ -5,7 +5,7 @@
 <div class="row">
     <div class="col-lg-12 col-md-12">
         <div class="panel panel-primary">
-            <div class="panel-heading">General Journal</div>
+            <div class="panel-heading">Check Disbursement Journal</div>
             <div class="panel-body">
                 <div class="col-lg-3 col-md-3 col-sm-6">
                     <div class="form-inline pull-left" role="form">
@@ -28,7 +28,7 @@
                     <div class="form-inline pull-left" role="form">
                         <div class="form-group">
                             <label for="inputName">TO:</label>
-                            <div class="row">   
+                            <div class="row">
                                 <div class="col-md-6">
                                     <p class="input-group">
                                         <input type="date" class="form-control" datepicker-popup ng-model="dateparamsTO.paramsdate.chkDate" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
@@ -43,7 +43,7 @@
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6">
                     <div class="form-inline pull-left" role="form">
-                        <a class="btn btn-success" ng-click="getGJEntries()"><i class="fa fa-print"></i> Show</a>
+                        <a class="btn btn-success" ng-click="getCDVInfo()"><i class="fa fa-print"></i> Show</a>
                         <a class="btn btn-success" ng-click="printData()"><i class="fa fa-print"></i> Print</a>
                     </div>
                 </div>
@@ -52,13 +52,14 @@
                 <table class="table table-hover table-responsive">
                     <h4 class="text-center">Solutions Management System, Inc.</h4>
                     <h5 class="text-center">#47 Hayes Street, Cagayan de Oro City</h5>
-                    <h3 class="text-center">GENERAL JOURNAL</h3>
+                    <h3 class="text-center">CHECK DISBURSEMENT JOURNAL</h3>
                     <br>
                     <br>
                     <thead>
                         <tr>
-                            <th>JV #</th>
+                            <th>CDV #</th>
                             <th>Date</th>
+                            <th>Payee</th>
                             <th>Particulars</th>
                             <th>Account Title</th>
                             <th>Debit</th>
@@ -67,9 +68,10 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="data in tableParams">
-                            <td>{{data.JVNum}}</td>
-                            <td>{{data.transDate}}</td>
-                            <td>{{data.particulars}}</td>
+                            <td>{{data.CDVNo}}</td>
+                            <td>{{data.chkDate}}</td>
+                            <td>{{data.payee}}</td>
+                            <td>{{data.particular}}</td>
                             <td>
                                 <span ng-show="data.idAcctTitleDB != null && data.idAcctTitleCR == null">{{data.acctTitle}}</span>
                                 <span ng-show="data.idAcctTitleDB == null && data.idAcctTitleCR != null">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{data.acctTitle}}</span>
