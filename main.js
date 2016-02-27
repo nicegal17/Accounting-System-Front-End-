@@ -31,14 +31,15 @@ app.on('ready', function() {
     mainWindow = new BrowserWindow({
         width: 1366,
         height: 768,
-        resizable: true
+        resizable: true,
+        'node-integration': false,
     });
 
     // and load the index.html of the app.
     mainWindow.loadUrl( INDEX );
 
     // Open the DevTools.
-    //mainWindow.openDevTools();
+    mainWindow.openDevTools();
 
     mainWindow.webContents.on( 'did-finish-load', function () {
         mainWindow.show();
