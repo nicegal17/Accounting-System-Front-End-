@@ -1,42 +1,52 @@
 'use strict';
 
 angular.module('accounting')
-    .factory('SearchCDVFactory', function($http, $q) {
+    .factory('SearchCDVFactory', function($http, API_URL) {
 
         return {
-
-            getCDVNo: function(callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.get('/api/v1/Search')
-                    .success(function(data) {
-                        deferred.resolve(data);
-                        return cb();
-                    })
-                    .error(function(err) {
-                        deferred.reject(err);
-                        return cb(err);
-                    }.bind(this));
-
-                return deferred.promise;
+            getCDVNo: function() {
+                return $http({
+                    url: API_URL + '/Search',
+                    method: 'GET',
+                }).then(function(res) {
+                    return res.data;
+                });
             },
 
-            getAcctEntries: function(CDVNo,callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
+             getCDVDet: function(CDVNo) {
+                return $http({
+                    url: API_URL + '/Search/getCDVDet/' + CDVNo,
+                    method: 'GET',
+                }).then(function(res) {
+                    return res.data;
+                });
+            },
 
-                $http.get('/api/v1/AppCDV/getAcctEntries/' + CDVNo)
-                    .success(function(data) {
-                        deferred.resolve(data);
-                        return cb();
-                    })
-                    .error(function(err) {
-                        deferred.reject(err);
-                        return cb(err);
-                    }.bind(this));
+             getDBEntries: function(CDVNo) {
+                return $http({
+                    url: API_URL + '/Search/getDBEntries/' + CDVNo,
+                    method: 'GET',
+                }).then(function(res) {
+                    return res.data;
+                });
+            },
 
-                return deferred.promise;
+             getCREntries: function(CDVNo) {
+                return $http({
+                    url: API_URL + '/Search/getCREntries/' + CDVNo,
+                    method: 'GET',
+                }).then(function(res) {
+                    return res.data;
+                });
+            },
+
+             getDBSum: function(CDVNo) {
+                return $http({
+                    url: API_URL + '/Search/getDBSum/' + CDVNo,
+                    method: 'GET',
+                }).then(function(res) {
+                    return res.data;
+                });
             },
         };
     });

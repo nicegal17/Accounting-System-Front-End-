@@ -1,9 +1,9 @@
  'use strict';
 
  angular.module('accounting')
-     .controller('cdvctrl', function($scope, $filter, CDVFactory, toastr) {
+     .controller('cdvctrl', function($scope, $filter, $window, CDVFactory, toastr) {
 
-        $scope.cboBank = function(bank) {
+         $scope.cboBank = function(bank) {
              var str = bank.split('--');
              $scope.CDV.bankID = str[0];
              $scope.CDV.acctNum = str[1];
@@ -11,7 +11,7 @@
 
          $scope.today = function() {
              $scope.dt = new Date();
-         }
+         };
 
          $scope.clear = function() {
              $scope.dt = null;
@@ -81,6 +81,7 @@
          $scope.removeRow = function(index) {
              $scope.entries.splice(index, 1);
          };
+
          $scope.total = function() {
              $scope.totalDB = 0;
              $scope.totalCR = 0;
@@ -93,19 +94,22 @@
          };
 
          $scope.saveCDVEntries = function() {
+             $scope.currentUser = JSON.parse($window.localStorage['user']);
+             console.log('user: ', $scope.currentUser.userID);
              console.log('cdv: ', $scope.CDV);
              console.log('cdv: ', JSON.stringify($scope.entries));
              var data = {
                  CDV: $scope.CDV,
-                 entries: JSON.stringify($scope.entries)
-             }
+                 entries: JSON.stringify($scope.entries),
+                 userID: $scope.currentUser.userID
+             };
+             console.log('data: ', data);
              CDVFactory.createCDV(data).then(function(res) {
-                 console.log('data: ', res);
-                 toastr.success('Check Disbursement Voucher has been Created', 'CDV Created');
-                 $scope.entries = "";
-                 $scope.CDV = "";
-                 $scope.totalDB = "";
-                 $scope.totalCR = "";
+                  toastr.success('Check Disbursement Voucher has been Created', 'CDV Created');
+                 $scope.entries = '';
+                 $scope.CDV = '';
+                 $scope.totalDB = '';
+                 $scope.totalCR = '';
              });
          };
 
@@ -117,9 +121,11 @@
              $scope.entries = [];
              $scope.entry = {};
              $scope.cdvnums = {};
+             $scope.currentUser = {};
+             $scope.userID = {};
 
              $scope.CDV.bankID = null;
-             $scope.CDV.bankName = "";
+             $scope.CDV.bankName = '';
 
              CDVFactory.getBankName().then(function(data) {
                  $scope.banks = data;
@@ -154,7 +160,7 @@
              }];
          }
 
-          $scope.today();   
+         $scope.today();
 
          init();
      });

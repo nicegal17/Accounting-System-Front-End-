@@ -10,7 +10,7 @@ angular.module('accounting')
                 return $http({
                     url: API_URL + '/auth/login',
                     method: 'POST',
-                    data: {
+                    data: { 
                         username: username,
                         password: password
                     }
@@ -19,14 +19,11 @@ angular.module('accounting')
                 });
             },
             storeUser: function(user, token) {
-                $window.localStorage['user'] = user
+                $window.localStorage['user'] = user;
                 $window.localStorage['userToken'] = token;
             },
             getUser: function() {
-                // return $window.localStorage['user'];
-
-                   var currentUser = JSON.stringify($window.localStorage['user']);
-                    // console.log('curUser: ', currentUser);
+                return $window.localStorage['user'];
             },    
             getToken: function() {
                 return $window.localStorage['userToken'];

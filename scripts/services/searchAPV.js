@@ -1,42 +1,43 @@
 'use strict';
 
 angular.module('accounting')
-    .factory('searchAPVFactory', function($http, $q) {
+    .factory('searchAPVFactory', function($http, API_URL) {
 
         return {
-
-            getAPVNo: function(callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.get('/api/v1/SearchAPV')
-                    .success(function(data) {
-                        deferred.resolve(data);
-                        return cb();
-                    })
-                    .error(function(err) {
-                        deferred.reject(err);
-                        return cb(err);
-                    }.bind(this));
-
-                return deferred.promise;
+            getAPVNo: function() {
+                return $http({
+                    url: API_URL + '/SearchAPV',
+                    method: 'GET',
+                }).then(function(res) {
+                    return res.data;
+                });
             },
 
-            getAcctEntries: function(apvID,callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
+             getAPVDet: function(apvID) {
+                return $http({
+                    url: API_URL + '/SearchAPV/getAPVDet/' + apvID,
+                    method: 'GET',
+                }).then(function(res) {
+                    return res.data;
+                });
+            },
 
-                $http.get('/api/v1/appAPV/getAcctEntries/' + apvID)
-                    .success(function(data) {
-                        deferred.resolve(data);
-                        return cb();
-                    })
-                    .error(function(err) {
-                        deferred.reject(err);
-                        return cb(err);
-                    }.bind(this));
+             getDBEntries: function(apvID) {
+                return $http({
+                    url: API_URL + '/SearchAPV/getDBEntries/' + apvID,
+                    method: 'GET',
+                }).then(function(res) {
+                    return res.data;
+                });
+            },
 
-                return deferred.promise;
+             getCREntries: function(apvID) {
+                return $http({
+                    url: API_URL + '/SearchAPV/getCREntries/' + apvID,
+                    method: 'GET',
+                }).then(function(res) {
+                    return res.data;
+                });
             },
         };
     });

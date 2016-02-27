@@ -17,13 +17,13 @@ angular
         $rootScope.$on('$stateChangeStart', function(event, next) {
             var user = AuthenticationFactory.getUser();
             var token = AuthenticationFactory.getToken();
-            
+
             if (next.name === 'login') {
                 console.log('login');
                 if (!_.isEmpty(user) && !_.isEmpty(token)) {
                     $location.path('/main/dashboard');
                 }
-            }else{
+            } else {
                 if (_.isEmpty(user) && _.isEmpty(token)) {
                     $location.path('/login');
                 }

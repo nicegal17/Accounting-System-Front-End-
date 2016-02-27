@@ -1,19 +1,31 @@
  'use strict';
 
  angular.module('accounting')
-     .controller('employeectrl', function($scope, $filter, EmployeeFactory,PositionFactory, toastr, ngDialog, ngTableParams) {
+     .controller('employeectrl', function($scope, $filter, EmployeeFactory, PositionFactory, toastr, ngDialog, ngTableParams) {
 
          $scope.saveEmployee = function() {
              console.log('employee: ', $scope.employee);
 
              if ($scope.isUpdate === true) {
                  EmployeeFactory.updateEmployee($scope.employee.empID, $scope.employee).then(function(data) {
-                     toastr.success('Employee Details has been updated', 'Update Employee Details');
+                     if (!_.isEmpty(data)) {
+                         if (data.success === 'true') {
+                             toastr.success(data.msg, 'Update Employee Details');
+                         } else {
+                             toastr.error(data.msg, 'Error');
+                         }
+                     }
                  });
              } else {
                  EmployeeFactory.createEmployee($scope.employee).then(function(data) {
                      console.log('data: ', data);
-                     toastr.success('New Employee has been added to the system.', 'Add New Employee');
+                     if (!_.isEmpty(data)) {
+                         if (data.success === 'true') {
+                             toastr.success(data.msg, 'Add New Employee');
+                         } else {
+                             toastr.error(data.msg, 'Error');
+                         }
+                     }
                  });
              }
 
@@ -37,18 +49,18 @@
 
          $scope.refresh = function() {
              $scope.tableParams.reload();
-             $scope.searchEmployee = "";
+             $scope.searchEmployee = '';
          };
 
-         $scope.getIDPos = function(id) {
-             $scope.employee = {};
-             EmployeeFactory.getPosID(id).then(function(data) {
-                 if (data.length > 0) {
-                     $scope.employee = data[0];
-                     $scope.employee.position = data[0].idPosition;
-                 }
-             });
-         };
+         // $scope.getIDPos = function(id) {
+         //     $scope.employee = {};
+         //     EmployeeFactory.getPosID(id).then(function(data) {
+         //         if (data.length > 0) {
+         //             $scope.employee = data[0];
+         //             $scope.employee.position = data[0].idPosition;
+         //         }
+         //     });
+         // };
 
          $scope.getEmployeeID = function(id) {
              $scope.employee = {};
@@ -56,12 +68,14 @@
              EmployeeFactory.getEID(id).then(function(data) {
                  if (data.length > 0) {
                      $scope.employee = data[0];
+                     $scope.employee.position = data[0].idPosition;
+                     console.log('employee: ', $scope.employee);
                      $scope.isUpdate = true;
                  }
              });
          };
 
-         $scope.$watch("searchEmployee", function() {
+         $scope.$watch('searchEmployee', function() {
              $scope.tableParams.reload();
          });
 
@@ -72,6 +86,7 @@
              $scope.isUpdate = false;
              $scope.isDisable = true;
 
+             /* jshint ignore:start */
              $scope.tableParams = new ngTableParams({
                  page: 1, // show first page
                  count: 10, // count per page
@@ -81,7 +96,6 @@
              }, {
                  getData: function($defer, params) {
                      EmployeeFactory.getEmployees().then(function(data) {
-                         console.log('data: ', data);
                          var orderedData = {};
 
                          if ($scope.searchEmployee) {
@@ -96,10 +110,11 @@
                      });
                  }
              });
+             /* jshint ignore:end */
 
              PositionFactory.getPositions().then(function(data) {
-                 console.log('positions: ', data);
                  $scope.positions = data;
+                 $scope.employee.position = data[0].idPosition;
              });
          }
 

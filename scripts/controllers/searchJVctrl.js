@@ -1,34 +1,42 @@
  'use strict';
 
  angular.module('accounting')
-     .controller('searchJVctrl', function($scope, $filter, ngDialog, SearchJVFactory, $modalInstance) {
+     .controller('searchJVctrl', function($scope, $filter, ngDialog, SearchJVFactory, $modalInstance, ReportingService) {
 
-        $scope.closeModal = function() {
+         $scope.closeModal = function() {
              console.log('cancel');
              $modalInstance.close();
-         }
+         };
 
-        $scope.changeMeChange = function(jv) {
+         $scope.changeMeChange = function(jv) {
              var str = jv.split('--');
              $scope.search.JID = str[0];
-             $scope.search.sDate = str[1];
-             $scope.search.Particular = str[2];
-             $scope.search.JVNum = str[3];
 
-             SearchJVFactory.getAcctEntries($scope.search.JID).then(function(data) {
+             SearchJVFactory.getJVDet($scope.search.JID).then(function(data) {
                  $scope.accnts = data;
-                 console.log(data);
+             });
 
+             SearchJVFactory.getDBEntries($scope.search.JID).then(function(data) {
+                 $scope.debits = data;
+             });
+
+             SearchJVFactory.getCREntries($scope.search.JID).then(function(data) {
+                 $scope.credits = data;
+             });
+         };
+
+         $scope.printData = function() {
+             var divToPrint = document.getElementById('printTable');
+             ReportingService.printData(divToPrint);
+         };
+
+         function init() {
+             $scope.search = {};
+
+             SearchJVFactory.getJVNo().then(function(data) {
+                 $scope.jvs = data;
              });
          }
 
-        function init(){
-            $scope.search = {};
-
-            SearchJVFactory.getJVNo().then(function(data) {
-                 $scope.jvs = data;
-             });
-        };
-
-        init();
+         init();
      });

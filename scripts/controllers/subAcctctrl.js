@@ -1,16 +1,26 @@
  'use strict';
 
  angular.module('accounting')
-     .controller('subAcctctrl', function($scope, $filter, SubAcctFactory, toastr, ngDialog, $modalInstance) {
+     .controller('subAcctctrl', function($scope, $filter, $window, SubAcctFactory, toastr, ngDialog, $modalInstance) {
 
          $scope.saveSubAccount = function() {
+             $scope.currentUser = JSON.parse($window.localStorage['user']);
+             var data = {
+                 subaccount: $scope.subaccount,
+                 userID: $scope.currentUser.userID
+             };
 
-             SubAcctFactory.createSubAccts($scope.subAccount).then(function(data) {
-                 toastr.success('Record Successfully Created', 'Record Created');
-                 $scope.subAccount = {};
-                 $scope.refresh();
+             SubAcctFactory.createSubAccts(data).then(function(data) {
+                if (!_.isEmpty(data)) {
+                    if (data.success === 'true') {
+                         toastr.success(data.msg, 'Creating New Sub Account');
+                    } else {
+                        toastr.error(data.msg  , 'Error');
+                    }
+                }  
              });
 
+             $scope.subAccount = {};
          };
 
           $scope.cancel = function() {
@@ -20,7 +30,7 @@
          $scope.closeModal = function() {
              console.log('cancel');
              $modalInstance.close();
-         }
+         };
 
          function init() {
              $scope.subAccount = {};

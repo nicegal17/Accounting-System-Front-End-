@@ -1,17 +1,28 @@
  'use strict';
 
  angular.module('accounting')
-     .controller('userctrl', function($scope, $filter, UsersFactory, toastr, ngDialog, ngTableParams, $modalInstance) {
+     .controller('userctrl', function($scope, $filter, UsersFactory, toastr, ngDialog, $modalInstance, ngTableParams) {
 
          $scope.saveUser = function() {
              if ($scope.isUpdate === true) {
                  UsersFactory.updateUser($scope.user.userID, $scope.user).then(function(data) {
-                    console.log('data: ', data);
-                     toastr.success('User Account has been updated', 'Record Updated');
+                     if (!_.isEmpty(data)) {
+                         if (data.success === 'true') {
+                             toastr.success(data.msg, 'Record Updated');
+                         } else {
+                             toastr.error(data.msg, 'Error');
+                         }
+                     }
                  });
              } else {
                  UsersFactory.createUser($scope.user).then(function(data) {
-                     toastr.success('New user has been successfully created', 'New User Account');
+                     if (!_.isEmpty(data)) {
+                         if (data.success === 'true') {
+                             toastr.success(data.msg, 'New User Account');
+                         } else {
+                             toastr.error(data.msg, 'Error');
+                         }
+                     }
                  });
              }
 
@@ -36,14 +47,14 @@
          $scope.closeModal = function() {
              console.log('cancel');
              $modalInstance.close();
-         }
+         };
 
          $scope.refresh = function() {
              $scope.tableParams.reload();
-             $scope.searchUser = "";
+             $scope.searchUser = '';
          };
 
-         $scope.$watch("searchUser", function() {
+         $scope.$watch('searchUser', function() {
              $scope.tableParams.reload();
          });
 
@@ -53,40 +64,18 @@
              UsersFactory.getUserID(id).then(function(data) {
                  if (data.length > 0) {
                      $scope.user = data[0];
+                     console.log('$scope.user: ', $scope.user);
                      $scope.isUpdate = true;
                  }
              });
          };
 
-         $scope.delUser = function(id) {
-             ngDialog.openConfirm({
-                 templateUrl: 'templates/directives/delModal.html',
-                 className: 'ngdialog-theme-default',
-                 scope: $scope
-             }).then(function() {
-                 UsersFactory.deleteUser(id).then(function(data) {
-                     $scope.refresh();
-                 });
-                 console.log(id);
-             });
-
-         };
-
          function init() {
-             $scope.users = {};
              $scope.user = {};
              $scope.empNames = {};
              $scope.isDisable = true;
 
-             UsersFactory.getEmployee().then(function(data) {
-                 console.log('empNames: ', data);
-                 $scope.empNames = data;
-
-                 // $scope.user.empName = 3;
-                 //  console.log($scope.user.empName);
-
-             });
-
+             /* jshint ignore:start */
              $scope.tableParams = new ngTableParams({
                  page: 1,
                  count: 5,
@@ -111,6 +100,7 @@
                      });
                  }
              });
+             /* jshint ignore:end */
          }
 
          init();

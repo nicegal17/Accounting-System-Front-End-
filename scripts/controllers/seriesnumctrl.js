@@ -6,11 +6,16 @@
          $scope.saveSeries = function() {
              SeriesFactory.updateNumSeries($scope.series.idNum, $scope.series).then(function(data) {
                  console.log('data: ', data);
-                 toastr.success('Accounting Number Seris has been Successfully Updated', 'Update Record');
+                 if (!_.isEmpty(data)) {
+                     if (data.success === 'true') {
+                         toastr.success(data.msg, 'Update Record');
+                     }
+                 }
+
              });
          };
 
-         $scope.$watch("seriesnum", function() {
+         $scope.$watch('seriesnum', function() {
              $scope.tableParams.reload();
          });
 
@@ -31,11 +36,12 @@
 
          $scope.closeModal = function() {
              $modalInstance.close();
-         }
+         };
 
          function init() {
              $scope.series = {};
 
+             /* jshint ignore:start */
              $scope.tableParams = new ngTableParams({
                  page: 1, // show first page
                  count: 10, // count per page
@@ -60,6 +66,7 @@
                      });
                  }
              });
+             /* jshint ignore:end */
          }
 
          init();

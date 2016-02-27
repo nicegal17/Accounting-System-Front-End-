@@ -1,5 +1,6 @@
 <div class="modal-header">
-    <h3 class="modal-title">Position</h3>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="closeModal()"><span aria-hidden="true">&times;</span></button>
+    <h5 class="modal-title">Position</h5>
 </div>
 <div class="modal-body">
     <div class="panel panel-primary">
@@ -9,7 +10,7 @@
                     <label for="inputName">Position</label>
                     <input type="text" class="form-control" id="inputName" ng-disabled="isDisable" ng-model="position.posName">
                 </div>
-                <a class="btn btn-warning" ng-show="isDisable" ng-click="addNew()"><i class="fa fa-plus"></i> Add New Position</a>
+                <a class="btn btn-warning" ng-show="isDisable" ng-click="addNew()"><i class="fa fa-plus"></i> </a>
                 <a class="btn btn-sm btn-primary" ng-show="!isDisable" ng-click="savePosition()"><span class="glyphicon glyphicon-saved"></span> Save</a>
                 <button ng-click="cancel()" class="btn btn-sm btn-danger" ng-hide="isDisable"> Cancel</button>
             </form>
@@ -43,7 +44,4 @@
             </table>
         </div>
     </div>
-</div>
-<div class="modal-footer">
-    <button class="btn btn-sm btn-danger" ng-click="closeModal()"><span class="glyphicon glyphicon-remove-circle"></span> Close</button>
 </div>

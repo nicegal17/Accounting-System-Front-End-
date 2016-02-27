@@ -1,0 +1,40 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="closeModal()"><span aria-hidden="true">&times;</span></button>
+</div>
+<div class="modal-body">
+    <div class="panel panel-primary">
+        <div class="panel-heading">New Branch Name Details</div>
+        <div class="panel-body">
+            <form>
+                <div class="form-group">
+                    <label for="inputName">Branch</label>
+                    <input type="text" class="form-control" ng-model="branch.brName" value = "branchDet.brName" placeholder="Enter Branch Name">
+                </div>
+                <div class="form-group">
+                    <label for="inputSlug">Manager</label>
+                    <input type="text" class="form-control" ng-model="branch.brManager" placeholder="Enter Branch Manager i.e. Lastname, Firstname Middlename">
+                </div>
+                <div class="form-group">
+                    <label for="inputSlug">Address</label>
+                    <input type="text" class="form-control" ng-model="branch.brAddress" placeholder="Enter Branch Address">
+                </div>
+                <div class="form-group">
+                    <label for="inputSlug">Telephone</label>
+                    <input type="text" class="form-control" ng-model="branch.tel" placeholder="Enter Branch telephobe hotline">
+                </div>
+                <div class="form-group">
+                    <label for="inputSlug">I.P Address</label>
+                    <input type="text" class="form-control" ng-model="branch.IP" placeholder="Enter Branch I.P Address">
+                </div>
+                <div class="form-group">
+                    <label for="inputSlug">Code</label>
+                    <input type="text" class="form-control" ng-model="branch.code" placeholder="Enter Branch Code No.">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-sm btn-primary" ng-click="saveBranch()"><span class="glyphicon glyphicon-saved"></span> Save</button>
+    <button ng-click="cancel()" class="btn btn-sm btn-danger"> Cancel</button>
+</div>

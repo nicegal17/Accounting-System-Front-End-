@@ -1,12 +1,14 @@
+'use strict';
+
 $(function() {
-
     $('#side-menu').metisMenu();
-
 });
 
 //Loads the correct sidebar on window load,
 //collapses the sidebar on window resize.
 // Sets the min-height of #page-wrapper to window size
+
+/* jshint ignore:start */
 $(function() {
     $(window).bind("load resize", function() {
         topOffset = 50;
@@ -34,3 +36,4 @@ $(function() {
         element.addClass('active');
     }
 });
+/* jshint ignore:end */

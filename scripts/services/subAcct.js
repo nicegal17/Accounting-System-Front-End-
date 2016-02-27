@@ -58,5 +58,5 @@ angular.module('accounting')
                     return res.data;
                 });
             },
-        }
+        };
     });

@@ -6,12 +6,24 @@
          $scope.savePosition = function() {
              console.log('position`: ', $scope.position);
              if ($scope.isUpdate === true) {
-                 PositionFactory.updatePositions($scope.position.idPosition,$scope.position).then(function(data) {
-                     toastr.success('Record Successfully Updated', 'Record Updated');
+                 PositionFactory.updatePositions($scope.position.idPosition, $scope.position).then(function(data) {
+                     if (!_.isEmpty(data)) {
+                         if (data.success === 'true') {
+                             toastr.success(data.msg, 'Record Updated');
+                         } else {
+                             toastr.success(data.msg, 'Error');
+                         }
+                     }
                  });
              } else {
                  PositionFactory.createPositions($scope.position).then(function(data) {
-                     toastr.success('Record Successfully Created', 'Record Saved');
+                     if (!_.isEmpty(data)) {
+                         if (data.success === 'true') {
+                             toastr.success(data.msg, 'Record Saved');
+                         } else {
+                             toastr.success(data.msg, 'Error');
+                         }
+                     }
                  });
              }
              $scope.position = {};
@@ -34,15 +46,15 @@
 
          $scope.refresh = function() {
              $scope.tableParams.reload();
-             $scope.searchPosition = "";
+             $scope.searchPosition = '';
          };
 
          $scope.closeModal = function() {
              console.log('cancel');
              $modalInstance.close();
-         }
+         };
 
-         $scope.$watch("searchPosition", function() {
+         $scope.$watch('searchPosition', function() {
              $scope.tableParams.reload();
          });
 
@@ -63,11 +75,12 @@
              $scope.isUpdate = false;
              $scope.isDisable = true;
 
+             /* jshint ignore:start */
              $scope.tableParams = new ngTableParams({
-                 page: 1, 
-                 count: 5, 
+                 page: 1,
+                 count: 5,
                  sorting: {
-                     name: 'asc' 
+                     name: 'asc'
                  }
              }, {
                  getData: function($defer, params) {
@@ -86,6 +99,7 @@
                      });
                  }
              });
+             /* jshint ignore:end */
          }
 
          init();

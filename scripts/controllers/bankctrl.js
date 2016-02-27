@@ -1,17 +1,29 @@
  'use strict';
 
  angular.module('accounting')
-     .controller('bankctrl', function($scope, $filter, BankFactory, toastr, ngDialog, ngTableParams, $modalInstance) {
+     .controller('bankctrl', function($scope, $filter, BankFactory, toastr, ngDialog, ngTableParams) {
 
          $scope.saveBank = function() {
              if ($scope.isUpdate === true) {
                  BankFactory.updateBank($scope.bank.bankID, $scope.bank).then(function(data) {
                      console.log('data: ', data);
-                     toastr.success('Record Successfully Updated', 'Update Record');
+                     if (!_.isEmpty(data)) {
+                        if (data.success === 'true') {
+                            toastr.success(data.msg, 'Update Record');
+                        } else {
+                            toastr.error(data.msg, 'Error');
+                        }
+                     } 
                  });
              } else {
                  BankFactory.createBanks($scope.bank).then(function(data) {
-                     toastr.success('Record Successfully Created', 'Record Created');
+                    if (!_.isEmpty(data)) {
+                        if (data.success === 'true') {
+                            toastr.success(data.msg, 'Record Created');
+                        } else {
+                            toastr.error(data.msg, 'Error');
+                        }
+                    }  
                  });
              }
 
@@ -20,11 +32,6 @@
 
              $scope.isDisable = true;
          };
-
-         $scope.closeModal = function() {
-             console.log('cancel');
-             $modalInstance.close();
-         }
 
          $scope.addNew = function() {
              $scope.isUpdate = false;
@@ -40,10 +47,10 @@
 
          $scope.refresh = function() {
              $scope.tableParams.reload();
-             $scope.searchBank = "";
+             $scope.searchBank = '';
          };
 
-         $scope.$watch("searchBank", function() {
+         $scope.$watch('searchBank', function() {
              $scope.tableParams.reload();
          });
 
@@ -78,6 +85,7 @@
              $scope.isUpdate = false;
              $scope.isDisable = true;
 
+             /* jshint ignore:start */
              $scope.tableParams = new ngTableParams({
                  page: 1,
                  count: 5,
@@ -101,6 +109,7 @@
                      });
                  }
              });
+             /* jshint ignore:end */
          }
 
          init();

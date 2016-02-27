@@ -15,7 +15,7 @@ angular.module('accounting')
 
             getAcctEntries: function(CDVNo) {
                 return $http({
-                    url: API_URL + '/getAcctEntries/' + CDVNo,
+                    url: API_URL + '/AppCDV/getAcctEntries/' + CDVNo,
                     method: 'GET',
                 }).then(function(res) {
                     return res.data;

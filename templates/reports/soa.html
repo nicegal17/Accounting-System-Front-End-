@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-lg-12">
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">S T A T E M E N T O F A C C O U N T</div>
+            <div id="printTable">
+                <h3 class="text-center">STATEMENT OF ACCOUNT</h3>
+                <form class="form-horizontal" role="form">
+                    <div class="col-xs-6 col-md-6">
+                        <div class="form-group" ng-repeat="soa in soas">
+                            <label for="inputName">Invoice To: {{soa.brName}}</label>
+                            <br>
+                            <label for="inputName">Address: {{soa.brAddress}}</label>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-md-6">
+                        <div class="form-group" ng-repeat="accnt in accnts">
+                            <label for="inputName">Date: {{accnt.chkDate}}</label>
+                            <br>
+                            <label for="inputName">Bank/Check No: {{accnt.bankName}} / {{accnt.chkNO}}</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

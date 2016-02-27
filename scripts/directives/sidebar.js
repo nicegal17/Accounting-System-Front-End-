@@ -7,5 +7,5 @@ angular.module('accounting')
             replace: true,
             scope: {},
             controller: 'sideBarCtrl'
-        }
+        };
     });

@@ -1,12 +1,12 @@
  'use strict';
 
  angular.module('accounting')
-     .controller('apvctrl', function($scope, $filter, APVFactory, $modalInstance, ngDialog, toastr) {
+     .controller('apvctrl', function($scope, $filter, $modalInstance, $window, APVFactory, toastr) {
 
-        $scope.closeModal = function() {
+         $scope.closeModal = function() {
              console.log('cancel');
              $modalInstance.close();
-         }
+         };
 
          $scope.addRow = function(row) {
              var DB, CR;
@@ -53,27 +53,34 @@
          };
 
          $scope.saveAPVEntries = function() {
-             console.log('apv: ', $scope.APVoucher);
-             console.log('apv: ', JSON.stringify($scope.entries));
+             $scope.currentUser = JSON.parse($window.localStorage['user']);
+
              var data = {
-                 APVoucher: $scope.APVoucher,
-                 entries: JSON.stringify($scope.entries)
-             }
+                 APV: $scope.APV,
+                 entries: JSON.stringify($scope.entries),
+                 userID: $scope.currentUser.userID
+             };
+
              APVFactory.createAPV(data).then(function(res) {
                  console.log('data: ', res);
-                 toastr.success('Account Payable Voucher has been Created', 'APV Created');
-                 $scope.entries = "";
-                 $scope.APVoucher = "";
-                 $scope.totalDB = "";
-                 $scope.totalCR = "";
+                 toastr.success('Journal Voucher has been Created', 'APV Created');
+                 $scope.entries = '';
+                 $scope.APV = '';
+                 $scope.totalDB = '';
+                 $scope.totalCR = '';
              });
          };
 
+         $scope.cancel = function() {
+             $scope.entry = {};
+         };
+
          function init() {
-             $scope.APVoucher = {};
+             $scope.APV = {};
              $scope.acctTitles = {};
              $scope.entries = [];
              $scope.entry = {};
+             $scope.userID = {};
 
              APVFactory.getAcctTitle().then(function(data) {
                  $scope.acctTitles = data;
@@ -81,5 +88,4 @@
          }
 
          init();
-
      });

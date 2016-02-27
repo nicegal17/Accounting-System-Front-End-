@@ -7,7 +7,14 @@
              console.log('beginBal: ', $scope.beginBal);
               beginBalFactory.createBeginBal($scope.beginBal).then(function(data) {
                   console.log('data: ', data);
-                  toastr.success('Record Successfully Saved');
+                  if (!_.isEmpty(data)) {
+                    if (data.success === 'true') {
+                        toastr.success(data.msg, 'Add New Beginning Balance');
+                    }else {
+                        toastr.success(data.msg, 'Error');
+                    }
+                  }
+                  
                   $scope.beginBal = {};
               });
          };
@@ -19,7 +26,7 @@
              $scope.beginBal.idAccntTitle = str[0];
              console.log('normsId: ', str[1]);
              console.log('accntId: ', str[0]);
-         }
+         };
 
          $scope.cancel = function() {
              $scope.beginBal = {};
@@ -28,7 +35,7 @@
          $scope.closeModal = function() {
              console.log('cancel');
              $modalInstance.close();
-         }
+         };
 
          function init() {
              $scope.acctTitle = {};

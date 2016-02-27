@@ -40,5 +40,18 @@ angular.module('accounting')
                     return res.data;
                 });
             },
+
+            getCDVInfo: function(filterDate, filterDateTO) {
+                return $http({
+                    url: API_URL + '/CDV/getCDVInfo',
+                    data: {
+                        from: filterDate,
+                        to: filterDateTO
+                    },
+                    method: 'POST',
+                }).then(function(res){
+                    return res.data;
+                });
+            },
         };
     });

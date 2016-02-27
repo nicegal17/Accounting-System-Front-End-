@@ -5,11 +5,15 @@ angular
     .controller('MainCtrl', function($scope) {
 
     })
-    .controller('headerCtrl', function($scope, AuthenticationFactory) {
+    .controller('headerCtrl', function($scope, $rootScope, AuthenticationFactory) {
         $scope.logout = function() {
             console.log('logout');
             AuthenticationFactory.Logout();
         };
+
+        var currentUser = AuthenticationFactory.getUser();
+        currentUser = JSON.parse(currentUser);
+        $rootScope.currentUser = currentUser;
     })
     .controller('sideBarCtrl', function($scope, $modal) {
         $scope.selectedMenu = 'dashboard';
@@ -18,17 +22,17 @@ angular
 
         $scope.check = function(x) {
 
-            if (x === $scope.collapseVar){
+            if (x === $scope.collapseVar) {
                 $scope.collapseVar = 0;
-            }else{
+            } else {
                 $scope.collapseVar = x;
             }
         };
 
         $scope.multiCheck = function(y) {
-            if (y === $scope.multiCollapseVar){
+            if (y === $scope.multiCollapseVar) {
                 $scope.multiCollapseVar = 0;
-            }else{
+            } else {
                 $scope.multiCollapseVar = y;
             }
         };
@@ -45,11 +49,19 @@ angular
         };
 
         $scope.openAppCDV = function() {
-            console.log('asdasda');
             var modalInstance = $modal.open({
                 animation: true,
                 templateUrl: './templates/modals/appCDV.html',
                 controller: 'appCDVctrl',
+                size: 'lg'
+            });
+        };
+
+        $scope.openAuditCDV = function() {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: '/templates/modals/auditCDV.html',
+                controller: 'auditCDVctrl',
                 size: 'lg'
             });
         };
@@ -77,6 +89,15 @@ angular
                 animation: true,
                 templateUrl: './templates/modals/appJV.html',
                 controller: 'appJVctrl',
+                size: 'lg'
+            });
+        };
+
+        $scope.openAuditJV = function() {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: '/templates/modals/auditJV.html',
+                controller: 'auditJVctrl',
                 size: 'lg'
             });
         };
@@ -117,11 +138,11 @@ angular
             });
         };
 
-        $scope.openSearchAPV = function() {
+        $scope.openAuditAPV = function() {
             var modalInstance = $modal.open({
                 animation: true,
-                templateUrl: './templates/modals/searchAPV.html',
-                controller: 'searchAPVctrl',
+                templateUrl: '/templates/modals/auditAPV.html',
+                controller: 'auditAPVctrl',
                 size: 'lg'
             });
         };
@@ -156,12 +177,21 @@ angular
             });
         };
 
+        $scope.openSearchAPV = function() {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: '/templates/modals/searchAPV.html',
+                controller: 'searchAPVctrl',
+                size: 'lg'
+            });
+        };
+
         $scope.openSubAcct = function() {
             var modalInstance = $modal.open({
                 animation: true,
                 templateUrl: './templates/modals/subAcct.html',
                 controller: 'subAcctctrl',
-                size: 'md'
+                size: 'lg'
             });
         };
 
@@ -200,4 +230,14 @@ angular
                 size: 'md'
             });
         };
+
+        $scope.issueOR = function() {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: '/templates/modals/OR.html',
+                controller: 'ORctrl',
+                size: 'md'
+            });
+        };
+
     });

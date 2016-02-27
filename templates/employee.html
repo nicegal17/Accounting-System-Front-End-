@@ -11,7 +11,7 @@
                 <form>
                     <div class="form-group">
                         <label for="inputName">Name</label>
-                        <input type="text" class="form-control" ng-model="employee.empName" placeholder="Employee fullname" ng-disabled="isDisable">
+                        <input type="text" class="form-control" ng-model="employee.empName" placeholder="Employee fullname Ex: Lastname, Firstname" ng-disabled="isDisable">
                     </div>
                     <div class="form-group">
                         <label for="inputSlug">Address</label>
@@ -24,7 +24,7 @@
                     <div class="form-group">
                         <label>Position</label>
                         <select ng-model="employee.position" class="form-control">
-                            <option ng-repeat="position in positions" value="{{position.idPosition}}">{{position.posName}}</option>
+                            <option ng-repeat="position in positions track by position.idPosition" ng-value="position.idPosition" ng-selected="employee.position == position.idPosition">{{position.posName}}</option>
                         </select>
                     </div>
                     <button class="btn btn-sm btn-primary" ng-click="saveEmployee()"><span class="glyphicon glyphicon-saved"></span> Save</button>
@@ -38,7 +38,7 @@
             <div class="panel-heading">Manage Employee List</div>
             <div class="panel-body">
                 <div class="form-inline pull-left" role="form">
-                    <a class="btn btn-warning" ng-click="addNew()"><i class="fa fa-plus"></i> Add New Employee</a>
+                    <a class="btn btn-warning" ng-click="addNew()"><i class="fa fa-plus"></i> </a>
                 </div>
                 <div class="form-inline pull-right" role="form">
                     <div class="form-group">

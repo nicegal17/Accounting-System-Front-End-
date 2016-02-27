@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h3 class="modal-title">Search Journal Voucher</h3>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="closeModal()"><span aria-hidden="true">&times;</span></button>
 </div>
 <div class="modal-body">
     <div class="panel panel-primary">
@@ -8,20 +8,8 @@
                 <div class="form-group">
                     <label for="inputName">Journal Voucher #</label>
                     <select ng-model="search.jv" class="form-control" ng-change="changeMeChange(search.jv)">
-                        <option ng-repeat="jv in jvs" value="{{jv.JID}}--{{jv.transDate}}--{{jv.particulars}}--{{jv.JVNum}}">{{jv.JVNum}}</option>
+                        <option ng-repeat="jv in jvs" value="{{jv.JID}}">{{jv.JVNum}}</option>
                     </select>
-                </div>
-                <div class="form-group">
-                    <label for="inputSlug">Date:</label>
-                    <label for="inputSlug">{{search.sDate}}</label>
-                </div>
-                <div class="form-group">
-                    <label for="inputSlug">Journal Voucher No.:</label>
-                    <label for="inputSlug">{{search.JVNum}}</label>
-                </div>
-                <div class="form-group">
-                    <label for="inputSlug">Particular:</label>
-                    <label for="inputSlug">{{search.Particular}}</label>
                 </div>
             </form>
         </div>
@@ -29,44 +17,61 @@
     <div class="panel panel-primary">
         <div class="panel-heading">Journal Voucher</div>
         <div class="scrollable-area">
-            <table class="table table-bordered table-hover" id="tab_logic">
-                <thead>
-                    <tr>
-                        <th class="text-center">Account Title</th>
-                        <th class="text-center">Debit</th>
-                        <th class="text-center">Credit</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="accnt in accnts">
-                        <td>
-                            <span ng-show="accnt.idAcctTitleDB != null && accnt.idAcctTitleCR == null">{{accnt.acctTitle}}</span>
-                            <span ng-show="accnt.idAcctTitleDB == null && accnt.idAcctTitleCR != null">&nbsp;&nbsp;&nbsp;&nbsp;{{accnt.acctTitle}}</span>
-                        </td>
-                        <td>
-                            <span ng-show="accnt.idAcctTitleDB != null && accnt.idAcctTitleCR == null"> {{accnt.amount}} </span>
-                            <span ng-show="accnt.idAcctTitleDB == null && accnt.idAcctTitleCR != null"></span>
-                        </td>
-                        <td>
-                            <span ng-show="accnt.idAcctTitleCR != null && accnt.idAcctTitleDB == null"> {{accnt.amount}} </span>
-                            <span ng-show="accnt.idAcctTitleCR == null && accnt.idAcctTitleDB != null"></span>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div id="printTable">
+                <table class="table table-hover table-responsive">
+                    <thead>
+                        <br>
+                        <br>
+                        <tr>
+                            <h4 class="text-center">Solutions Management System, Inc.</h4>
+                            <h5 class="text-center">#47 Hayes Street, Cagayan de Oro City</h5>
+                            <h3 class="text-center">JOURNAL VOUCHER</h3>
+                            <br>
+                            <br>
+                            <form class="form-horizontal" role="form">
+                                <div class="col-xs-6 col-md-6">
+                                    <div class="form-group" ng-repeat="accnt in accnts">
+                                        <label for="inputName">Date: {{accnt.transDate}}</label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-md-6">
+                                    <div class="form-group" ng-repeat="accnt in accnts">
+                                        <label for="inputName">JV No.: {{accnt.JVNum}}</label>
+                                    </div>
+                                </div>
+                            </form>
+                            <th class="text-center">Account Title</th>
+                            <th class="text-center">Debit</th>
+                            <th class="text-center">Credit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="debit in debits">
+                            <td>{{debit.acctTitle}}</td>
+                            <td class="text-center">{{debit.amount}}</td>
+                            <td></td>
+                        </tr>
+                        <tr ng-repeat="credit in credits">
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{credit.acctTitle}}</td>
+                            <td></td>
+                            <td class="text-center">{{credit.amount}}</td>
+                        </tr>
+                        <tr ng-repeat="accnt in accnts">
+                            <td>Particulars</td>
+                            <td>{{accnt.particulars}}</td>
+                            <td></td>
+                        </tr>
+                        <tr ng-repeat="credit in credits">
+                            <td ng-repeat="accnt in accnts">Prepared By: {{accnt.empName}}</td>
+                            <td>Audited By: </td>
+                            <td>Approve By: {{credit.empName}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
-    <hr>
-    <div class="form-group">
-        <label for="inputSlug">Prepared By:</label>
-        <label for="inputSlug">Prepared By</label>
-    </div>
-    <div class="form-group">
-        <label for="inputSlug">Approved By:</label>
-        <label for="inputSlug">Approved By</label>
     </div>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-sm btn-primary" ng-click="denyJV()"><span class="glyphicon glyphicon-print"></span> Print</button>
-    <button class="btn btn-sm btn-danger" ng-click="closeModal()"><span class="glyphicon glyphicon-remove-circle"></span> Close</button>
+    <a class="btn btn-success" ng-click="printData()"><i class="fa fa-print"></i> </a>
 </div>
