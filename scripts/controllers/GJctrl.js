@@ -1,22 +1,16 @@
  'use strict';
 
  angular.module('accounting')
-     .controller('checkctrl', function($scope, $filter, $modalInstance, $window, CheckFactory, toastr) {
-
-         $scope.closeModal = function() {
-             console.log('cancel');
-             $modalInstance.close();
-         }
+     .controller('GJctrl', function($scope, $filter, $modalInstance, $window, GJFactory, toastr, ReportingService) {
 
          $scope.today = function() {
-             $scope.dt = new Date();
+             $scope.dtFrom = new Date();
          }
 
          $scope.clear = function() {
-             $scope.dt = null;
+             $scope.dtFrom = null;
          };
 
-         // Disable weekend selection
          $scope.disabled = function(date, mode) {
              return (mode === 'day' && (date.getDay() === 0 || date.getDay() === 6));
          };
@@ -49,32 +43,24 @@
              return '';
          };
 
-         $scope.saveCheck = function() {
-             $scope.currentUser = JSON.parse($window.localStorage['user']);
-             var data = {
-                 check: $scope.check,
-                 userID: $scope.currentUser.userID
-             };
-
-              CheckFactory.createCheck(data).then(function(data) {
-                console.log('data', data);
-                 if (!_.isEmpty(data)) {
-                     if (data.success == 'true') {
-                         toastr.success(data.msg, 'Record Saved');
-                     } else {
-                         toastr.error(data.msg, 'Error');
-                     }
-                 }
-                 $scope.check = {};
-             });
+         $scope.dateParams = {
+             From: $scope.dtFrom
+                 // To: $scope.dtTo
          };
 
-         $scope.cancel = function() {
-             $scope.check = {};
+         AppJVFactory.getGJEntries($scope.dateParams).then(function(data) {
+             if (data.length > 0) {
+                 $scope.paramsDate = data;
+                 // console.log('data', $scope.appjv.dtFrom);
+             }
+         });
+
+         $scope.printData = function() {
+             var divToPrint = document.getElementById('printTable');
+             ReportingService.printData(divToPrint);
          };
 
          function init() {
-             $scope.check = {};
 
              $scope.dateOptions = {
                  formatYear: 'yy',
@@ -100,5 +86,4 @@
          $scope.today();
 
          init();
-
      });

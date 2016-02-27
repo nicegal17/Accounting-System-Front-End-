@@ -22,5 +22,18 @@ angular.module('accounting')
                     return res.data;
                 });
             },
+
+            getGJEntries: function(filterDate, filterDateTO) {
+                return $http({
+                    url: API_URL + '/JV/getGJEntries',
+                    data: {
+                        from: filterDate,
+                        to: filterDateTO
+                    },
+                    method: 'POST',
+                }).then(function(res){
+                    return res.data;
+                });
+            },
         };
     });
