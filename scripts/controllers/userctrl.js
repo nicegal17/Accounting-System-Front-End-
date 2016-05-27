@@ -18,9 +18,9 @@
                  UsersFactory.createUser($scope.user).then(function(data) {
                      if (!_.isEmpty(data)) {
                          if (data.success == 'true') {
-                             toastr.success(data.msg, 'New User Account');
+                             toastr.success(data.msg, 'New user account has been added.');
                          } else {
-                             toastr.error(data.msg, 'Error');
+                             toastr.error(data.msg, 'Error while saving new account.');
                          }
                      }
                  });
@@ -74,6 +74,19 @@
              $scope.user = {};
              $scope.empNames = {};
              $scope.isDisable = true;
+
+             UsersFactory.getEmployees().then(function(data) {
+                 $scope.employees = data;
+             });
+
+             UsersFactory.getUserRoles().then(function(data) {
+                 $scope.roles = data;
+             });
+
+             UsersFactory.getRolesPermission().then(function(data) {
+                 $scope.permissions = data;
+             });
+
 
              $scope.tableParams = new ngTableParams({
                  page: 1,

@@ -17,7 +17,7 @@ angular.module('accounting')
                 return;
             }
 
-            AuthenticationFactory.Login($scope.username, $scope.password).then(function(response) {
+            AuthenticationFactory.Login($scope.username, ($scope.password)).then(function(response) {
                 console.log('response: ', response);
 
                 if (response.success) {

@@ -147,7 +147,7 @@ angular
                 controller: 'reportingctrl',
                 resolve: {
                     reportParams: function() {
-                   .     return 'PO';
+                        return 'PO';
                     }
                 }
             })

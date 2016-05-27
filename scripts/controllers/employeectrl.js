@@ -8,23 +8,24 @@
 
              if ($scope.isUpdate === true) {
                  EmployeeFactory.updateEmployee($scope.employee.empID, $scope.employee).then(function(data) {
-                    if (!_.isEmpty(data)) {
-                        if (data.success == 'true') {
-                            toastr.success(data.msg, 'Update Employee Details');
-                        }else {
-                            toastr.error(data.msg, 'Error');
-                        }
-                    }     
+                     if (!_.isEmpty(data)) {
+                         if (data.success == 'true') {
+                             toastr.success(data.msg, 'Update Employee Details');
+                         } else {
+                             toastr.error(data.msg, 'Error');
+                         }
+                     }
                  });
              } else {
                  EmployeeFactory.createEmployee($scope.employee).then(function(data) {
                      console.log('data: ', data);
                      if (!_.isEmpty(data)) {
-                        if (data.success == 'true') {
-                            toastr.success(data.msg, 'Add New Employee');
-                        }else
-                            toastr.error(data.msg, 'Error');
-                     }    
+                         if (data.success == 'true') {
+                             toastr.success(data.msg, 'Add New Employee');
+                         } else {
+                             toastr.error(data.msg, 'Error');
+                         }
+                     }
                  });
              }
 
@@ -66,10 +67,10 @@
              $scope.isDisable = false;
              EmployeeFactory.getEID(id).then(function(data) {
                  if (data.length > 0) {
-                    $scope.employee = data[0];
-                    $scope.employee.position = data[0].idPosition;
-                    console.log('employee: ', $scope.employee);
-                    $scope.isUpdate = true;
+                     $scope.employee = data[0];
+                     $scope.employee.position = data[0].idPosition;
+                     console.log('employee: ', $scope.employee);
+                     $scope.isUpdate = true;
                  }
              });
          };
