@@ -52,16 +52,6 @@
              $scope.searchEmployee = "";
          };
 
-         // $scope.getIDPos = function(id) {
-         //     $scope.employee = {};
-         //     EmployeeFactory.getPosID(id).then(function(data) {
-         //         if (data.length > 0) {
-         //             $scope.employee = data[0];
-         //             $scope.employee.position = data[0].idPosition;
-         //         }
-         //     });
-         // };
-
          $scope.getEmployeeID = function(id) {
              $scope.employee = {};
              $scope.isDisable = false;

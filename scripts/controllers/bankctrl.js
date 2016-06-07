@@ -9,7 +9,7 @@
                      console.log('data: ', data);
                      if (!_.isEmpty(data)) {
                         if (data.success == 'true') {
-                            toastr.success(data.msg, 'Update Record');
+                            toastr.success(data.msg, 'Updating Record');
                         } else {
                             toastr.error(data.msg, 'Error');
                         }
@@ -19,7 +19,7 @@
                  BankFactory.createBanks($scope.bank).then(function(data) {
                     if (!_.isEmpty(data)) {
                         if (data.success == 'true') {
-                            toastr.success(data.msg, 'Record Created');
+                            toastr.success(data.msg, 'Creating New bank');
                         } else {
                             toastr.error(data.msg, 'Error');
                         }

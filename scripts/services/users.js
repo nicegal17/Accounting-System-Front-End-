@@ -31,7 +31,16 @@ angular.module('accounting')
                 });
             },
 
-             createUser: function(data) {
+            getUserID: function(id) {
+                return $http({
+                    url: API_URL + '/users/getUserID/' + id,
+                    method: 'GET',
+                }).then(function(res) {
+                    return res.data;
+                });
+            },
+
+            createUser: function(data) {
                 return $http({
                     url: API_URL + '/users',
                     method: 'POST',
@@ -41,23 +50,14 @@ angular.module('accounting')
                 });
             },
 
-            getRolesPermission: function() {
-                return $http({
-                    url: API_URL + '/users/getRolesPermission/',
-                    method: 'GET',
-                }).then(function(res) {
-                    return res.data;
-                });
-            },
-
-            getUserID: function(id) {
-                return $http({
-                    url: API_URL + '/users/getUserID/' + id,
-                    method: 'GET',
-                }).then(function(res) {
-                    return res.data;
-                });
-            },
+            // getRolesPermission: function() {
+            //     return $http({
+            //         url: API_URL + '/users/getRolesPermission/',
+            //         method: 'GET',
+            //     }).then(function(res) {
+            //         return res.data;
+            //     });
+            // },
 
             updateUser: function(id, data) {
                 return $http({

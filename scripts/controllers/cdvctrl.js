@@ -1,7 +1,7 @@
  'use strict';
 
  angular.module('accounting')
-     .controller('cdvctrl', function($scope, $filter, $window, CDVFactory, toastr) {
+     .controller('cdvctrl', function($scope, $filter, $window, CDVFactory, toastr, ngTableParams) {
 
          $scope.cboBank = function(bank) {
              var str = bank.split('--');
@@ -105,7 +105,7 @@
              };
              console.log('data: ', data);
              CDVFactory.createCDV(data).then(function(res) {
-                  toastr.success('Check Disbursement Voucher has been Created', 'CDV Created');
+                 toastr.success('Check Disbursement Voucher has been Created', 'CDV Created');
                  $scope.entries = "";
                  $scope.CDV = "";
                  $scope.totalDB = "";
@@ -115,14 +115,14 @@
 
          function init() {
              $scope.CDV = {};
-             $scope.banks = {};
-             $scope.accounts = {};
-             $scope.acctTitles = {};
-             $scope.entries = [];
-             $scope.entry = {};
-             $scope.cdvnums = {};
-             $scope.currentUser = {};
-             $scope.userID = {};
+             // $scope.banks = {};
+             // $scope.accounts = {};
+             // $scope.acctTitles = {};
+             // $scope.entries = [];
+             // $scope.entry = {};
+             // $scope.cdvnums = {};
+             // $scope.currentUser = {};
+             // $scope.userID = {};
 
              $scope.CDV.bankID = null;
              $scope.CDV.bankName = "";
@@ -131,13 +131,26 @@
                  $scope.banks = data;
              });
 
-             CDVFactory.getAcctTitle().then(function(data) {
+             CDVFactory.getAcctTitles().then(function(data) {
                  $scope.acctTitles = data;
              });
 
-             CDVFactory.getCDVNum().then(function(data) {
-                 $scope.cdvnums = data;
+             $scope.getCDVID = function(id) {
+             $scope.CDV = {};
+             $scope.isDisable = false;
+             CDVFactory.getCDVID(id).then(function(data) {
+                 if (data.length > 0) {
+                     $scope.CDV = data[0];
+                     // $scope.CDV.position = data[0].idPosition;
+                     console.log('CDV: ', $scope.CDV);
+                     $scope.isUpdate = true;
+                 }
              });
+         };
+
+             // CDVFactory.getCDVNum().then(function(data) {
+             //     $scope.cdvnums = data;
+             // });
 
              $scope.dateOptions = {
                  formatYear: 'yy',
@@ -158,6 +171,31 @@
                  date: afterTomorrow,
                  status: 'partially'
              }];
+
+              $scope.tableParams = new ngTableParams({
+                 page: 1, // show first page
+                 count: 10, // count per page
+                 sorting: {
+                     name: 'asc' // initial sorting
+                 }
+             }, {
+                 getData: function($defer, params) {
+                     CDVFactory.getCDV().then(function(data) {
+                         var orderedData = {};
+
+                         if ($scope.searchCDV) {
+                             orderedData = $filter('filter')(data, $scope.searchCDV);
+                             orderedData = params.sorting() ? $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
+                         } else {
+                             orderedData = params.sorting() ? $filter('orderBy')(data, params.orderBy()) : data;
+                         }
+
+                         params.total(data.length);
+                         $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+                     });
+                 }
+             });
+
          }
 
          $scope.today();

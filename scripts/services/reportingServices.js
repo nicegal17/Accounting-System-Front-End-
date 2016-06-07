@@ -26,8 +26,10 @@ angular.module('accounting')
                                 <div class="text-center">\
                                 <img src="/img/smsi.png" alt="SMSi Logo" class="img-responsive" style="width:300px;height:100px;">\
                             </div>\
-                            <div class="row">\
-                                <div class="col-xs-12"> ' + divToPrint.innerHTML + '</div>\
+                            <div class="row-fluid">\
+                                <div class="text-center">\
+                                <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12"> ' + divToPrint.innerHTML + '</div>\
+                                </div>\
                             </div>\
                         </div>\
                         <div class="row">\

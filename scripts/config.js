@@ -79,19 +79,34 @@ angular
                 templateUrl: 'templates/branch.html',
                 controller: 'branchctrl'
             })
-            .state('main.checkDisbursement', {
-                url: '/checkDisbursement',
-                templateUrl: 'templates/checkDisbursement.html',
+            .state('main.CDVList', {
+                url: '/CDVList',
+                templateUrl: 'templates/CDVList.html',
+                controller: 'cdvctrl'
+            })
+            .state('main.AddCDV', {
+                url: '/AddCDV',
+                templateUrl: 'templates/AddCDV.html',
+                controller: 'cdvctrl'
+            })
+            .state('main.editCDV', {
+                url: '/CDVList/:id',
+                templateUrl: 'templates/AddCDV.html',
                 controller: 'cdvctrl'
             })
             .state('main.purchaseOrder', {
                 url: '/purchaseOrder',
-                templateUrl: 'templates/po.html',
+                templateUrl: 'templates/PO.html',
+                controller: 'poctrl'
+            })
+            .state('main.AddPO', {
+                url: '/AddPO',
+                templateUrl: 'templates/AddPO.html',
                 controller: 'poctrl'
             })
             .state('main.prevPO', {
                 url: '/purchaseOrder/:id',
-                templateUrl: 'templates/PO_prev.html',
+                templateUrl: 'templates/reports/PO_prev.html',
                 controller: 'podetailsctrl'
             })
             .state('main.soa', {

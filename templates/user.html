@@ -10,12 +10,9 @@
             <div class="panel-body">
                 <form>
                     <div class="form-group">
-                        <h4><label for="inputName">{{user.empName}}</label></h4>
-                    </div>
-                     <div class="form-group">
-                        <label for="inputName">Employee Name</label>
+                        <label>Employee Name</label>
                         <select ng-model="user.employee" class="form-control">
-                            <option ng-repeat="employee in employees" value="{{employee.empID}}">{{employee.empName}}</option>
+                            <option ng-repeat="employee in employees track by employee.empID" ng-value="employee.empID" ng-selected="user.employee == employee.empID">{{employee.empName}}</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -23,13 +20,13 @@
                         <input type="text" class="form-control" ng-disabled="isDisable" ng-model="user.username" placeholder="Username">
                     </div>
                     <div class="form-group">
-                        <label for="inputName">Password</label>
                         <input class="form-control" ng-disabled="isDisable" placeholder="Password" name="password" ng-model="user.password" type="password" id="password" value="">
+                        <label for="inputName">Password</label>
                     </div>
                     <div class="form-group">
-                        <label for="inputName">User Role</label>
+                        <label>User Role</label>
                         <select ng-model="user.role" class="form-control">
-                            <option ng-repeat="role in roles" value="{{role.id}}">{{role.role_title}}</option>
+                            <option ng-repeat="role in roles track by role.roleID" ng-value="role.roleID" ng-selected="user.role == role.roleID">{{role.role_title}}</option>
                         </select>
                     </div>
                     <a class="btn btn-sm btn-primary" ng-show="!isDisable" ng-click="saveUser()"><span class="glyphicon glyphicon-saved"></span> Save</a>

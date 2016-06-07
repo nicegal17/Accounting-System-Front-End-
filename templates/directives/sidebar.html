@@ -5,7 +5,7 @@
                 <a ui-sref="main.dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
             </li>
             <li ui-sref-active="active">
-                <a ui-sref="main.manageUser">Manage Users</a>
+                <a ui-sref="main.manageUser"><i class="glyphicon glyphicon-user"></i> Manage Users</a>
             </li>
             <li ng-class="{active: collapseVar==1}">
                 <a href="" ng-click="check(1)"><i class="fa fa-wrench fa-fw"></i> Settings<span
@@ -69,7 +69,8 @@
                     <li><a ng-click="issueOR()" href="">Issue O.R</a></li>
                     <li><a href="">Update Accounting</a></li>
                     <li ng-init="third=!third" ng-class="{active: multiCollapseVar==5}">
-                        <a href="" ng-click="multiCheck(5)">Check Disbursement Voucher <span class="fa arrow"></span></a>
+                        <!-- <a href="" ng-click="multiCheck(5)">Check Disbursement Voucher <span class="fa arrow"></span></a> -->
+                        <a ui-sref="main.CDVList">Check Disbursement Voucher <span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level" collapse="multiCollapseVar!=5">
                             <li><a tabindex="-1" ui-sref="main.checkDisbursement">Prepare</a></li>
                             <li><a ng-click="openAppCDV()" href="">Approve</a></li>

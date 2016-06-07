@@ -4,18 +4,27 @@ angular.module('accounting')
     .factory('CDVFactory', function($http, API_URL) {
 
         return {
-            getBankName: function() {
+            getCDV: function() {
                 return $http({
-                    url: API_URL + '/CDV/banks',
+                    url: API_URL + '/CDV',
                     method: 'GET',
                 }).then(function(res) {
                     return res.data;
                 });
             },
 
-            getAcctTitle: function() {
+            getBankName: function() {
                 return $http({
-                    url: API_URL + '/CDV',
+                    url: API_URL + '/CDV/getBankName',
+                    method: 'GET',
+                }).then(function(res) {
+                    return res.data;
+                });
+            },
+
+            getAcctTitles: function() {
+                return $http({
+                    url: API_URL + '/CDV/getAcctTitles',
                     method: 'GET',
                 }).then(function(res){
                     return res.data;
@@ -32,14 +41,22 @@ angular.module('accounting')
                 });
             },
 
-            getCDVNum: function() {
+            getCDVID: function(id) {
                 return $http({
-                    url: API_URL + '/CDV/cdvnum',
+                    url: API_URL + '/CDV/getCDVID/' + id,
                     method: 'GET',
                 }).then(function(res){
                     return res.data;
                 });
             },
+            // getCDVNum: function() {
+            //     return $http({
+            //         url: API_URL + '/CDV/cdvnum',
+            //         method: 'GET',
+            //     }).then(function(res){
+            //         return res.data;
+            //     });
+            // },
 
             getCDVInfo: function(filterDate, filterDateTO) {
                 return $http({
