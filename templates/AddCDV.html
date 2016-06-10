@@ -23,8 +23,8 @@
                     </div>
                     <div class="form-group">
                         <label>Bank Name: </label>
-                        <select ng-model="CDV.bank" class="form-control input-sm" ng-change="cboBank(CDV.bank)">
-                            <option ng-repeat="bank in banks" value="{{bank.bankID}}--{{bank.acctNum}}">{{bank.bankName}}</option>
+                        <select ng-model="CDV.bank" class="form-control" ng-change="cboBank(CDV.bank)">
+                            <option ng-repeat="bank in banks track by bank.bankID" value="{{bank.bankID}}--{{bank.acctNum}}" ng-selected="CDV.bank == bank.bankID">{{bank.bankName}}</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -35,7 +35,7 @@
                     </div>
                     <div class="form-group">
                         <label for="inputName">Amount</label>
-                        <input type="number" class="form-control" id="inputName" ng-model="CDV.amount" placeholder="Input Amount">
+                        <input type="decimal" class="form-control" id="inputName" ng-model="CDV.amount" placeholder="Input Amount">
                     </div>
                     <div class="form-group">
                         <label for="inputName">Check Number</label>
@@ -51,8 +51,8 @@
             <div class="panel-body">
                 <form class="form-inline">
                     <div class="form-group">
-                        <select ng-model="entry.acctTitle" class="form-control" id="inputName" placeholder=" Select Accounting Title">
-                            <option ng-repeat="acctTitle in acctTitles" value="{{acctTitle.idAcctTitle}}">{{acctTitle.acctTitle}}</option>
+                        <select ng-model="entry.acctTitle" class="form-control" id="inputName">
+                            <option ng-repeat="acctTitle in acctTitles track by acctTitle.idAcctTitle" ng-value="{{acctTitle.idAcctTitle}}" ng-selected="entry.acctTitle == acctTitle.idAcctTitle">{{acctTitle.acctTitle}}</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -73,7 +73,7 @@
                                 <th class="text-center">Account Title</th>
                                 <th class="text-center">Debit</th>
                                 <th class="text-center">Credit</th>
-                                <th width="5%"></th>
+                                <th width="10%">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -82,6 +82,9 @@
                                 <td>{{entry.DB}}</td>
                                 <td>{{entry.CR}}</td>
                                 <td class="text-center">
+                                    <a class="btn btn-primary btn-xs" ng-click="getEntriesID(CDV.cdvID)">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
                                     <a class="btn btn-danger btn-xs" ng-click="removeRow($index)">
                                         <i class="fa fa-trash"></i>
                                     </a>
@@ -99,10 +102,13 @@
                         <input type="text" class="form-control" id="inputName" ng-model="CDV.particular" placeholder="Particular">
                     </div>
                 </div>
-            </div>
-            <div class="panel-footer">
-                <button class="btn btn-sm btn-primary" ng-click="saveCDVEntries()"><span class="glyphicon glyphicon-saved"></span> Save</button>
-                <button class="btn btn-sm btn-danger" ng-hide="isDisable">Cancel</button>
+                <br>
+                <br>
+                <div class="form-inline pull-right" role="form">
+                    <button class="btn btn-sm btn-primary" ng-click="saveCDVEntries()"><span class="glyphicon glyphicon-saved"></span> Save</button>
+                    <button class="btn btn-sm btn-danger" ng-hide="isDisable"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                </div>
             </div>
         </div>
     </div>
+</div>

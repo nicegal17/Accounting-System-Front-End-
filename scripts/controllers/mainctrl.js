@@ -46,14 +46,14 @@ angular
             });
         };
 
-        $scope.openAppCDV = function() {
-            var modalInstance = $modal.open({
-                animation: true,
-                templateUrl: '/templates/modals/appCDV.html',
-                controller: 'appCDVctrl',
-                size: 'lg'
-            });
-        };
+        // $scope.openAppCDV = function() {
+        //     var modalInstance = $modal.open({
+        //         animation: true,
+        //         templateUrl: '/templates/modals/appCDV.html',
+        //         controller: 'appCDVctrl',
+        //         size: 'lg'
+        //     });
+        // };
 
         $scope.openAuditCDV = function() {
             var modalInstance = $modal.open({

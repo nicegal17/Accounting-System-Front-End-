@@ -94,6 +94,11 @@ angular
                 templateUrl: 'templates/AddCDV.html',
                 controller: 'cdvctrl'
             })
+            .state('main.appCDV', {
+                url: '/appCDV/:id',
+                templateUrl: 'templates/appCDV.html',
+                controller: 'cdvctrl'
+            })
             .state('main.purchaseOrder', {
                 url: '/purchaseOrder',
                 templateUrl: 'templates/PO.html',

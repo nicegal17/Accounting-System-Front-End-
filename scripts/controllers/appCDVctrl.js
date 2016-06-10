@@ -1,32 +1,32 @@
  'use strict';
 
  angular.module('accounting')
-     .controller('appCDVctrl', function($scope, $filter, $modalInstance, $window, AppCDVFactory, toastr, ngDialog, ngTableParams) {
+     .controller('appCDVctrl', function($scope, $filter, $window, AppCDVFactory, toastr, ngDialog, ngTableParams) {
 
-         $scope.appCDV = function() {
-             $scope.appcdv = {};
-         };
+         // $scope.appCDV = function() {
+         //     $scope.appcdv = {};
+         // };
 
-         $scope.closeModal = function() {
-             console.log('cancel');
-             $modalInstance.close();
-         };
+         // $scope.closeModal = function() {
+         //     console.log('cancel');
+         //     $modalInstance.close();
+         // };
 
-         $scope.changeMeChange = function(cdv) {
-             console.log('cdv: ', cdv);
-             var str = cdv.split('--');
-             $scope.appcdv.CDVNo = str[0];
-             $scope.appcdv.sDate = str[1];
-             $scope.appcdv.Particular = str[2];
-             $scope.appcdv.CDVNum = str[3];
-             $scope.appcdv.userName = str[4];
+         // $scope.changeMeChange = function(cdv) {
+         //     console.log('cdv: ', cdv);
+         //     var str = cdv.split('--');
+         //     $scope.appcdv.CDVNo = str[0];
+         //     $scope.appcdv.sDate = str[1];
+         //     $scope.appcdv.Particular = str[2];
+         //     $scope.appcdv.CDVNum = str[3];
+         //     $scope.appcdv.userName = str[4];
 
-             AppCDVFactory.getAcctEntries($scope.appcdv.CDVNo).then(function(data) {
-                 $scope.accnts = data;
-                 console.log('entries: ', data);
+         //     AppCDVFactory.getAcctEntries($scope.appcdv.CDVNo).then(function(data) {
+         //         $scope.accnts = data;
+         //         console.log('entries: ', data);
 
-             });
-         };
+         //     });
+         // };
 
          $scope.appCDV = function() {
              $scope.currentUser = JSON.parse($window.localStorage['user']);

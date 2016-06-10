@@ -1,0 +1,84 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h5 class="page-header">Approve Check Disbursement Voucher</h5>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading"></div>
+            <div class="panel-body">
+                <form>
+                    <div class="form-inline form-group">
+                        <div class="col-lg-3 col-md-3">
+                            <div class="form-group">
+                                <label for="inputName">CDV Number: </label>
+                                <label for="inputSlug">{{detail.CDVNo}}</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3">
+                            <div class="form-group">
+                                <label for="inputSlug">Payee: </label>
+                                <label for="inputSlug">{{detail.payee}}</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3">
+                            <div class="form-group">
+                                <label for="inputSlug">Check Number: </label>
+                                <label for="inputSlug">{{detail.chkNO}}</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3">
+                            <div class="form-group">
+                                <label for="inputSlug">Amount: </label>
+                                <label for="inputSlug">{{detail.amount}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <br>
+                <br>
+                <div class="scrollable-area">
+                    <table class="table table-bordered table-hover" id="tab_logic">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Account Title</th>
+                                <th class="text-center">Debit</th>
+                                <th class="text-center">Credit</th>
+                                <th width="5%"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="accnt in accnts">
+                                <td>
+                                    <span ng-show="accnt.idAcctTitleDB != null && accnt.idAcctTitleCR == null">{{accnt.acctTitle}}</span>
+                                    <span ng-show="accnt.idAcctTitleDB == null && accnt.idAcctTitleCR != null">&nbsp;&nbsp;&nbsp;&nbsp;{{accnt.acctTitle}}</span>
+                                </td>
+                                <td>
+                                    <span ng-show="accnt.idAcctTitleDB != null && accnt.idAcctTitleCR == null"> {{accnt.amount}} </span>
+                                    <span ng-show="accnt.idAcctTitleDB == null && accnt.idAcctTitleCR != null"></span>
+                                </td>
+                                <td>
+                                    <span ng-show="accnt.idAcctTitleCR != null && accnt.idAcctTitleDB == null"> {{accnt.amount}} </span>
+                                    <span ng-show="accnt.idAcctTitleCR == null && accnt.idAcctTitleDB != null"></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                    <br>
+                    <div class="col-lg-3 col-md-3">
+                        <div class="form-group">
+                            <label for="inputSlug">Prepared By:</label>
+                            <label for="inputSlug">{{detail.empName}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-sm btn-primary" ng-click="appCDV()"><span class="glyphicon glyphicon-ok"></span> Approve</button>
+    <button class="btn btn-sm btn-warning" ng-click="denyCDV()"><span class="glyphicon glyphicon-remove"></span> Deny</button>
+</div>

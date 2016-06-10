@@ -1,7 +1,7 @@
  'use strict';
 
  angular.module('accounting')
-     .controller('cdvctrl', function($scope, $filter, $window, CDVFactory, toastr, ngTableParams) {
+     .controller('cdvctrl', function($scope, $filter, $window, $stateParams, CDVFactory, toastr, ngTableParams) {
 
          $scope.cboBank = function(bank) {
              var str = bank.split('--');
@@ -93,64 +93,123 @@
              });
          };
 
+         $scope.getCDVEntries = function(id) {
+             CDVFactory.getCDVEntries(id).then(function(data) {
+                 if (data.length > 0) {
+                     $scope.entry = data[0];
+                     $scope.entry.acctTitle = data[0].idAcctTitle;
+
+                     console.log('data:', $scope.entry);
+                     $scope.isUpdate = true;
+                 }
+             });
+         };
+
          $scope.saveCDVEntries = function() {
              $scope.currentUser = JSON.parse($window.localStorage['user']);
-             console.log('user: ', $scope.currentUser.userID);
-             console.log('cdv: ', $scope.CDV);
-             console.log('cdv: ', JSON.stringify($scope.entries));
              var data = {
                  CDV: $scope.CDV,
                  entries: JSON.stringify($scope.entries),
                  userID: $scope.currentUser.userID
              };
+
+             if ($scope.isUpdate === true) {
+                 CDVFactory.updateCDV($scope.CDV.cdvID, data).then(function(data) {
+                     if (!_.isEmpty(data)) {
+                         if (data.success === 'true') {
+                             toastr.success(data.msg, 'Updating Check Disbursement Voucher');
+                         } else {
+                             toastr.error(data.msg, 'Error while updating CDV.');
+                         }
+                     }
+                 });
+             } else {
+                 CDVFactory.createCDV(data).then(function(data) {
+                     console.log('data: ', data);
+                     if (!_.isEmpty(data)) {
+                         if (data.success == 'true') {
+                             toastr.success(data.msg, 'Creating New Check Disbursement Voucher');
+                         } else {
+                             toastr.error(data.msg, 'Error while creating new CDV.');
+                         }
+                     }
+                 });
+             }
+             $scope.entries = "";
+             $scope.CDV = "";
+             $scope.totalDB = "";
+             $scope.totalCR = "";
+         };
+
+         $scope.approveCDV = function() {
+             $scope.currentUser = JSON.parse($window.localStorage['user']);
+             var data = {
+                 userID: $scope.currentUser.userID
+             };
              console.log('data: ', data);
-             CDVFactory.createCDV(data).then(function(res) {
-                 toastr.success('Check Disbursement Voucher has been Created', 'CDV Created');
-                 $scope.entries = "";
-                 $scope.CDV = "";
-                 $scope.totalDB = "";
-                 $scope.totalCR = "";
+             AppCDVFactory.appCDV($scope.appcdv.CDVNo, data).then(function(data) {
+                 console.log('data: ', data);
+                 toastr.success('Check Disbursement Voucher has been approved', 'Approve CDV');
+             });
+         };
+
+         $scope.denyCDV = function() {
+             AppCDVFactory.denyCDV($scope.appcdv.CDVNo, $scope.appcdv).then(function(data) {
+                 console.log('data: ', data);
+                 toastr.success('Check Disbursement Voucher has been denied', 'Denied CDV');
              });
          };
 
          function init() {
              $scope.CDV = {};
-             // $scope.banks = {};
-             // $scope.accounts = {};
-             // $scope.acctTitles = {};
-             // $scope.entries = [];
-             // $scope.entry = {};
-             // $scope.cdvnums = {};
-             // $scope.currentUser = {};
-             // $scope.userID = {};
-
              $scope.CDV.bankID = null;
              $scope.CDV.bankName = "";
+             $scope.entries = [];
+             $scope.isUpdate = false;
 
-             CDVFactory.getBankName().then(function(data) {
+             CDVFactory.getBanks().then(function(data) {
                  $scope.banks = data;
+                 $scope.CDV.bank = data[0].bankID;
+
+                 console.log('data', $scope.banks);
              });
 
              CDVFactory.getAcctTitles().then(function(data) {
                  $scope.acctTitles = data;
              });
 
-             $scope.getCDVID = function(id) {
-             $scope.CDV = {};
-             $scope.isDisable = false;
-             CDVFactory.getCDVID(id).then(function(data) {
-                 if (data.length > 0) {
-                     $scope.CDV = data[0];
-                     // $scope.CDV.position = data[0].idPosition;
-                     console.log('CDV: ', $scope.CDV);
-                     $scope.isUpdate = true;
-                 }
+             CDVFactory.getCDVNum().then(function(data) {
+                 $scope.cdvnums = data;
              });
-         };
 
-             // CDVFactory.getCDVNum().then(function(data) {
-             //     $scope.cdvnums = data;
-             // });
+             if (!_.isUndefined($stateParams.id)) {
+                 $scope.detail = {};
+                 CDVFactory.getCDVByID($stateParams.id).then(function(data) {
+                     if (data.length > 0) {
+                         $scope.detail = data[0];
+                     }
+                 });
+
+                 CDVFactory.getCDVDetails($stateParams.id).then(function(data) {
+                     if (data.length > 0) {
+                         $scope.CDV = data[0];
+                     }
+                 });
+
+                 CDVFactory.getCDVEntries($stateParams.id).then(function(data) {
+                     if (data.length > 0) {
+                         $scope.entries = data;
+                     }
+                 });
+
+                 // CDVFactory.getCREntries($stateParams.id).then(function(data) {
+                 //    if (data.length > 0 ) {
+                 //        $scope.credit = data[0];
+
+                 //       // console.log('data', $scope.entries)
+                 //    }
+                 // });
+             }
 
              $scope.dateOptions = {
                  formatYear: 'yy',
@@ -172,7 +231,7 @@
                  status: 'partially'
              }];
 
-              $scope.tableParams = new ngTableParams({
+             $scope.tableParams = new ngTableParams({
                  page: 1, // show first page
                  count: 10, // count per page
                  sorting: {
