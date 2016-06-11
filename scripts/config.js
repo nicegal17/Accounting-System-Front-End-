@@ -99,6 +99,7 @@ angular
                 templateUrl: 'templates/appCDV.html',
                 controller: 'cdvctrl'
             })
+           
             .state('main.purchaseOrder', {
                 url: '/purchaseOrder',
                 templateUrl: 'templates/PO.html',
@@ -171,15 +172,21 @@ angular
                     }
                 }
             })
-            .state('main.CDV', {
-                url: '/CDV',
-                templateUrl: 'templates/modals/searchCDV.html',
-                controller: 'reportingctrl',
-                resolve: {
-                    reportParams: function() {
-                        return 'CDV';
-                    }
-                }
+            // .state('main.CDV', {
+            //     url: '/CDV',
+            //     templateUrl: 'templates/modals/searchCDV.html',
+            //     controller: 'reportingctrl',
+            //     resolve: {
+            //         reportParams: function() {
+            //             return 'CDV';
+            //         }
+            //     }
+            // })
+
+             .state('main.previewCDV', {
+                url: '/previewCDV/:id',
+                templateUrl: 'templates/reports/PreviewCDV.html',
+                controller: 'cdvctrl'
             })
             .state('main.JV', {
                 url: '/JV',

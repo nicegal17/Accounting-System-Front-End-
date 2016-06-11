@@ -87,6 +87,35 @@ angular.module('accounting')
                 });
             },
 
+            approveCDV: function(id, data) {
+                return $http({
+                    url: API_URL + '/CDV/approveCDV/' + id,
+                    method: 'PUT',
+                    data: data
+                }).then(function(res) {
+                    return res.data;
+                });
+            },
+
+            denyCDV: function(id, data) {
+                return $http({
+                    url: API_URL + '/CDV/denyCDV/' + id,
+                    method: 'PUT',
+                    data: data
+                }).then(function(res) {
+                    return res.data;
+                });
+            },
+
+            previewCDV: function(id) {
+                return $http({
+                    url: API_URL + '/CDV/previewCDV/' + id,
+                    method: 'GET',
+                }).then(function(res){
+                    return res.data;
+                });
+            },
+
             getCDVInfo: function(filterDate, filterDateTO) {
                 return $http({
                     url: API_URL + '/CDV/getCDVInfo',

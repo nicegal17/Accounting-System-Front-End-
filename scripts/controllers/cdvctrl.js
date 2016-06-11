@@ -1,7 +1,7 @@
  'use strict';
 
  angular.module('accounting')
-     .controller('cdvctrl', function($scope, $filter, $window, $stateParams, CDVFactory, toastr, ngTableParams) {
+     .controller('cdvctrl', function($scope, $filter, $window, $stateParams, CDVFactory, toastr, ngTableParams, ReportingService) {
 
          $scope.cboBank = function(bank) {
              var str = bank.split('--');
@@ -146,10 +146,13 @@
              var data = {
                  userID: $scope.currentUser.userID
              };
-             console.log('data: ', data);
-             AppCDVFactory.appCDV($scope.appcdv.CDVNo, data).then(function(data) {
+             CDVFactory.approveCDV($scope.CDV.cdvID, data).then(function(data) {
                  console.log('data: ', data);
-                 toastr.success('Check Disbursement Voucher has been approved', 'Approve CDV');
+                 if (data.success === 'true') {
+                     toastr.success(data.msg, 'Approving Check Disbursement Voucher');
+                 } else {
+                     toastr.error(data.msg, 'Error while Approving CDV.');
+                 }
              });
          };
 
@@ -196,19 +199,17 @@
                      }
                  });
 
+                 CDVFactory.previewCDV($stateParams.id).then(function(data) {
+                     if (data.length > 0) {
+                         $scope.preview = data[0];
+                     }
+                 });
+
                  CDVFactory.getCDVEntries($stateParams.id).then(function(data) {
                      if (data.length > 0) {
                          $scope.entries = data;
                      }
                  });
-
-                 // CDVFactory.getCREntries($stateParams.id).then(function(data) {
-                 //    if (data.length > 0 ) {
-                 //        $scope.credit = data[0];
-
-                 //       // console.log('data', $scope.entries)
-                 //    }
-                 // });
              }
 
              $scope.dateOptions = {
@@ -260,4 +261,9 @@
          $scope.today();
 
          init();
+
+         $scope.printData = function() {
+             var divToPrint = document.getElementById('printTable');
+             ReportingService.printData(divToPrint);
+         };
      });

@@ -45,22 +45,21 @@
                                 <th class="text-center">Account Title</th>
                                 <th class="text-center">Debit</th>
                                 <th class="text-center">Credit</th>
-                                <th width="5%"></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="accnt in accnts">
+                            <tr ng-repeat="entry in entries">
                                 <td>
-                                    <span ng-show="accnt.idAcctTitleDB != null && accnt.idAcctTitleCR == null">{{accnt.acctTitle}}</span>
-                                    <span ng-show="accnt.idAcctTitleDB == null && accnt.idAcctTitleCR != null">&nbsp;&nbsp;&nbsp;&nbsp;{{accnt.acctTitle}}</span>
+                                    <span ng-show="entry.DB != 0 && entry.CR == 0">{{entry.title}}</span>
+                                    <span ng-show="entry.DB == 0 && entry.CR != 0">&nbsp;&nbsp;&nbsp;&nbsp;{{entry.title}}</span>
                                 </td>
                                 <td>
-                                    <span ng-show="accnt.idAcctTitleDB != null && accnt.idAcctTitleCR == null"> {{accnt.amount}} </span>
-                                    <span ng-show="accnt.idAcctTitleDB == null && accnt.idAcctTitleCR != null"></span>
+                                    <span ng-show="entry.DB != 0 && entry.CR == 0"> {{entry.DB}} </span>
+                                    <span ng-show="entry.DB == 0 && entry.CR != 0"></span>
                                 </td>
                                 <td>
-                                    <span ng-show="accnt.idAcctTitleCR != null && accnt.idAcctTitleDB == null"> {{accnt.amount}} </span>
-                                    <span ng-show="accnt.idAcctTitleCR == null && accnt.idAcctTitleDB != null"></span>
+                                    <span ng-show="entry.CR != 0 && entry.DB == 0"> {{entry.CR}} </span>
+                                    <span ng-show="entry.CR == 0 && entry.DB != 0"></span>
                                 </td>
                             </tr>
                         </tbody>
@@ -79,6 +78,6 @@
     </div>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-sm btn-primary" ng-click="appCDV()"><span class="glyphicon glyphicon-ok"></span> Approve</button>
-    <button class="btn btn-sm btn-warning" ng-click="denyCDV()"><span class="glyphicon glyphicon-remove"></span> Deny</button>
+    <button class="btn btn-sm btn-primary" ng-click="approveCDV()"><span class="glyphicon glyphicon-ok"></span> Approve</button>
+    <button class="btn btn-sm btn-warning" ng-click="denyCDV()"><span class="glyphicon glyphicon-remove"></span> Disapprove</button>
 </div>
