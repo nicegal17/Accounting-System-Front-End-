@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-lg-12">
-        <h5 class="page-header">Approve Check Disbursement Voucher</h5>
+        <h5 class="page-header">Approve Journal Voucher</h5>
     </div>
 </div>
 <div class="row">
@@ -10,32 +10,28 @@
             <div class="panel-body">
                 <form>
                     <div class="form-inline form-group">
-                        <div class="col-lg-3 col-md-3">
+                        <div class="col-lg-6 col-md-6">
                             <div class="form-group">
-                                <label for="inputName">CDV Number: </label>
-                                <label for="inputSlug">{{detail.CDVNo}}</label>
+                                <label for="inputName">JV Number: </label>
+                                <label for="inputSlug">{{entry.JVNum}}</label>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-3">
+                        <div class="col-lg-6 col-md-6">
                             <div class="form-group">
-                                <label for="inputSlug">Payee: </label>
-                                <label for="inputSlug">{{detail.payee}}</label>
+                                <label for="inputSlug">Transaction Date: </label>
+                                <label for="inputSlug">{{entry.transdate}}</label>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-3">
+                        <div class="col-lg-12 col-md-12">
                             <div class="form-group">
-                                <label for="inputSlug">Check Number: </label>
-                                <label for="inputSlug">{{detail.chkNO}}</label>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-3">
-                            <div class="form-group">
-                                <label for="inputSlug">Amount: </label>
-                                <label for="inputSlug">{{detail.amount}}</label>
+                                <label for="inputSlug">Particular: </label>
+                                <label for="inputSlug">{{entry.particulars}}</label>
                             </div>
                         </div>
                     </div>
                 </form>
+                <br>
+                <br>
                 <br>
                 <br>
                 <div class="scrollable-area">
@@ -51,7 +47,7 @@
                             <tr ng-repeat="entry in entries">
                                 <td>
                                     <span ng-show="entry.DB != 0 && entry.CR == 0">{{entry.title}}</span>
-                                    <span ng-show="entry.DB == 0 && entry.CR != 0">&nbsp;&nbsp;&nbsp;&nbsp;{{entry.title}}</span>
+                                    <span ng-show="entry.DB == 0 && entry.CR != 0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{entry.title}}</span>
                                 </td>
                                 <td>
                                     <span ng-show="entry.DB != 0 && entry.CR == 0"> {{entry.DB}} </span>
@@ -66,10 +62,10 @@
                     </table>
                     <br>
                     <br>
-                    <div class="col-lg-3 col-md-3">
+                    <div class="col-lg-12 col-md-12">
                         <div class="form-group">
                             <label for="inputSlug">Prepared By:</label>
-                            <label for="inputSlug">{{detail.empName}}</label>
+                            <label for="inputSlug">{{entry.empName}}</label>
                         </div>
                     </div>
                 </div>
@@ -79,8 +75,8 @@
 </div>
 <div class="modal-footer">
     <div class="form-inline pull-left" role="form">
-        <button class="btn btn-sm btn-primary" ng-click="approveCDV()"><span class="glyphicon glyphicon-ok"></span> Approve</button>
-        <button class="btn btn-sm btn-danger" ng-click="cancelCDV()"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+        <button class="btn btn-sm btn-primary" ng-click="approveJV()"><span class="glyphicon glyphicon-ok"></span> Approve</button>
+        <button class="btn btn-sm btn-danger" ng-click="cancelJV()"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
     </div>
-    <button class="btn btn-sm btn-success" ng-click="auditCDV()"><span class="glyphicon glyphicon-check"></span> Audit</button>
+    <button class="btn btn-sm btn-success" ng-click="auditJV()"><span class="glyphicon glyphicon-check"></span> Audit</button>
 </div>

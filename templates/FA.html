@@ -60,7 +60,7 @@
                 </div>
                 <div class="form-inline pull-right" role="form">
                     <div class="form-group">
-                        <input id="txtvalue" type="text" class="form-control" ng-model="searchAsset" placeholder="Search">
+                        <input id="txtvalue" type="text" class="form-control" ng-model="searchAsset" placeholder="Search Item Name">
                     </div>
                     <button ng-click="search()" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
                 </div>
@@ -68,23 +68,23 @@
             <div class="scrollable-area">
                 <table id="tbl_subject" class="table table-hover table-responsive" ng-table="tableParams">
                     <tr ng-repeat="asset in $data">
-                        <td data-title="'Item Name'">
+                        <td data-title="'Item Name'" class="text-center">
                             {{asset.itemName}}
                         </td>
-                        <td data-title="'Item Cost'">
+                        <td data-title="'Item Cost'" class="text-center">
                             {{asset.cost}}
                         </td>
-                        <td data-title="'Date Purchased'">
+                        <td data-title="'Date Purchased'" class="text-center">
                             {{asset.datePurchased}}
                         </td>
-                        <td data-title="'Quantity'">
+                        <td data-title="'Quantity'" class="text-center">
                             {{asset.qty}}
                         </td>
-                        <td data-title="'Category'">
+                        <td data-title="'Category'" class="text-center">
                             {{asset.desc}}
                         </td>
-                        <td data-title="'Action'">
-                            <div class="text-right">
+                        <td data-title="'Action'" class="text-center">
+                            <div class="text-center">
                                 <a class="btn btn-primary btn-xs" id="edit" ng-click="getAssetItem(asset.itemID)">
                                     <i class="fa fa-pencil"></i>
                                 </a>

@@ -156,12 +156,38 @@
              });
          };
 
-         $scope.denyCDV = function() {
-             AppCDVFactory.denyCDV($scope.appcdv.CDVNo, $scope.appcdv).then(function(data) {
+         $scope.cancelCDV = function() {
+             $scope.currentUser = JSON.parse($window.localStorage['user']);
+             var data = {
+                 userID: $scope.currentUser.userID
+             };
+             CDVFactory.cancelCDV($scope.CDV.cdvID, data).then(function(data) {
                  console.log('data: ', data);
-                 toastr.success('Check Disbursement Voucher has been denied', 'Denied CDV');
+                 if (data.success === 'true') {
+                     toastr.success(data.msg, 'Check Disbursement Voucher');
+                 } else {
+                     toastr.error(data.msg, 'Error while Cancelling CDV.');
+                 }
              });
          };
+
+         $scope.auditCDV = function() {
+             $scope.currentUser = JSON.parse($window.localStorage['user']);
+             var data = {
+                 userID: $scope.currentUser.userID
+             };
+             CDVFactory.auditCDV($scope.CDV.cdvID, data).then(function(data) {
+                 if (data.success === 'true') {
+                     toastr.success(data.msg, 'Audit Check Disbursement Voucher');
+                 } else {
+                     toastr.error(data.msg, 'Error while Auditing CDV.');
+                 }
+             });
+         };
+
+         $scope.$watch("CDVNum", function() {
+             $scope.tableParams.reload();
+         });
 
          function init() {
              $scope.CDV = {};
@@ -210,6 +236,12 @@
                          $scope.entries = data;
                      }
                  });
+
+                 CDVFactory.editCDVEntries($stateParams.id).then(function(data) {
+                     if (data.length > 0) {
+                         $scope.entries = data;
+                     }
+                 });
              }
 
              $scope.dateOptions = {
@@ -243,8 +275,8 @@
                      CDVFactory.getCDV().then(function(data) {
                          var orderedData = {};
 
-                         if ($scope.searchCDV) {
-                             orderedData = $filter('filter')(data, $scope.searchCDV);
+                         if ($scope.CDVNum) {
+                             orderedData = $filter('filter')(data, $scope.CDVNum);
                              orderedData = params.sorting() ? $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
                          } else {
                              orderedData = params.sorting() ? $filter('orderBy')(data, params.orderBy()) : data;

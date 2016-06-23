@@ -49,7 +49,7 @@
         <div class="panel panel-primary">
             <div class="panel-heading">Check Disbursement Voucher Entry</div>
             <div class="panel-body">
-                <form class="form-inline">
+                <form class="form-inline" editable-form name="editableForm" onaftersave="saveCDVEntries">
                     <div class="form-group">
                         <select ng-model="entry.acctTitle" class="form-control" id="inputName">
                             <option ng-repeat="acctTitle in acctTitles track by acctTitle.idAcctTitle" ng-value="{{acctTitle.idAcctTitle}}" ng-selected="entry.acctTitle == acctTitle.idAcctTitle">{{acctTitle.acctTitle}}</option>
@@ -78,22 +78,35 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="entry in entries">
-                                <td>{{entry.title}}</td>
-                                <td>{{entry.DB}}</td>
-                                <td>{{entry.CR}}</td>
+                                <td>
+                                    <span ng-if="entry.DB != 0 && entry.CR == 0">{{entry.title}}</span>
+                                    <span ng-if="entry.DB == 0 && entry.CR != 0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{entry.title}}</span>
+                                </td>
                                 <td class="text-center">
-                                    <a class="btn btn-primary btn-xs" ng-click="getEntriesID(CDV.cdvID)">
+                                    <span ng-if="entry.DB != 0 && entry.CR == 0"> {{entry.DB}} </span>
+                                </td>
+                                <td class="text-center">
+                                    <span ng-if="entry.CR != 0 && entry.DB == 0"> {{entry.CR}} </span>
+                                </td>
+                                <td class="text-center">
+                                    <a class="btn btn-primary btn-xs" ng-click="editCDVEntries(entry.idAcctTitle)">
                                         <i class="fa fa-pencil"></i>
                                     </a>
                                     <a class="btn btn-danger btn-xs" ng-click="removeRow($index)">
                                         <i class="fa fa-trash"></i>
                                     </a>
                                 </td>
+
+                                <!-- <td style="white-space: nowrap">
+                                    <form>
+                                    </form>
+                                </td> -->
                             </tr>
                             <tr>
                                 <td>Total:</td>
                                 <td>{{totalDB}}</td>
                                 <td>{{totalCR}}</td>
+                                <td></td>
                             </tr>
                         </tbody>
                     </table>

@@ -18,27 +18,34 @@ angular.module('accounting')
                         <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.min.css">\
                         <link rel="stylesheet" href="bower_components/ng-table/dist/ng-table.css"/>\
                         <style type="text/css" media="screen">body {padding-top: 50px;} </style>\
+                        <link href="styles/style.css" rel="stylesheet">\
+                        <link href="styles/main.css" rel="stylesheet">\
+                        <link href="styles/paper-bootstrap.min.css" rel="stylesheet">\
+                        <link href="styles/report.min.css" rel="stylesheet">\
                     </head>\
                     <body onload="window.print()">\
-                    <div class="container">\
-                        <div class="row">\
-                            <div class="col-xs-12">\
-                                <div class="text-center">\
-                                <img src="/img/smsi.png" alt="SMSi Logo" class="img-responsive" style="width:300px;height:100px;">\
+                        <div class="container">\
+                            <div class="row">\
+                                <div class="col-xs-12">\
+                                    <div class="text-center">\
+                                        <img src="/img/smsi.png" alt="SMSi Logo" class="img-responsive" style="width:300px;height:100px;">\
+                                    </div>\
+                                    <div class="row">\
+                                        <div class="col-xs-12 table-responsive">\
+                                            <table class="table table-striped">\
+                                                <div> ' + divToPrint.innerHTML + '</div>\
+                                            </table>\
+                                        </div>\
+                                    </div>\
                             </div>\
-                            <div class="row-fluid">\
-                                <div class="text-center">\
-                                <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12"> ' + divToPrint.innerHTML + '</div>\
+                            <div class="row">\
+                                <br></br>\
+                                <div class="col-xs-12 col-xs-offset-2">\
                                 </div>\
                             </div>\
                         </div>\
-                        <div class="row">\
-                            <br></br>\
-                            <div class="col-xs-12 col-xs-offset-2">\
-                            </div>\
-                        </div>\
-                        </body>\
-                        </html>';
+                    </body>\
+                    </html>';
 
 
                 newWin.document.open();

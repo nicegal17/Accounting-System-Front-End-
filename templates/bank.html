@@ -41,7 +41,7 @@
                 <div class="form-inline pull-right" role="form">
                     <div class="form-group">
 
-                        <input id="txtvalue" type="text" class="form-control" ng-model="searchBank" placeholder="Search">
+                        <input id="txtvalue" type="text" class="form-control" ng-model="searchBank" placeholder="Search Bank Name">
                     </div>
                     <button ng-click="search()" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
                 </div>
@@ -50,20 +50,20 @@
             <div class="scrollable-area">
                 <table id="tbl_subject" class="table table-hover table-responsive" ng-table="tableParams">
                     <tr ng-repeat="bank in $data">
-                        <td data-title="'Bank Name'" sortable="'posName'">
+                        <td data-title="'Bank Name'" sortable="'posName'" class="text-center">
                             {{bank.bankName}}
                         </td>
-                        <td data-title="'Account Number'" sortable="'posName'">
+                        <td data-title="'Account Number'" sortable="'posName'" class="text-center">
                             {{bank.acctNum}}
                         </td>
-                        <td data-title="'Address'" sortable="'posName'">
+                        <td data-title="'Address'" sortable="'posName'" class="text-center">
                             {{bank.address}}
                         </td>
-                        <td data-title="'Telephone No.'" sortable="'posName'">
+                        <td data-title="'Telephone No.'" sortable="'posName'" class="text-center">
                             {{bank.Tel}}
                         </td>
-                        <td data-title="'Action'">
-                            <div class="text-right">
+                        <td data-title="'Action'" class="text-center">
+                            <div class="text-center">
                                 <a class="btn btn-primary btn-xs" ng-click="getBankID(bank.bankID)">
                                     <i class="fa fa-pencil"></i>
                                 </a>

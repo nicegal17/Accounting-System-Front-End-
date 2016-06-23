@@ -5,7 +5,7 @@ angular
     .controller('MainCtrl', function($scope) {
 
     })
-    .controller('headerCtrl', function($scope,$rootScope, AuthenticationFactory) {
+    .controller('headerCtrl', function($scope, $rootScope, AuthenticationFactory) {
         $scope.logout = function() {
             console.log('logout');
             AuthenticationFactory.Logout();
@@ -46,111 +46,12 @@ angular
             });
         };
 
-        // $scope.openAppCDV = function() {
-        //     var modalInstance = $modal.open({
-        //         animation: true,
-        //         templateUrl: '/templates/modals/appCDV.html',
-        //         controller: 'appCDVctrl',
-        //         size: 'lg'
-        //     });
-        // };
-
-        $scope.openAuditCDV = function() {
-            var modalInstance = $modal.open({
-                animation: true,
-                templateUrl: '/templates/modals/auditCDV.html',
-                controller: 'auditCDVctrl',
-                size: 'lg'
-            });
-        };
-
-        // $scope.openSearchCDV = function() {
-        //     var modalInstance = $modal.open({
-        //         animation: true,
-        //         templateUrl: '/templates/modals/searchCDV.html',
-        //         controller: 'searchCDVctrl',
-        //         size: 'lg'
-        //     });
-        // };
-
-        $scope.openJV = function() {
-            var modalInstance = $modal.open({
-                animation: true,
-                templateUrl: '/templates/modals/JV.html',
-                controller: 'JVctrl',
-                size: 'lg'
-            });
-        };
-
-        $scope.openAppJV = function() {
-            var modalInstance = $modal.open({
-                animation: true,
-                templateUrl: '/templates/modals/appJV.html',
-                controller: 'appJVctrl',
-                size: 'lg'
-            });
-        };
-
-        $scope.openAuditJV = function() {
-            var modalInstance = $modal.open({
-                animation: true,
-                templateUrl: '/templates/modals/auditJV.html',
-                controller: 'auditJVctrl',
-                size: 'lg'
-            });
-        };
-
-        $scope.openSearchJV = function() {
-            var modalInstance = $modal.open({
-                animation: true,
-                templateUrl: '/templates/modals/searchJV.html',
-                controller: 'searchJVctrl',
-                size: 'lg'
-            });
-        };
-
         $scope.openCheck = function() {
             var modalInstance = $modal.open({
                 animation: true,
                 templateUrl: '/templates/modals/check.html',
                 controller: 'checkctrl',
                 size: 'md'
-            });
-        };
-
-        $scope.openAPVoucher = function() {
-            var modalInstance = $modal.open({
-                animation: true,
-                templateUrl: '/templates/modals/APVoucher.html',
-                controller: 'apvctrl',
-                size: 'lg'
-            });
-        };
-
-        $scope.openAppAPV = function() {
-            var modalInstance = $modal.open({
-                animation: true,
-                templateUrl: '/templates/modals/appAPV.html',
-                controller: 'appAPVctrl',
-                size: 'lg'
-            });
-        };
-
-        $scope.openAuditAPV = function() {
-            var modalInstance = $modal.open({
-                animation: true,
-                templateUrl: '/templates/modals/auditAPV.html',
-                controller: 'auditAPVctrl',
-                size: 'lg'
-            });
-        };
-
-        $scope.openSearchAPV = function() {
-            var modalInstance = $modal.open({
-                animation: true,
-                templateUrl: '/templates/modals/searchAPV.html',
-                controller: 'searchAPVctrl',
-                size: 'lg'
             });
         };
 

@@ -99,7 +99,41 @@ angular
                 templateUrl: 'templates/appCDV.html',
                 controller: 'cdvctrl'
             })
-           
+            .state('main.JVList', {
+                url: '/JVList',
+                templateUrl: 'templates/JVList.html',
+                controller: 'JVctrl'
+            })
+            .state('main.AddJV', {
+                url: '/AddJV',
+                templateUrl: 'templates/AddJV.html',
+                controller: 'JVctrl'
+            })
+            .state('main.AppJV', {
+                url: '/AppJV/:id',
+                templateUrl: 'templates/AppJV.html',
+                controller: 'JVctrl'
+            })
+            .state('main.APVList', {
+                url:'/APVList',
+                templateUrl: 'templates/APVList.html',
+                controller: 'apvctrl'
+            })
+            .state('main.AddAPV', {
+                url: '/AddAPV',
+                templateUrl: 'templates/AddAPV.html',
+                controller: 'apvctrl'
+            })
+            .state('main.AppAPV', {
+                url: '/AppAPV/:id',
+                templateUrl: 'templates/AppAPV.html',
+                controller: 'apvctrl'
+            })
+            .state('main.editAPV', {
+                url: '/APVList/:id',
+                templateUrl: 'templates/AddAPV.html',
+                controller: 'apvctrl'
+            })
             .state('main.purchaseOrder', {
                 url: '/purchaseOrder',
                 templateUrl: 'templates/PO.html',
@@ -172,39 +206,33 @@ angular
                     }
                 }
             })
-            // .state('main.CDV', {
-            //     url: '/CDV',
-            //     templateUrl: 'templates/modals/searchCDV.html',
-            //     controller: 'reportingctrl',
-            //     resolve: {
-            //         reportParams: function() {
-            //             return 'CDV';
-            //         }
-            //     }
-            // })
-
-             .state('main.previewCDV', {
+            .state('main.previewCDV', {
                 url: '/previewCDV/:id',
                 templateUrl: 'templates/reports/PreviewCDV.html',
-                controller: 'cdvctrl'
-            })
-            .state('main.JV', {
-                url: '/JV',
-                templateUrl: 'templates/modals/searchJV.html',
-                controller: 'reportingctrl',
+                controller: 'cdvctrl',
                 resolve: {
                     reportParams: function() {
                         return 'JV';
                     }
                 }
             })
-            .state('main.APV', {
-                url: '/APV',
-                templateUrl: 'templates/modals/searchAPV.html',
-                controller: 'reportingctrl',
+            .state('main.previewJV', {
+                url: '/previewJV/:id',
+                templateUrl: 'templates/reports/PreviewJV.html',
+                controller: 'JVctrl',
                 resolve: {
                     reportParams: function() {
-                        return 'APV';
+                        return 'JV';
+                    }
+                }
+            })
+            .state('main.previewAPV', {
+                url: '/previewAPV/:id',
+                templateUrl: 'templates/reports/PreviewAPV.html',
+                controller: 'apvctrl',
+                resolve: {
+                    reportParams: function() {
+                        return 'JV';
                     }
                 }
             })

@@ -44,17 +44,17 @@
         <div class="scrollable-area">
             <table id="tbl_subject" class="table table-hover table-responsive" ng-table="tableParams">
                 <tr ng-repeat="series in $data">
-                    <td data-title="'Description'" sortable="'posName'">
+                    <td data-title="'Description'" sortable="'posName'" class="text-center">
                         {{series.Description}}
                     </td>
-                    <td data-title="'Abbrevation'" sortable="'posName'">
+                    <td data-title="'Abbrevation'" sortable="'posName'" class="text-center">
                         {{series.ABRV}}
                     </td>
-                    <td data-title="'Series Number'" sortable="'posName'">
+                    <td data-title="'Series Number'" sortable="'posName'" class="text-center">
                         {{series.numSeries}}
                     </td>
-                    <td data-title="'Action'">
-                        <div class="text-right">
+                    <td data-title="'Action'" class="text-center">
+                        <div class="text-center">
                             <a class="btn btn-primary btn-xs" ng-click="getSeriesNum(series.idNum)">
                                 <i class="fa fa-pencil"></i>
                             </a>

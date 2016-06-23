@@ -87,6 +87,15 @@ angular.module('accounting')
                 });
             },
 
+            previewCDV: function(id) {
+                return $http({
+                    url: API_URL + '/CDV/previewCDV/' + id,
+                    method: 'GET',
+                }).then(function(res){
+                    return res.data;
+                });
+            },
+
             approveCDV: function(id, data) {
                 return $http({
                     url: API_URL + '/CDV/approveCDV/' + id,
@@ -97,9 +106,9 @@ angular.module('accounting')
                 });
             },
 
-            denyCDV: function(id, data) {
+            cancelCDV: function(id, data) {
                 return $http({
-                    url: API_URL + '/CDV/denyCDV/' + id,
+                    url: API_URL + '/CDV/cancelCDV/' + id,
                     method: 'PUT',
                     data: data
                 }).then(function(res) {
@@ -107,11 +116,12 @@ angular.module('accounting')
                 });
             },
 
-            previewCDV: function(id) {
+            auditCDV: function(id, data) {
                 return $http({
-                    url: API_URL + '/CDV/previewCDV/' + id,
-                    method: 'GET',
-                }).then(function(res){
+                    url: API_URL + '/CDV/auditCDV/' + id,
+                    method: 'PUT',
+                    data: data
+                }).then(function(res) {
                     return res.data;
                 });
             },
@@ -124,6 +134,15 @@ angular.module('accounting')
                         to: filterDateTO
                     },
                     method: 'POST',
+                }).then(function(res){
+                    return res.data;
+                });
+            },
+
+            editCDVEntries: function(id) {
+                return $http({
+                    url: API_URL + '/CDV/editCDVEntries/' + id,
+                    method: 'GET',
                 }).then(function(res){
                     return res.data;
                 });

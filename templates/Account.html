@@ -57,7 +57,7 @@
                 </div>
                 <div class="form-inline pull-right" role="form">
                     <div class="form-group">
-                        <input id="txtvalue" type="text" class="form-control" ng-model="searchAcctChart" placeholder="Search">
+                        <input id="txtvalue" type="text" class="form-control" ng-model="searchAcctChart" placeholder="Search Account Title">
                     </div>
                     <button ng-click="search()" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
                 </div>
@@ -65,20 +65,20 @@
             <div class="scrollable-area" id="printTable">
                 <table id="tbl_subject" class="table table-hover table-responsive" ng-table="tableParams">
                     <tr ng-repeat="account in $data">
-                        <td data-title="'Account CODE'" sortable="'title'">
+                        <td data-title="'Account CODE'" sortable="'title'" class="text-center">
                             {{account.acctCode}}
                         </td>
-                        <td data-title="'Account Title'">
+                        <td data-title="'Account Title'" class="text-center">
                             {{account.acctTitle}}
                         </td>
-                        <td data-title="'Normal Balance'">
+                        <td data-title="'Normal Balance'" class="text-center">
                             {{account.normDesc}}
                         </td>
-                        <td data-title="'Account Type'">
+                        <td data-title="'Account Type'" class="text-center">
                             {{account.acctType}}
                         </td>
-                        <td data-title="'Action'">
-                            <div class="text-right">
+                        <td data-title="'Action'" class="text-center">
+                            <div class="text-center">
                                 <a class="btn btn-primary btn-xs" ng-click="getAcctChartByID(account.idAcctTitle)">
                                     <i class="fa fa-pencil"></i>
                                 </a>
