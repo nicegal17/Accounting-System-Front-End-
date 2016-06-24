@@ -3,6 +3,11 @@
  angular.module('accounting')
      .controller('JVctrl', function($scope, $filter, $window, JVFactory, toastr, ngTableParams, $stateParams, ReportingService) {
 
+         // var self = this;
+
+         // self.cancel = cancel;
+         // self.save = save;
+
          $scope.addRow = function(row) {
              var DB, CR;
 
@@ -137,8 +142,42 @@
          };
 
          $scope.$watch("JVNum", function() {
-             $scope.tableParams.reload();
+             $scope.tableParams.reload()    ;
          });
+
+         $scope.getTemplate = function(row) {
+             if (row.title === $scope.entries.selected.title) return 'edit';
+             else return 'display';
+         };
+
+         // $scope.selected = {};
+
+         $scope.editJVEntries = function(row) {
+             $scope.entries.selected = angular.copy(row);
+         }
+
+         $scope.reset = function() {
+             $scope.entries.selected = {};
+         };
+
+         //  function cancel(row, rowForm) {
+         //     var originalRow = resetRow(row, rowForm);
+         //     angular.extend(row, originalRow);
+         // }
+
+         //  function resetRow(row, rowForm) {
+         //     row.isEditing = false;
+         //     rowForm.$setPristine();
+         //     self.tableTracker.untrack(row);
+         //     return _.findWhere(originalData, function(r){
+         //          return r.id === row.id;
+         //     });
+         //  }
+
+         //  function save(row, rowForm) {
+         //     var originalRow = resetRow(row, rowForm);
+         //     angular.extend(originalRow, row);
+         //  }
 
          function init() {
              $scope.JV = {};

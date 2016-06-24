@@ -237,11 +237,7 @@
                      }
                  });
 
-                 CDVFactory.editCDVEntries($stateParams.id).then(function(data) {
-                     if (data.length > 0) {
-                         $scope.entries = data;
-                     }
-                 });
+                
              }
 
              $scope.dateOptions = {

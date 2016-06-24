@@ -138,14 +138,5 @@ angular.module('accounting')
                     return res.data;
                 });
             },
-
-            editCDVEntries: function(id) {
-                return $http({
-                    url: API_URL + '/CDV/editCDVEntries/' + id,
-                    method: 'GET',
-                }).then(function(res){
-                    return res.data;
-                });
-            },
         };
     });

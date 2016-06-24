@@ -36,32 +36,51 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="entry in entries">
+                            <tr ng-repeat="entry in entries" ng-include="getTemplate(acctTitle)">
+                            </tr>
+                            <script type="text/ng-template" id="display">
                                 <td>
                                     <span ng-show="entry.DB != 0 && entry.CR == 0">{{entry.title}}</span>
                                     <span ng-show="entry.DB == 0 && entry.CR != 0">&nbsp;&nbsp;&nbsp;&nbsp;{{entry.title}}</span>
                                 </td>
                                 <td>
                                     <span ng-show="entry.DB != 0 && entry.CR == 0"> {{entry.DB}} </span>
-                                    <span ng-show="entry.DB == 0 && entry.CR != 0"></span>
                                 </td>
                                 <td>
                                     <span ng-show="entry.CR != 0 && entry.DB == 0"> {{entry.CR}} </span>
-                                    <span ng-show="entry.CR == 0 && entry.DB != 0"></span>
                                 </td>
                                 <td class="text-center">
-                                    <a class="btn btn-primary btn-xs" ng-click="getEntriesID(CDV.cdvID)">
+                                    <a class="btn btn-primary btn-xs" ng-click="editJVEntries(row)">
                                         <i class="fa fa-pencil"></i>
                                     </a>
                                     <a class="btn btn-danger btn-xs" ng-click="removeRow($index)">
                                         <i class="fa fa-trash"></i>
                                     </a>
                                 </td>
+                            </script>
+                            <script type="text/ng-template" id="edit">
+                                <td>
+                                    <select ng-model="entry.acctTitle" class="form-control" id="inputName">
+                                        <option ng-repeat="acctTitle in acctTitles track by acctTitle.idAcctTitle" ng-value="{{acctTitle.idAcctTitle}}" ng-selected="entry.acctTitle == acctTitle.idAcctTitle">{{acctTitle.acctTitle}}</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="text" ng-model="entry.selected.DB" />
+                                </td>
+                                <td>
+                                    <input type="text" ng-model="entry.selected.CR" />
+                                </td>
+                                <td>
+                                    <button ng-click="saveContact($index)">Save</button>
+                                    <button ng-click="reset()">Cancel</button>
+                                </td>
+                            </script>
                             </tr>
                             <tr>
                                 <td>Total:</td>
                                 <td>{{totalDB}}</td>
-                                <td>{{totalCR}}</td><td></td>
+                                <td>{{totalCR}}</td>
+                                <td></td>
                             </tr>
                         </tbody>
                     </table>

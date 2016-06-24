@@ -104,6 +104,11 @@ angular
                 templateUrl: 'templates/JVList.html',
                 controller: 'JVctrl'
             })
+            .state('main.editJV', {
+                url: '/JVList/:id',
+                templateUrl: 'templates/AddJV.html',
+                controller: 'JVctrl'
+            })
             .state('main.AddJV', {
                 url: '/AddJV',
                 templateUrl: 'templates/AddJV.html',
