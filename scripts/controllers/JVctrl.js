@@ -3,11 +3,6 @@
  angular.module('accounting')
      .controller('JVctrl', function($scope, $filter, $window, JVFactory, toastr, ngTableParams, $stateParams, ReportingService) {
 
-         // var self = this;
-
-         // self.cancel = cancel;
-         // self.save = save;
-
          $scope.addRow = function(row) {
              var DB, CR;
 
@@ -99,7 +94,7 @@
          $scope.approveJV = function() {
              $scope.currentUser = JSON.parse($window.localStorage['user']);
              var data = {
-                 userID: $scope.currentUser.userID
+                   userID: $scope.currentUser.userID
              };
              JVFactory.approveJV($scope.entry.JID, data).then(function(data) {
                  console.log('data: ', data);
@@ -142,42 +137,24 @@
          };
 
          $scope.$watch("JVNum", function() {
-             $scope.tableParams.reload()    ;
+             $scope.tableParams.reload();
          });
 
-         $scope.getTemplate = function(row) {
-             if (row.title === $scope.entries.selected.title) return 'edit';
-             else return 'display';
+         // $scope.saveUser = function(data, id) {
+         //     //$scope.user not updated yet
+         //     angular.extend(data, { id: id });
+         //     return $http.post('/saveUser', data);
+         // };
+
+         $scope.saveEntries = function() {
+             $scope.inserted = {
+                 id: $scope.users.length + 1,
+                 name: '',
+                 status: null,
+                 group: null
+             };
+             $scope.entries.push($scope.inserted);
          };
-
-         // $scope.selected = {};
-
-         $scope.editJVEntries = function(row) {
-             $scope.entries.selected = angular.copy(row);
-         }
-
-         $scope.reset = function() {
-             $scope.entries.selected = {};
-         };
-
-         //  function cancel(row, rowForm) {
-         //     var originalRow = resetRow(row, rowForm);
-         //     angular.extend(row, originalRow);
-         // }
-
-         //  function resetRow(row, rowForm) {
-         //     row.isEditing = false;
-         //     rowForm.$setPristine();
-         //     self.tableTracker.untrack(row);
-         //     return _.findWhere(originalData, function(r){
-         //          return r.id === row.id;
-         //     });
-         //  }
-
-         //  function save(row, rowForm) {
-         //     var originalRow = resetRow(row, rowForm);
-         //     angular.extend(originalRow, row);
-         //  }
 
          function init() {
              $scope.JV = {};
@@ -191,7 +168,7 @@
                  JVFactory.getJVDetails($stateParams.id).then(function(data) {
                      if (data.length > 0) {
                          $scope.entries = data;
-                         $scope.entry = data[0];
+                         $scope.JV = data[0];
                      }
                  });
 

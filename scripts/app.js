@@ -1,7 +1,7 @@
 'use strict';
 
 angular
-    .module('accounting', ['ngResource', 'ngSanitize', 'ui.router', 'ui.bootstrap', 'ngAnimate', 'toastr', 'ngDialog', 'ngTable', 'ngCookies', 'oc.lazyLoad', 'angular-loading-bar'])
+    .module('accounting', ['ngResource', 'ngSanitize', 'ui.router', 'ui.bootstrap', 'ngAnimate', 'toastr', 'ngDialog', 'ngTable', 'ngCookies', 'oc.lazyLoad', 'angular-loading-bar', 'xeditable'])
     .constant('API_URL', 'http://192.168.0.6:8000/api/v1')
     // .constant('API_URL', 'http://localhost:81/AccountingSystem/public/api/v1')
     .config(function($httpProvider, $ocLazyLoadProvider) {
@@ -12,7 +12,9 @@ angular
             events: true,
         });
     })
-    .run(function($rootScope, $state, $location, AuthenticationFactory) {
+    .run(function($rootScope, $state, $location, AuthenticationFactory, editableOptions) {
+        editableOptions.theme = 'bs3';
+
         $rootScope.$on('$stateChangeStart', function(event, next) {
             var user = AuthenticationFactory.getUser();
             var token = AuthenticationFactory.getToken();

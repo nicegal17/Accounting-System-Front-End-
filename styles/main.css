@@ -101,14 +101,14 @@ background-color: #eee;
     padding-left: 10px;
   }
 
-.demoTable td:last-child {
+/*.demoTable td:last-child {
   min-width: 90px;
-}
+}*/
 
 /** Editable table
 ------------------------- */
 
-.editable-table > tbody > tr > td {
+/*.editable-table > tbody > tr > td {
   padding: 4px
 }
 .editable-text {
@@ -129,3 +129,6 @@ background-color: #eee;
   padding-top: 4px;
   padding-bottom: 4px;
 }
+
+.table {width: 100% }
+form[editable-form] > div {margin: 10px 0;}*/

@@ -26,67 +26,42 @@
                 </form>
                 <br>
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover" id="tab_logic">
-                        <thead>
-                            <tr>
-                                <th class="text-center">Account Title</th>
-                                <th class="text-center">Debit</th>
-                                <th class="text-center">Credit</th>
-                                <th width="10%">Action</th>
+                    <tbody>
+                        <table class="table table-bordered table-hover table-condensed">
+                            <tr style="font-weight: bold">
+                                <td style="width:40%">Account Title</td>
+                                <td style="width:20%">Debit</td>
+                                <td style="width:20%">Credit</td>
+                                <td style="width:5%">Action</td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="entry in entries" ng-include="getTemplate(acctTitle)">
+                            <tr ng-repeat="entry in entries">
+                                <td>
+                                    <span ng-if="entry.DB != 0 && entry.CR == 0" editable-select="entry.title" e-name="acctTitle" e-form="rowform" e-ng-options="acctTitle in acctTitles track by acctTitle.idAcctTitle">{{ entry.title || 'empty' }}    
+                                    </span>
+                                    <span ng-if="entry.DB == 0 && entry.CR != 0" editable-select="entry.title" e-name="acctTitle" e-form="rowform" e-ng-options="acctTitle in acctTitles track by acctTitle.idAcctTitle">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ entry.title || 'empty' }}</span>
+                                </td>
+                                <td>
+                                    <span editable-text="entry.DB" e-name="DB" e-form="rowform">{{ entry.DB }}</span>
+                                </td>
+                                <td>
+                                    <span editable-text="entry.CR" e-name="CR" e-form="rowform">{{ entry.CR }}</span>
+                                </td>
+                                <td style="white-space: nowrap">
+                                    <form editable-form name="rowform" ng-show="rowform.$visible" onbeforesave="saveUser($data, entry.idAcctTitle)" class="form-buttons form-inline">
+                                        <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-saved"></i></button>
+                                        <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default btn-xs"><i class="fa fa-close"></i></button>
+                                    </form>
+                                    <div ng-show="!rowform.$visible" shown="inserted == user">
+                                        <a class="btn btn-primary btn-xs" ng-click="rowform.$show()"><i class="fa fa-pencil"></i></a>
+                                        <a class="btn btn-danger btn-xs" ng-click="removeUser($index)"><i class="fa fa-trash"></i></a>
+                                    </div>
+                                </td>
                             </tr>
-                            <script type="text/ng-template" id="display">
-                                <td>
-                                    <span ng-show="entry.DB != 0 && entry.CR == 0">{{entry.title}}</span>
-                                    <span ng-show="entry.DB == 0 && entry.CR != 0">&nbsp;&nbsp;&nbsp;&nbsp;{{entry.title}}</span>
-                                </td>
-                                <td>
-                                    <span ng-show="entry.DB != 0 && entry.CR == 0"> {{entry.DB}} </span>
-                                </td>
-                                <td>
-                                    <span ng-show="entry.CR != 0 && entry.DB == 0"> {{entry.CR}} </span>
-                                </td>
-                                <td class="text-center">
-                                    <a class="btn btn-primary btn-xs" ng-click="editJVEntries(row)">
-                                        <i class="fa fa-pencil"></i>
-                                    </a>
-                                    <a class="btn btn-danger btn-xs" ng-click="removeRow($index)">
-                                        <i class="fa fa-trash"></i>
-                                    </a>
-                                </td>
-                            </script>
-                            <script type="text/ng-template" id="edit">
-                                <td>
-                                    <select ng-model="entry.acctTitle" class="form-control" id="inputName">
-                                        <option ng-repeat="acctTitle in acctTitles track by acctTitle.idAcctTitle" ng-value="{{acctTitle.idAcctTitle}}" ng-selected="entry.acctTitle == acctTitle.idAcctTitle">{{acctTitle.acctTitle}}</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <input type="text" ng-model="entry.selected.DB" />
-                                </td>
-                                <td>
-                                    <input type="text" ng-model="entry.selected.CR" />
-                                </td>
-                                <td>
-                                    <button ng-click="saveContact($index)">Save</button>
-                                    <button ng-click="reset()">Cancel</button>
-                                </td>
-                            </script>
-                            </tr>
-                            <tr>
-                                <td>Total:</td>
-                                <td>{{totalDB}}</td>
-                                <td>{{totalCR}}</td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                        </table>
+                    </tbody>
                     <div class="form-group">
                         <label for="inputName">Particular</label>
-                        <input type="text" class="form-control" id="inputName" ng-model="JV.particular" placeholder="Particular">
+                        <input type="text" class="form-control" id="inputName" ng-model="JV.particulars" placeholder="Particular">
                     </div>
                 </div>
                 <br>
