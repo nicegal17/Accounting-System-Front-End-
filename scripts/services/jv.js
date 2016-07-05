@@ -90,6 +90,25 @@ angular.module('accounting')
                 });
             },
 
+            getJVPK: function(id) {
+                return $http({
+                    url: API_URL + '/JV/getJVPK/' + id,
+                    method: 'GET',
+                }).then(function(res) {
+                    return res.data;
+                });
+            },
+
+            updateJVEntries: function(id, data) {
+                return $http({
+                    url: API_URL + '/JV/updateJVEntries/' + id,
+                    method: 'PUT',
+                    data: data
+                }).then(function(res) {
+                    return res.data;
+                });
+            },
+
             getGJEntries: function(filterDate, filterDateTO) {
                 return $http({
                     url: API_URL + '/JV/getGJEntries',

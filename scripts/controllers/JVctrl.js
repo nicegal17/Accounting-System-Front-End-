@@ -1,12 +1,12 @@
  'use strict';
 
  angular.module('accounting')
-     .controller('JVctrl', function($scope, $filter, $window, JVFactory, toastr, ngTableParams, $stateParams, ReportingService) {
+     .controller('JVctrl', function($scope, $filter, $window, $stateParams, $http, JVFactory, toastr, ngTableParams, ReportingService) {
 
          $scope.addRow = function(row) {
              var DB, CR;
 
-             var title = _.find($scope.acctTitles, {
+             var acctTitle = _.find($scope.acctTitles, {
                  'idAcctTitle': parseInt(row.acctTitle)
              });
 
@@ -23,8 +23,8 @@
              }
 
              $scope.entries.push({
-                 acctTitle: row.acctTitle,
-                 title: title.acctTitle,
+                 title: row.acctTitle,
+                 acctTitle: acctTitle.acctTitle,
                  DB: DB,
                  CR: CR
              });
@@ -75,6 +75,7 @@
                  });
              } else {
                  JVFactory.createJV(data).then(function(data) {
+                    console.log('data: ', $scope.entries);
                      if (!_.isEmpty(data)) {
                          if (data.success == 'true') {
                              toastr.success(data.msg, 'Journal Voucher Entry');
@@ -94,7 +95,7 @@
          $scope.approveJV = function() {
              $scope.currentUser = JSON.parse($window.localStorage['user']);
              var data = {
-                   userID: $scope.currentUser.userID
+                 userID: $scope.currentUser.userID
              };
              JVFactory.approveJV($scope.entry.JID, data).then(function(data) {
                  console.log('data: ', data);
@@ -116,7 +117,7 @@
                  if (data.success === 'true') {
                      toastr.success(data.msg, 'Cancel Journal Voucher');
                  } else {
-                     toastr.error(data.msg, 'Error while Cancelling JV.');
+                     toastr.error(data.msg, 'Error while Canceling JV.');
                  }
              });
          };
@@ -140,24 +141,34 @@
              $scope.tableParams.reload();
          });
 
-         // $scope.saveUser = function(data, id) {
-         //     //$scope.user not updated yet
-         //     angular.extend(data, { id: id });
-         //     return $http.post('/saveUser', data);
-         // };
+         $scope.getJVPK = function(id) {
+             JVFactory.getJVPK(id).then(function(data) {
+                 if (data.length > 0) {
+                     $scope.entry = data[0];
+                     console.log('$scope.entry: ', $scope.entry);
+                 }
+             });
+         }
 
-         $scope.saveEntries = function() {
-             $scope.inserted = {
-                 id: $scope.users.length + 1,
-                 name: '',
-                 status: null,
-                 group: null
+         $scope.updateJVEntries = function() {
+             var data = {
+                 JV: $scope.JV,
+                 entries: JSON.stringify($scope.entries),
+                 userID: $scope.currentUser.userID
              };
-             $scope.entries.push($scope.inserted);
+
+             JVFactory.updateJVEntries($scope.entry.PK, data).then(function(data) {
+                 if (data.success === 'true') {
+                     toastr.success(data.msg, 'Updated');
+                 } else {
+                     toastr.error(data.msg, 'Error while Auditing JV.');
+                 }
+             });
          };
 
          function init() {
              $scope.JV = {};
+             $scope.entry = {};
              $scope.entries = [];
 
              JVFactory.getAcctTitle().then(function(data) {

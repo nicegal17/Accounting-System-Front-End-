@@ -36,9 +36,9 @@
                             </tr>
                             <tr ng-repeat="entry in entries">
                                 <td>
-                                    <span ng-if="entry.DB != 0 && entry.CR == 0" editable-select="entry.title" e-name="acctTitle" e-form="rowform" e-ng-options="acctTitle in acctTitles track by acctTitle.idAcctTitle">{{ entry.title || 'empty' }}    
+                                    <span ng-if="entry.DB != 0 && entry.CR == 0" ng-model="entry.acctTitle" editable-select="entry.acctTitle" e-name="entry.acctTitle" e-form="rowform" ng-value="{{entry.idAcctTitle}}" e-ng-options="entry.acctTitle as entry.acctTitle for entry in acctTitles">{{ entry.acctTitle }}    
                                     </span>
-                                    <span ng-if="entry.DB == 0 && entry.CR != 0" editable-select="entry.title" e-name="acctTitle" e-form="rowform" e-ng-options="acctTitle in acctTitles track by acctTitle.idAcctTitle">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ entry.title || 'empty' }}</span>
+                                    <span ng-if="entry.DB == 0 && entry.CR != 0" ng-model="entry.acctTitle" editable-select="entry.acctTitle" e-name="entry.acctTitle" e-form="rowform" ng-value="{{entry.idAcctTitle}}" e-ng-options="entry.acctTitle as entry.acctTitle for entry in acctTitles">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ entry.acctTitle }} </span>
                                 </td>
                                 <td>
                                     <span editable-text="entry.DB" e-name="DB" e-form="rowform">{{ entry.DB }}</span>
@@ -47,12 +47,12 @@
                                     <span editable-text="entry.CR" e-name="CR" e-form="rowform">{{ entry.CR }}</span>
                                 </td>
                                 <td style="white-space: nowrap">
-                                    <form editable-form name="rowform" ng-show="rowform.$visible" onbeforesave="saveUser($data, entry.idAcctTitle)" class="form-buttons form-inline">
-                                        <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-saved"></i></button>
+                                    <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline">
+                                        <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary btn-xs" ng-click="updateJVEntries()"><i class="glyphicon glyphicon-saved"></i></button>
                                         <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default btn-xs"><i class="fa fa-close"></i></button>
                                     </form>
-                                    <div ng-show="!rowform.$visible" shown="inserted == user">
-                                        <a class="btn btn-primary btn-xs" ng-click="rowform.$show()"><i class="fa fa-pencil"></i></a>
+                                    <div ng-show="!rowform.$visible" shown="inserted == entry">
+                                        <a class="btn btn-primary btn-xs" ng-click="rowform.$show(getJVPK(entry.PK))"><i class="fa fa-pencil"></i></a>
                                         <a class="btn btn-danger btn-xs" ng-click="removeUser($index)"><i class="fa fa-trash"></i></a>
                                     </div>
                                 </td>
