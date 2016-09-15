@@ -41,15 +41,15 @@ angular.module('accounting')
                 });
             },
 
-            updateJV: function(id, data) {
-                return $http({
-                    url: API_URL + '/JV/' + id,
-                    method: 'PUT',
-                    data: data
-                }).then(function(res) {
-                    return res.data;
-                });
-            },
+            // updateJVEntries: function(id, data) {
+            //     return $http({
+            //         url: API_URL + '/JV/' + id,
+            //         method: 'PUT',
+            //         data: data
+            //     }).then(function(res) {
+            //         return res.data;
+            //     });
+            // },
 
             approveJV: function(id, data) {
                 return $http({
@@ -99,7 +99,7 @@ angular.module('accounting')
                 });
             },
 
-            updateJVEntries: function(id, data) {
+             updateJVEntries: function(id, data) {
                 return $http({
                     url: API_URL + '/JV/updateJVEntries/' + id,
                     method: 'PUT',

@@ -36,15 +36,15 @@
                             </tr>
                             <tr ng-repeat="entry in entries">
                                 <td>
-                                    <span ng-if="entry.DB != 0 && entry.CR == 0" ng-model="entry.acctTitle" editable-select="entry.acctTitle" e-name="entry.acctTitle" e-form="rowform" ng-value="{{entry.idAcctTitle}}" e-ng-options="entry.acctTitle as entry.acctTitle for entry in acctTitles">{{ entry.acctTitle }}    
+                                    <span ng-if="entry.DB != 0 && entry.CR == 0" ng-model="entry.acctTitle" editable-select="entry.acctTitle" e-name="entry.acctTitle" e-form="rowform" ng-value="{{entry.idAcctTitle}}" e-ng-options="entry.acctTitle as entry.acctTitle for entry in acctTitles" ng-selected="entry.acctTitle == acctTitle.idAcctTitle">{{ entry.acctTitle }}    
                                     </span>
-                                    <span ng-if="entry.DB == 0 && entry.CR != 0" ng-model="entry.acctTitle" editable-select="entry.acctTitle" e-name="entry.acctTitle" e-form="rowform" ng-value="{{entry.idAcctTitle}}" e-ng-options="entry.acctTitle as entry.acctTitle for entry in acctTitles">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ entry.acctTitle }} </span>
+                                    <span ng-if="entry.DB == 0 && entry.CR != 0" ng-model="entry.acctTitle" editable-select="entry.acctTitle" e-name="entry.acctTitle" e-form="rowform" ng-value="{{entry.idAcctTitle}}" e-ng-options="entry.acctTitle as entry.acctTitle for entry in acctTitles" ng-selected="entry.acctTitle == acctTitle.idAcctTitle">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ entry.acctTitle }} </span>
                                 </td>
                                 <td>
-                                    <span editable-text="entry.DB" e-name="DB" e-form="rowform">{{ entry.DB }}</span>
+                                    <span editable-text="entry.DB" e-name="DB" e-form="rowform" ng-model="entry.DB">{{ entry.DB }}</span>
                                 </td>
                                 <td>
-                                    <span editable-text="entry.CR" e-name="CR" e-form="rowform">{{ entry.CR }}</span>
+                                    <span editable-text="entry.CR" e-name="CR" e-form="rowform" ng-model="entry.CR">{{ entry.CR }}</span>
                                 </td>
                                 <td style="white-space: nowrap">
                                     <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline">
