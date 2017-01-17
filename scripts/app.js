@@ -4,7 +4,8 @@ angular
     .module('accounting', ['ngResource', 'ngSanitize', 'ui.router', 'ui.bootstrap', 'ngAnimate', 'toastr', 'ngDialog', 'ngTable', 'ngCookies', 'oc.lazyLoad', 'angular-loading-bar', 'xeditable'])
     .constant('API_URL', 'http://192.168.0.6:8000/api/v1')
     // .constant('API_URL', 'http://localhost:81/AccountingSystem/public/api/v1')
-    .config(function($httpProvider, $ocLazyLoadProvider) {
+    .config(function($httpProvider, $ocLazyLoadProvider, $locationProvider) {
+        $locationProvider.html5Mode(true).hashPrefix('!'); //this for location 
 
         $httpProvider.interceptors.push('authInterceptor');
         $ocLazyLoadProvider.config({
@@ -12,7 +13,20 @@ angular
             events: true,
         });
     })
-    .run(function($rootScope, $state, $location, AuthenticationFactory, editableOptions) {
+
+//this is for location
+.controller("reportingctrl", function($scope, $location) {
+    $scope.$location = {};
+    angular.forEach("protocol host port path search hash".split(" "), function(method) {
+        $scope.$location[method] = function() {
+            var result = $location[method].call($location);
+            return angular.isObject(result) ? angular.toJson(result) : result;
+        };
+    });
+})
+
+
+.run(function($rootScope, $state, $location, AuthenticationFactory, editableOptions) {
         editableOptions.theme = 'bs3';
 
         $rootScope.$on('$stateChangeStart', function(event, next) {

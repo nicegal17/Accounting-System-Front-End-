@@ -4,8 +4,9 @@ angular
     .module('accounting')
     .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
         $stateProvider
+
         // =========== AUTHENTICATION =========== //
-            .state('login', {
+        .state('login', {
             url: '/login',
             templateUrl: 'templates/login/login.html',
             controller: 'loginctrl'
@@ -242,7 +243,7 @@ angular
                 }
             })
             .state('main.CDJ', {
-                url: '/CDJ',
+                url: '/CDJ/:sdate1',
                 templateUrl: 'templates/reports/checkdisbursement-journal.html',
                 controller: 'reportingctrl',
                 resolve: {
@@ -262,5 +263,6 @@ angular
                 }
             });
 
+        $locationProvider.html5Mode( true );
         $urlRouterProvider.otherwise('/login');
     });

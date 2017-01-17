@@ -1,3 +1,6 @@
+<head>
+    <base href="/">
+</head>
 <div class="row">
     <div class="col-lg-12">
     </div>
@@ -14,7 +17,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <p class="input-group">
-                                        <input type="date" id="exampleInput" name="input" class="form-control" datepicker-popup ng-model="dateParams.paramsdate.chkDate" is-open="opened" min-date="{{minDate | date:'yyyy-MM-dd'}}" max-date="{{maxDate | date:'yyyy-MM-dd'}}" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                                        <input type="date" id="exampleInput" name="input" class="form-control" datepicker-popup ng-model="sdate1.paramsdate.chkDate" is-open="opened" min-date="{{minDate | date:'yyyy-MM-dd'}}" max-date="{{maxDate | date:'yyyy-MM-dd'}}" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
                                         <span class="input-group-btn">
                                                 <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                                             </span>
@@ -24,7 +27,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-6">
+               <!--  <div class="col-lg-3 col-md-3 col-sm-6">
                     <div class="form-inline pull-left" role="form">
                         <div class="form-group">
                             <label for="inputName">TO:</label>
@@ -40,10 +43,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="col-lg-3 col-md-3 col-sm-6">
                     <div class="form-inline pull-left" role="form">
-                        <a class="btn btn-success" ng-click="getCDVInfo()"><i class="fa fa-print"></i> Show</a>
+                        <a class="btn btn-success" ng-click="?target=sdate1"><i class="fa fa-print"></i> Show</a>
                         <a class="btn btn-success" ng-click="printData()"><i class="fa fa-print"></i> Print</a>
                     </div>
                 </div>
@@ -61,13 +64,13 @@
                             <th>Date</th>
                             <th>Payee</th>
                             <th>Particulars</th>
-                            <th>Account Title</th>
+                            <!-- <th>Account Title</th>
                             <th>Debit</th>
-                            <th>Credit</th>
+                            <th>Credit</th> -->
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="data in tableParams">
+                   <!--      <tr ng-repeat="data in tableParams">
                             <td>{{data.CDVNo}}</td>
                             <td>{{data.chkDate}}</td>
                             <td>{{data.payee}}</td>
@@ -85,7 +88,7 @@
                                 <span ng-show="data.idAcctTitleCR == null && data.idAcctTitleDB != null"></span>
                             </td>
                         </tr>
-                    </tbody>
+                    </tbody> -->
                 </table>
             </div>
         </div>

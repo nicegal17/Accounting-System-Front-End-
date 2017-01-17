@@ -352,3 +352,57 @@ table.dataTable thead .sorting:after {
 .panel-yellow a:hover {
     color: #df8a13;
 }
+
+.text-left {
+  text-align: left;
+}
+.text-right {
+  text-align: right;
+}
+.text-center {
+  text-align: center;
+}
+.text-justify {
+  text-align: justify;
+}
+.text-nowrap {
+  white-space: nowrap;
+}
+.text-lowercase {
+  text-transform: lowercase;
+}
+.text-uppercase {
+  text-transform: uppercase;
+}
+.text-capitalize {
+  text-transform: capitalize;
+}
+.hr { 
+    padding: 0px;
+    margin: 0px;
+}
+
+.text-center-align {
+  display: block;
+  text-align: center;
+}
+
+@media print {
+    aside#sidebar,header[role="banner"],footer,#comments,#respond {
+        display: none;
+    }
+    #container #content #main {
+        width: 90%;
+        margin: 0px;
+        padding: 0px;
+    }
+    * {
+        color: #000;    
+        background-color: #fff;
+        @include box-shadow(none);
+        @include text-shadow(none);
+    }
+    a:after {
+        content: "( "attr(href)" )";
+    }
+}

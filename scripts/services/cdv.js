@@ -26,7 +26,7 @@ angular.module('accounting')
                 return $http({
                     url: API_URL + '/CDV/getAcctTitles',
                     method: 'GET',
-                }).then(function(res){
+                }).then(function(res) {
                     return res.data;
                 });
             },
@@ -35,7 +35,7 @@ angular.module('accounting')
                 return $http({
                     url: API_URL + '/CDV/getCDVByID/' + id,
                     method: 'GET',
-                }).then(function(res){
+                }).then(function(res) {
                     return res.data;
                 });
             },
@@ -44,7 +44,7 @@ angular.module('accounting')
                 return $http({
                     url: API_URL + '/CDV/getCDVDetails/' + id,
                     method: 'GET',
-                }).then(function(res){
+                }).then(function(res) {
                     return res.data;
                 });
             },
@@ -53,7 +53,7 @@ angular.module('accounting')
                 return $http({
                     url: API_URL + '/CDV/getCDVEntries/' + id,
                     method: 'GET',
-                }).then(function(res){
+                }).then(function(res) {
                     return res.data;
                 });
             },
@@ -62,7 +62,7 @@ angular.module('accounting')
                 return $http({
                     url: API_URL + '/CDV/getCDVNum',
                     method: 'GET',
-                }).then(function(res){
+                }).then(function(res) {
                     return res.data;
                 });
             },
@@ -72,7 +72,7 @@ angular.module('accounting')
                     url: API_URL + '/CDV',
                     method: 'POST',
                     data: data
-                }).then(function(res){
+                }).then(function(res) {
                     return res.data;
                 });
             },
@@ -91,7 +91,7 @@ angular.module('accounting')
                 return $http({
                     url: API_URL + '/CDV/previewCDV/' + id,
                     method: 'GET',
-                }).then(function(res){
+                }).then(function(res) {
                     return res.data;
                 });
             },
@@ -126,17 +126,27 @@ angular.module('accounting')
                 });
             },
 
-            getCDVInfo: function(filterDate, filterDateTO) {
+            getCDVInfo: function(sdate1) {
                 return $http({
-                    url: API_URL + '/CDV/getCDVInfo',
-                    data: {
-                        from: filterDate,
-                        to: filterDateTO
-                    },
-                    method: 'POST',
-                }).then(function(res){
+                    url: API_URL + '/CDV/getCDVInfo/' + sdate1,
+                    method: 'PUT'
+                }).then(function(res) {
                     return res.data;
                 });
             },
+
+            // data: {
+            //     from: filterDate
+            // },
+
+            // getCDVEntries: function(id) {
+            // return $http({
+            //     url: API_URL + '/CDV/getCDVEntries/' + id,
+            //     method: 'GET',
+            // }).then(function(res){
+            //     return res.data;
+            // });
+
+
         };
     });

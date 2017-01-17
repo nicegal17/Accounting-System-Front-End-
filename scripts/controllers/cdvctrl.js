@@ -236,8 +236,6 @@
                          $scope.entries = data;
                      }
                  });
-
-                
              }
 
              $scope.dateOptions = {
