@@ -243,7 +243,7 @@ angular
                 }
             })
             .state('main.CDJ', {
-                url: '/CDJ/:sdate1',
+              url: '/CDJ',
                 templateUrl: 'templates/reports/checkdisbursement-journal.html',
                 controller: 'reportingctrl',
                 resolve: {
@@ -263,6 +263,6 @@ angular
                 }
             });
 
-        $locationProvider.html5Mode( true );
+        // $locationProvider.html5Mode( true );
         $urlRouterProvider.otherwise('/login');
     });

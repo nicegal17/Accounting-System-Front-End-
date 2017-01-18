@@ -128,8 +128,8 @@ angular.module('accounting')
 
             getCDVInfo: function(sdate1) {
                 return $http({
-                    url: API_URL + '/CDV/getCDVInfo/' + sdate1,
-                    method: 'PUT'
+                    url: API_URL + '/CDV/getCDVInfo?sdate1=' + sdate1,
+                    method: 'GET'
                 }).then(function(res) {
                     return res.data;
                 });

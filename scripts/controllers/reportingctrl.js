@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('accounting')
-    .controller('reportingctrl', ['$routeParams', '$location', function($scope, $filter, $routeParams, $location, toastr, ngTableParams, PositionFactory, AccountFactory, PODetFactory, CDVFactory, JVFactory, APVFactory, ReportingService, reportParams) {
+    .controller('reportingctrl', function($scope, $filter, toastr, ngTableParams, PositionFactory, AccountFactory, PODetFactory, CDVFactory, JVFactory, APVFactory, ReportingService, reportParams) {
 
         $scope.tableParams = [];
 
@@ -97,27 +97,29 @@ angular.module('accounting')
             //     var dateval = $location.search()['sdate1'];
             // }
 
-            $scope.location = $location;
-            $scope.$watch('location.search()', function() {
-                $scope.target = ($location.search()).target;
-            }, true);
+            // $scope.location = $location;
+            // $scope.$watch('location.search()', function() {
+            //     $scope.target = ($location.search()).target;
+            // }, true);
 
             // $scope.changeTarget = function(name) {
             //     $location.search('target', name);
             // }
 
-            // $scope.getCDVInfo = function() {
-            //     CDVFactory.getCDVInfo($filter('date')($scope.sdate1.paramsdate.chkDate, 'yyyy-MM-dd')).then(function(data) {
-            //         $scope.tableParams = data;
-            //     });
-            // };
+            $scope.getCDVInfo = function() {
+                CDVFactory.getCDVInfo($filter('date')($scope.sdate1.paramsdate.chkDate, 'yyyy-MM-dd')).then(function(data) {
+                    $scope.tableParams = data;
+                });
+            };
+
+
         }
 
         $scope.printData = function() {
             var divToPrint = document.getElementById('printTable');
             ReportingService.printData(divToPrint);
         };
-    }]);
+    });
 
 
 // CDVFactory.getCDVInfo($filter('date')($scope.dateParams.paramsdate.chkDate, 'yyyy-MM-dd'), $filter('date')($scope.dateparamsTO.paramsdate.chkDate, 'yyyy-MM-dd')).then(function(data) {
