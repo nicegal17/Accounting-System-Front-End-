@@ -27,7 +27,7 @@
                         </div>
                     </div>
                 </div>
-               <!--  <div class="col-lg-3 col-md-3 col-sm-6">
+                <!--  <div class="col-lg-3 col-md-3 col-sm-6">
                     <div class="form-inline pull-left" role="form">
                         <div class="form-group">
                             <label for="inputName">TO:</label>
@@ -64,18 +64,34 @@
                             <th>Date</th>
                             <th>Payee</th>
                             <th>Particulars</th>
-                            <!-- <th>Account Title</th>
-                            <th>Debit</th>
-                            <th>Credit</th> -->
                         </tr>
                     </thead>
+                    <!-- <tbody ng-model="CDV.cdjournal">
+                        <tr ng-repeat="cdjournal in cdjournals track by cdjournal.cdvID">
+                            <td>{{cdjournal.CDVNo}}</td>
+                            <td>{{cdjournal.chkDate}}</td>
+                            <td>{{cdjournal.payee}}</td>
+                            <td>{{cdjournal.particular}}</td>
+                        </tr>
+                    </tbody> -->
                     <tbody>
-                   <!--      <tr ng-repeat="data in tableParams">
-                            <td>{{data.CDVNo}}</td>
-                            <td>{{data.chkDate}}</td>
-                            <td>{{data.payee}}</td>
-                            <td>{{data.particular}}</td>
-                            <td>
+                        <tr ng-repeat="CDV in $data">
+                            <td>{{CDV.CDVNo}}</td>
+                            <td>{{CDV.chkDate}}</td>
+                            <td>{{CDV.payee}}</td>
+                            <td>{{CDV.particular}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <select ng-model="employee.position" class="form-control">
+                            <option ng-repeat="position in positions track by position.idPosition" ng-value="position.idPosition" ng-selected="employee.position == position.idPosition">{{position.posName}}</option>
+                        </select> -->
+
+<!--  <td>
                                 <span ng-show="data.idAcctTitleDB != null && data.idAcctTitleCR == null">{{data.acctTitle}}</span>
                                 <span ng-show="data.idAcctTitleDB == null && data.idAcctTitleCR != null">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{data.acctTitle}}</span>
                             </td>
@@ -86,11 +102,4 @@
                             <td>
                                 <span ng-show="data.idAcctTitleCR != null && data.idAcctTitleDB == null"> {{data.amount}} </span>
                                 <span ng-show="data.idAcctTitleCR == null && data.idAcctTitleDB != null"></span>
-                            </td>
-                        </tr>
-                    </tbody> -->
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
+                            </td> -->

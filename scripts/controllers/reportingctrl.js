@@ -13,13 +13,7 @@ angular.module('accounting')
             }
         }
 
-        $scope.CDV = {};
-
-        // $scope.dateparamsTO = {
-        //     "paramsdate": {
-        //         "chkDate": new Date()
-        //     }
-        // }
+       $scope.cdjournals = {};
 
         $scope.sDateFr = function() {
             $scope.filterDate = $filter('date')($scope.sdate1.paramsdate.chkDate, 'yyyy-MM-dd');
@@ -73,11 +67,13 @@ angular.module('accounting')
             if (!_.isEmpty($scope.tableParams)) {
                 $scope.tableParams.splice(0, $scope.tableParams.length);
             }
-        } else if (reportParams === 'JV') {
+        } 
+        else if (reportParams === 'JV') {
             if (!_.isEmpty($scope.tableParams)) {
                 $scope.tableParams.splice(0, $scope.tableParams.length);
             }
-        } else if (reportParams === 'APJ') {
+        } 
+        else if (reportParams === 'APJ') {
             if (!_.isEmpty($scope.tableParams)) {
                 $scope.tableParams.splice(0, $scope.tableParams.length);
             }
@@ -88,49 +84,52 @@ angular.module('accounting')
                 });
             };
 
-        } else if (reportParams === 'CDJ') {
+        } 
+        else if (reportParams === 'CDJ') {
             if (!_.isEmpty($scope.tableParams)) {
                 $scope.tableParams.splice(0, $scope.tableParams.length);
             }
-
-            // if ($location.search().hasOwnProperty('sdate1')) {
-            //     var dateval = $location.search()['sdate1'];
-            // }
-
-            // $scope.location = $location;
-            // $scope.$watch('location.search()', function() {
-            //     $scope.target = ($location.search()).target;
-            // }, true);
-
-            // $scope.changeTarget = function(name) {
-            //     $location.search('target', name);
-            // }
 
             $scope.getCDVInfo = function() {
                 CDVFactory.getCDVInfo($filter('date')($scope.sdate1.paramsdate.chkDate, 'yyyy-MM-dd')).then(function(data) {
                     $scope.tableParams = data;
                 });
             };
-
-
         }
 
         $scope.printData = function() {
             var divToPrint = document.getElementById('printTable');
             ReportingService.printData(divToPrint);
         };
+
+
+         function init() {
+             $scope.cdjs = {};
+
+             $scope.tableParams = new ngTableParams({
+                 page: 1, // show first page
+                 count: 10, // count per page
+                 sorting: {
+                     name: 'asc' // initial sorting
+                 }
+             }, {
+                 getData: function($defer, params) {
+                     CDVFactory.getCDVInfo().then(function(data) {
+                         var orderedData = {};
+
+                         if ($scope.searchEmployee) {
+                             orderedData = $filter('filter')(data, $scope.searchEmployee);
+                             orderedData = params.sorting() ? $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
+                         } else {
+                             orderedData = params.sorting() ? $filter('orderBy')(data, params.orderBy()) : data;
+                         }
+
+                         params.total(data.length);
+                         $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+                     });
+                 }
+             });
+         }
+
+         init();
     });
-
-
-// CDVFactory.getCDVInfo($filter('date')($scope.dateParams.paramsdate.chkDate, 'yyyy-MM-dd'), $filter('date')($scope.dateparamsTO.paramsdate.chkDate, 'yyyy-MM-dd')).then(function(data) {
-//     $scope.tableParams = data;
-//  });
-//     $scope.getCDVInfo = function(filterDate) {
-//     $scope.CDJ = {};
-//     CDVFactory.getCDVInfo(filterDate).then(function(data) {
-//         if (data.length > 0) {
-//             $scope.CDJ = data[0];
-//             console.log('$scope.user: ', $scope.CDJ);
-//         }
-//     });
-// };
