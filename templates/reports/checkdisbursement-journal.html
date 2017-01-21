@@ -19,31 +19,31 @@
                                     <p class="input-group">
                                         <input type="date" id="exampleInput" name="input" class="form-control" datepicker-popup ng-model="sdate1.paramsdate.chkDate" is-open="opened" min-date="{{minDate | date:'yyyy-MM-dd'}}" max-date="{{maxDate | date:'yyyy-MM-dd'}}" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
                                         <span class="input-group-btn">
-                                                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                                            </span>
+                                            <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!--  <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="col-lg-3 col-md-3 col-sm-6">
                     <div class="form-inline pull-left" role="form">
                         <div class="form-group">
                             <label for="inputName">TO:</label>
                             <div class="row">
                                 <div class="col-md-6">
                                     <p class="input-group">
-                                        <input type="date" class="form-control" datepicker-popup ng-model="dateparamsTO.paramsdate.chkDate" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                                        <input type="date" class="form-control" datepicker-popup ng-model="sdate2.paramsdate.chkDate" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
                                         <span class="input-group-btn">
-                                                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                                            </span>
+                                            <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div> -->
+                </div>
                 <div class="col-lg-3 col-md-3 col-sm-6">
                     <div class="form-inline pull-left" role="form">
                         <a class="btn btn-success" ng-click="getCDVInfo(CDV.chkDate)"><i class="fa fa-print"></i> Show</a>
@@ -53,33 +53,33 @@
             </div>
             <div id="printTable">
                 <table class="table table-hover table-responsive">
-                    <h4 class="text-center">Solutions Management System, Inc.</h4>
-                    <h5 class="text-center">#47 Hayes Street, Cagayan de Oro City</h5>
-                    <h3 class="text-center">CHECK DISBURSEMENT JOURNAL</h3>
+                    <h6 class="text-center" style="font-weight:bold;">Solutions Management System, Inc. (SMSI)</h6>
+                    <h6 class="text-center">#47 Hayes Street, Cagayan de Oro City</h6>
+                    <h6 class="text-center">Tel Fax No. (088) 856-1662</h6><br>
+                    <h5 class="text-center" style="font-weight:bold;">CHECK DISBURSEMENT VOUCHER</h5>
+                    <h5 class="text-center" style="font-weight:bold;">Summary Report</h5>
+                    <h5 class="text-center" style="font-weight:bold;">For the Month of</h5>
                     <br>
                     <br>
                     <thead>
                         <tr>
                             <th>CDV #</th>
-                            <th>Date</th>
                             <th>Payee</th>
+                            <th>Date</th>
+                            <th>Check No.</th>
                             <th>Particulars</th>
+                            <th>Amount</th>
+                            <th>TOTAL DISBURSEMENT FOR THE MONTH</th>
                         </tr>
                     </thead>
-                    <!-- <tbody ng-model="CDV.cdjournal">
-                        <tr ng-repeat="cdjournal in cdjournals track by cdjournal.cdvID">
-                            <td>{{cdjournal.CDVNo}}</td>
-                            <td>{{cdjournal.chkDate}}</td>
-                            <td>{{cdjournal.payee}}</td>
-                            <td>{{cdjournal.particular}}</td>
-                        </tr>
-                    </tbody> -->
                     <tbody>
-                        <tr ng-repeat="CDV in $data">
-                            <td>{{CDV.CDVNo}}</td>
-                            <td>{{CDV.chkDate}}</td>
-                            <td>{{CDV.payee}}</td>
-                            <td>{{CDV.particular}}</td>
+                        <tr ng-repeat="data in tableParams">
+                            <td>{{data.CDVNo}}</td>
+                            <td>{{data.payee}}</td>
+                            <td>{{data.chkDate}}</td>
+                            <td>{{data.chkNO}}</td>
+                            <td>{{data.particular}}</td>
+                            <td class="text-right">{{data.amount}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -87,19 +87,3 @@
         </div>
     </div>
 </div>
-<!-- <select ng-model="employee.position" class="form-control">
-                            <option ng-repeat="position in positions track by position.idPosition" ng-value="position.idPosition" ng-selected="employee.position == position.idPosition">{{position.posName}}</option>
-                        </select> -->
-
-<!--  <td>
-                                <span ng-show="data.idAcctTitleDB != null && data.idAcctTitleCR == null">{{data.acctTitle}}</span>
-                                <span ng-show="data.idAcctTitleDB == null && data.idAcctTitleCR != null">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{data.acctTitle}}</span>
-                            </td>
-                            <td>
-                                <span ng-show="data.idAcctTitleDB != null && data.idAcctTitleCR == null"> {{data.amount}} </span>
-                                <span ng-show="data.idAcctTitleDB == null && data.idAcctTitleCR != null"></span>
-                            </td>
-                            <td>
-                                <span ng-show="data.idAcctTitleCR != null && data.idAcctTitleDB == null"> {{data.amount}} </span>
-                                <span ng-show="data.idAcctTitleCR == null && data.idAcctTitleDB != null"></span>
-                            </td> -->

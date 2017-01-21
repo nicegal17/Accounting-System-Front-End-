@@ -126,27 +126,13 @@ angular.module('accounting')
                 });
             },
 
-            getCDVInfo: function(sdate1) {
+            getCDVInfo: function(sdate1, sdate2) {
                 return $http({
-                    url: API_URL + '/CDV/getCDVInfo?sdate1=' + sdate1,
+                    url: API_URL + '/CDV/getCDVInfo?sdate1=' + sdate1 + '&' + 'sdate2=' + sdate2,
                     method: 'GET'
                 }).then(function(res) {
                     return res.data;
                 });
             },
-
-            // data: {
-            //     from: filterDate
-            // },
-
-            // getCDVEntries: function(id) {
-            // return $http({
-            //     url: API_URL + '/CDV/getCDVEntries/' + id,
-            //     method: 'GET',
-            // }).then(function(res){
-            //     return res.data;
-            // });
-
-
         };
     });

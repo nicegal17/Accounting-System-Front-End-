@@ -13,15 +13,19 @@ angular.module('accounting')
             }
         }
 
-       $scope.cdjournals = {};
+        $scope.sdate2 = {
+            "paramsdate": {
+                "chkDate": new Date()
+            }
+        }
 
         $scope.sDateFr = function() {
             $scope.filterDate = $filter('date')($scope.sdate1.paramsdate.chkDate, 'yyyy-MM-dd');
         };
 
-        // $scope.sDateTO = function() {
-        //     $scope.filterDateTO = $filter('date')($scope.dateparamsTO.paramsdate.chkDate, 'yyyy-MM-dd');
-        // };
+        $scope.sDateTO = function() {
+            $scope.filterDateTO = $filter('date')($scope.sdate2.paramsdate.chkDate, 'yyyy-MM-dd');
+        };
 
         if (reportParams === 'chart-of-account') {
             if (!_.isEmpty($scope.tableParams)) {
@@ -91,7 +95,7 @@ angular.module('accounting')
             }
 
             $scope.getCDVInfo = function() {
-                CDVFactory.getCDVInfo($filter('date')($scope.sdate1.paramsdate.chkDate, 'yyyy-MM-dd')).then(function(data) {
+                CDVFactory.getCDVInfo($filter('date')($scope.sdate1.paramsdate.chkDate, 'yyyy-MM-dd'), $filter('date')($scope.sdate2.paramsdate.chkDate, 'yyyy-MM-dd')).then(function(data) {
                     $scope.tableParams = data;
                 });
             };
@@ -101,35 +105,4 @@ angular.module('accounting')
             var divToPrint = document.getElementById('printTable');
             ReportingService.printData(divToPrint);
         };
-
-
-         function init() {
-             $scope.cdjs = {};
-
-             $scope.tableParams = new ngTableParams({
-                 page: 1, // show first page
-                 count: 10, // count per page
-                 sorting: {
-                     name: 'asc' // initial sorting
-                 }
-             }, {
-                 getData: function($defer, params) {
-                     CDVFactory.getCDVInfo().then(function(data) {
-                         var orderedData = {};
-
-                         if ($scope.searchEmployee) {
-                             orderedData = $filter('filter')(data, $scope.searchEmployee);
-                             orderedData = params.sorting() ? $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
-                         } else {
-                             orderedData = params.sorting() ? $filter('orderBy')(data, params.orderBy()) : data;
-                         }
-
-                         params.total(data.length);
-                         $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-                     });
-                 }
-             });
-         }
-
-         init();
     });
