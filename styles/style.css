@@ -387,7 +387,7 @@ table.dataTable thead .sorting:after {
   text-align: center;
 }
 
-@media print {
+/*@media print {
     aside#sidebar,header[role="banner"],footer,#comments,#respond {
         display: none;
     }
@@ -405,4 +405,14 @@ table.dataTable thead .sorting:after {
     a:after {
         content: "( "attr(href)" )";
     }
-}
+}*/
+
+@media print body {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-size: 1em;
+    color: #333333;
+    margin-top: 2cm;
+    margin-right: 2cm;
+    margin-bottom: 1.5cm;
+    margin-left: 2cm
+        }

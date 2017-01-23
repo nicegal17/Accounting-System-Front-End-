@@ -5,8 +5,6 @@ angular
     .constant('API_URL', 'http://192.168.0.6:8000/api/v1')
     // .constant('API_URL', 'http://localhost:81/AccountingSystem/public/api/v1')
     .config(function($httpProvider, $ocLazyLoadProvider, $locationProvider) {
-        $locationProvider.html5Mode(true).hashPrefix('!'); //this for location 
-
         $httpProvider.interceptors.push('authInterceptor');
         $ocLazyLoadProvider.config({
             debug: false,
