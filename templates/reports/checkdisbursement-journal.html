@@ -55,8 +55,8 @@
                     <h6 class="text-center">Tel Fax No. (088) 856-1662</h6>
                     <br>
                     <h5 class="text-center" style="font-weight:bold;">CHECK DISBURSEMENT VOUCHER</h5>
-                    <h5 class="text-center" style="font-weight:bold;">Summary Report</h5>
-                    <h5 class="text-center" style="font-weight:bold;">For the Month of</h5>
+                    <h6 class="text-center" style="font-weight:bold;">Summary Report</h6>
+                    <h6 class="text-center" style="font-weight:bold;">For the Month of </h6>
                     <br>
                     <br>
                     <thead>
@@ -74,12 +74,15 @@
                             <td>{{data.cdvno}}</td>
                             <td>{{data.payee}}</td>
                             <td>{{data.chkDate}}</td>
-                            <td>{{data.chkNO}}</td>
+                            <td>{{data.chkNo}}</td>
                             <td>{{data.particular}}</td>
-                            <th>TOtal</th>
                             <td class="text-right">{{data.amount}}</td>
                         </tr>
                     </tbody>
+                    <tr ng-repeat="total in tableParams">
+                        <td>TOTAL DISBURSEMENT FOR THE MONTH {{total.totals}}</td>
+                       <!--  <td class="text-right"></td> -->
+                    </tr>
                 </table>
             </div>
         </div>

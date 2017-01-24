@@ -71,13 +71,11 @@ angular.module('accounting')
             if (!_.isEmpty($scope.tableParams)) {
                 $scope.tableParams.splice(0, $scope.tableParams.length);
             }
-        } 
-        else if (reportParams === 'JV') {
+        } else if (reportParams === 'JV') {
             if (!_.isEmpty($scope.tableParams)) {
                 $scope.tableParams.splice(0, $scope.tableParams.length);
             }
-        } 
-        else if (reportParams === 'APJ') {
+        } else if (reportParams === 'APJ') {
             if (!_.isEmpty($scope.tableParams)) {
                 $scope.tableParams.splice(0, $scope.tableParams.length);
             }
@@ -88,8 +86,7 @@ angular.module('accounting')
                 });
             };
 
-        } 
-        else if (reportParams === 'CDJ') {
+        } else if (reportParams === 'CDJ') {
             if (!_.isEmpty($scope.tableParams)) {
                 $scope.tableParams.splice(0, $scope.tableParams.length);
             }
@@ -99,6 +96,16 @@ angular.module('accounting')
                     $scope.tableParams = data;
                 });
             };
+
+            $scope.getCDVTotal = function() {
+              CDVFactory.getCDVTotal($filter('date')($scope.sdate1.paramsdate.chkDate, 'yyyy-MM-dd'), $filter('date')($scope.sdate2.paramsdate.chkDate, 'yyyy-MM-dd')).then(function(data) {
+                if (data.length > 0) {
+                    $scope.totals = data;
+                    console.log('data: ', $scope.totals);
+                }
+            });
+            }
+            
         }
 
         $scope.printData = function() {

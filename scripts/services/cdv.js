@@ -134,5 +134,14 @@ angular.module('accounting')
                     return res.data;
                 });
             },
+
+            getCDVTotal: function(sdate1, sdate2) {
+                return $http({
+                    url: API_URL + '/CDV/getCDVTotal?sdate1=' + sdate1 + '&' + 'sdate2=' + sdate2,
+                    method: 'GET'
+                }).then(function(res) {
+                    return res.data;
+                });
+            },
         };
     });

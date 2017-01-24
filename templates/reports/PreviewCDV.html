@@ -15,9 +15,12 @@
                                 <br>
                                 <br>
                                 <tr>
-                                    <h4 class="text-center">Solutions Management System, Inc.</h4>
-                                    <h5 class="text-center">#47 Hayes Street, Cagayan de Oro City</h5>
-                                    <h3 class="text-center">CHECK DISBURSEMENT VOUCHER</h3>
+                                    <h6 class="text-center" style="font-weight:bold;">Solutions Management System, Inc. (SMSI)</h6>
+                                    <h6 class="text-center">#47 Hayes Street, Cagayan de Oro City</h6>
+                                    <h6 class="text-center">Tel Fax No. (088) 856-1662</h6>
+                                    <br>
+                                    <br>
+                                    <h5 class="text-center" style="font-weight:bold;">CHECK DISBURSEMENT VOUCHER</h5>
                                     <br>
                                     <br>
                                     <br>
@@ -25,7 +28,7 @@
                                         <div class="col-sm-6 invoice-col">
                                             <div class="form-group">
                                                 <label for="inputName">Payee: </label>
-                                                <label for="inputSlug">{{preview.payee}}</label>
+                                                <label for="inputSlug" style="font-weight:bold;">{{preview.payee}}</label>
                                             </div>
                                         </div>
                                         <div class="col-sm-6 invoice-col">
@@ -92,7 +95,7 @@
                         <br>
                         <br>
                         <div class="row">
-                           <!--  <div class="col-sm-6 invoice-col"> --> <div class="col-xs-6 invoice-col">
+                            <div class="col-xs-6 invoice-col">
                                 <div class="form-group">
                                     <label for="inputName">Prepared By: </label>
                                     <label for="inputSlug" class="text-center">{{preview.prepby}}</label>
@@ -112,25 +115,27 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- <div class="col-sm-6 invoice-col"> --><div class="col-xs-6 invoice-col">
+                            <div class="col-xs-6 invoice-col">
                                 <div class="form-group">
                                     <label for="inputName">Received By: </label>
                                     <br>
                                     <br>
                                     <hr class="hr"></hr>
                                     <label for="inputName" class="text-center-align">Signature over printed name</label>
-                                    <br><br>
+                                    <br>
+                                    <br>
                                     <label for="inputName">Audited By: </label>
-                                    <label for="inputSlug">{{preview.auditedby}}</label><br><br>
+                                    <label for="inputSlug">{{preview.auditedby}}</label>
+                                    <br>
+                                    <br>
                                     <div class="form-inline pull-right" role="form">
-                                <div class="form-group">
-                                    <label>CDV No.:</label>
-                                    <label for="inputSlug">{{preview.CDVNo}}</label>
+                                        <div class="form-group">
+                                            <label>CDV No.:</label>
+                                            <label for="inputSlug">{{preview.CDVNo}}</label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                                </div>
-                            </div>
-                            
                         </div>
                     </div>
                 </div>
@@ -138,12 +143,3 @@
         </div>
     </div>
 </div>
-
-<!-- SELECT ID, Borrower, LoanGranted, DateGRanted, NetProceeds, Term, Interest, UnearnedInterest
-FROM
- (SELECT a.idmploye AS ID, CONCAT(a.lname, ', ', a.fname, ' ' , a.mname) AS Borrower,c.loangrant
- (SELECT b.loangrant AS LoanGranted, b.dategrant AS DateGranted, b.net AS NetProceeds, b.months AS Term, b.unearned AS UnearnedInterest 
-        FROM tbl_loanledg b WHERE b.active=1 AND ABS(PERIOD_DIFF(DATE_FORMAT(b.dategrant, '%Y%m'),'201611')) AND b.idmploye=a.idmploye ORDER BY a.idmploye DESC LIMIT 1) 
-  FROM tbl_member a WHERE a.memstat=1
-  ) AS flds
- -->
